@@ -22,6 +22,11 @@ body { min-width: 0; }
 .alex-menu { display: none; }
 .alex-languages.VPNavBarTranslations { display: flex; align-items: center; }
 .alex-languages .button[aria-expanded="false"] + .menu { opacity: 0; visibility: hidden; }
+/* The language control and Gallery entrance share theme-color feedback. */
+.alex-languages .alex-action-button { transition: color .25s; }
+.alex-languages .alex-action-button:is(:hover, :active),
+.cosmic-gallery .alex-action-button:is(:hover, :active) { color: var(--vp-c-brand-1); }
+.alex-languages .alex-action-button:is(:hover, :active) .text { color: inherit; }
 .alex-mobile-nav { position: absolute; top: 100%; right: 20px; padding: 16px 20px; background: var(--vp-c-bg-elv); border: 1px solid var(--vp-c-divider); border-radius: 8px; box-shadow: var(--vp-shadow-2); pointer-events: auto; }
 .alex-mobile-nav a { margin: 0 12px; font-size: 14px; }
 .alex-mobile-nav a:hover, .alex-mobile-nav a[aria-current="page"] { color: var(--vp-c-brand-1); }

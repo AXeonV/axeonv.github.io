@@ -6,6 +6,11 @@ import { ShaderPass } from 'three/addons/postprocessing/ShaderPass.js';
 import { disposeScene } from './resources.js';
 import { randomStarfieldPalette } from './palettes.js';
 
+const HOVER_SPEED = 10;
+const WARP_SPEED = 100;
+// Higher values make the starfield reach WARP_SPEED sooner after clicking.
+const WARP_ACCELERATION = 3.4;
+
 // Particle shaders and flight motion retained from the supplied Starfield H5.
 const vertexShader = `
   uniform float uTime;
@@ -114,17 +119,22 @@ export function createStarfield(renderer, { width, height, mobile }) {
   composer.addPass(zoom);
   let speed = 1;
   let targetSpeed = 1;
+  let hovered = false;
+  let warping = false;
+  const updateTargetSpeed = () => { targetSpeed = warping ? WARP_SPEED : hovered ? HOVER_SPEED : 1; };
 
   return {
-    setWarp(active) { targetSpeed = active ? 100 : 1; },
+    setHover(active) { hovered = active; updateTargetSpeed(); },
+    setWarp(active) { warping = active; updateTargetSpeed(); },
     get speed() { return speed; },
     render(delta, _elapsed, pointer) {
-      const smoothing = 1 - Math.exp(-delta * 1.212);
-      speed = THREE.MathUtils.lerp(speed, targetSpeed, smoothing);
+      const speedSmoothing = 1 - Math.exp(-delta * WARP_ACCELERATION);
+      const tiltSmoothing = 1 - Math.exp(-delta * 1.212);
+      speed = THREE.MathUtils.lerp(speed, targetSpeed, speedSmoothing);
       material.uniforms.uTime.value += delta * speed * 4;
       zoom.uniforms.strength.value = speed * 0.004;
-      points.rotation.x = THREE.MathUtils.lerp(points.rotation.x, pointer.y * 0.05, smoothing);
-      points.rotation.y = THREE.MathUtils.lerp(points.rotation.y, -pointer.x * 0.05, smoothing);
+      points.rotation.x = THREE.MathUtils.lerp(points.rotation.x, pointer.y * 0.05, tiltSmoothing);
+      points.rotation.y = THREE.MathUtils.lerp(points.rotation.y, -pointer.x * 0.05, tiltSmoothing);
       composer.render(delta);
     },
     resize(width, height) {

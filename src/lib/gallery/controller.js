@@ -2,7 +2,8 @@ import * as THREE from 'three';
 import { createStarfield } from './starfield.js';
 import { clamp01, smoothstep } from './resources.js';
 
-const WARP_DURATION = 2200;
+// Starfield acceleration/fade duration in milliseconds; smaller means a quicker transition.
+const WARP_DURATION = 1200;
 const ARRIVAL_DURATION = 2600;
 
 export function mountCosmicGallery(root) {
@@ -70,7 +71,7 @@ export function mountCosmicGallery(root) {
     setPhase('warp');
     button.disabled = true;
     status.textContent = root.dataset.enteringText;
-    // Acceleration has exactly one trigger: this button's click/keyboard activation.
+    // Click/keyboard activation overrides the gentler hover speed.
     stars.setWarp(!reducedMotion);
     try {
       const { createColorhole } = await import('./colorhole.js');
@@ -87,6 +88,12 @@ export function mountCosmicGallery(root) {
     }
   };
   button.addEventListener('click', enter);
+  const hoverButton = (event) => {
+    if (phase === 'starfield' && !reducedMotion && event.pointerType === 'mouse') stars.setHover(true);
+  };
+  const leaveButton = () => stars?.setHover(false);
+  button.addEventListener('pointerenter', hoverButton);
+  button.addEventListener('pointerleave', leaveButton);
   const movePointer = (event) => {
     const rect = host.getBoundingClientRect();
     pointer.x = ((event.clientX - rect.left) / rect.width) * 2 - 1;
@@ -121,8 +128,9 @@ export function mountCosmicGallery(root) {
       const arrivalTime = elapsed - phaseTime;
       const duration = reducedMotion ? 300 : ARRIVAL_DURATION;
       const progress = clamp01(arrivalTime / duration);
-      hole.setEntrance(smoothstep(progress));
-      setVeil(1 - smoothstep(clamp01(arrivalTime / (reducedMotion ? 200 : 1000))));
+      // The core grows and brightens first; the disk unfolds after it reaches full size.
+      const coreBrightness = hole.setEntrance(progress);
+      setVeil(1 - coreBrightness);
       if (progress === 1) {
         setPhase('colorhole');
         status.textContent = root.dataset.arrivedText;
@@ -162,6 +170,8 @@ export function mountCosmicGallery(root) {
     window.removeEventListener('pagehide', pageHide);
     window.removeEventListener('pageshow', pageShow);
     button.removeEventListener('click', enter);
+    button.removeEventListener('pointerenter', hoverButton);
+    button.removeEventListener('pointerleave', leaveButton);
     root.removeEventListener('pointermove', movePointer);
     root.removeEventListener('pointerleave', resetPointer);
     stars?.dispose();

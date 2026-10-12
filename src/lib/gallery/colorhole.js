@@ -4,7 +4,11 @@ import { EffectComposer } from 'three/addons/postprocessing/EffectComposer.js';
 import { RenderPass } from 'three/addons/postprocessing/RenderPass.js';
 import { UnrealBloomPass } from 'three/addons/postprocessing/UnrealBloomPass.js';
 import { ShaderPass } from 'three/addons/postprocessing/ShaderPass.js';
-import { disposeScene } from './resources.js';
+import { clamp01, disposeScene, smoothstep } from './resources.js';
+
+// First grow the central black hole, then unfold its disk from the inner edge.
+const CORE_GROWTH_END = 0.55;
+const STAR_BRIGHTNESS = 10;
 
 // Black hole, accretion disk, star and lensing shaders retained from the supplied H5.
 export function createColorhole(renderer, { width, height, mobile }) {
@@ -36,6 +40,7 @@ export function createColorhole(renderer, { width, height, mobile }) {
             "blackHoleScreenPos": { value: new THREE.Vector2(0.5, 0.5) },
             "lensingStrength": { value: 0.12 },
             "lensingRadius": { value: 0.3 },
+            "lensingScale": { value: 1 },
             "aspectRatio": { value: width / height },
             "chromaticAberration": { value: 0.005 }
         },
@@ -45,6 +50,7 @@ export function createColorhole(renderer, { width, height, mobile }) {
             uniform vec2 blackHoleScreenPos;
             uniform float lensingStrength;
             uniform float lensingRadius;
+            uniform float lensingScale;
             uniform float aspectRatio;
             uniform float chromaticAberration;
             varying vec2 vUv;
@@ -55,9 +61,13 @@ export function createColorhole(renderer, { width, height, mobile }) {
                 toCenter.x *= aspectRatio;
                 float dist = length(toCenter);
                 
-                float distortionAmount = lensingStrength / (dist * dist + 0.003);
-                distortionAmount = clamp(distortionAmount, 0.0, 0.7);
-                float falloff = smoothstep(lensingRadius, lensingRadius * 0.3, dist);
+                // Scale the screen-space lens with the projected black hole.
+                // A fixed radius would show a full-size ring even while the camera is far away.
+                float scaleSquared = lensingScale * lensingScale;
+                float distortionAmount = lensingStrength * scaleSquared * lensingScale / (dist * dist + 0.003 * scaleSquared);
+                distortionAmount = clamp(distortionAmount, 0.0, 0.7 * lensingScale);
+                float radius = lensingRadius * lensingScale;
+                float falloff = smoothstep(radius, radius * 0.3, dist);
                 distortionAmount *= falloff;
                 
                 vec2 offset = normalize(toCenter) * distortionAmount;
@@ -103,8 +113,9 @@ export function createColorhole(renderer, { width, height, mobile }) {
 
     for (let i = 0; i < starCount; i++) {
         const i3 = i * 3;
-        const phi = Math.acos(-1 + (2 * i) / starCount);
-        const theta = Math.sqrt(starCount * Math.PI) * phi;
+        // Independent directions avoid the spiral bands of the former Fibonacci placement.
+        const phi = Math.acos(THREE.MathUtils.randFloatSpread(2));
+        const theta = Math.random() * Math.PI * 2;
         const radius = Math.cbrt(Math.random()) * starFieldRadius + 100;
 
         starPositions[i3] = radius * Math.sin(phi) * Math.cos(theta);
@@ -125,6 +136,7 @@ export function createColorhole(renderer, { width, height, mobile }) {
     const starMaterial = new THREE.ShaderMaterial({
         uniforms: {
             uTime: { value: 0 },
+            uBrightness: { value: STAR_BRIGHTNESS },
             uPixelRatio: { value: renderer.getPixelRatio() }
         },
         vertexShader: `
@@ -145,6 +157,7 @@ export function createColorhole(renderer, { width, height, mobile }) {
             }
         `,
         fragmentShader: `
+            uniform float uBrightness;
             varying vec3 vColor;
             varying float vTwinkle;
             
@@ -155,7 +168,7 @@ export function createColorhole(renderer, { width, height, mobile }) {
                 float alpha = 1.0 - smoothstep(0.0, 0.5, dist);
                 alpha *= (0.2 + vTwinkle * 0.8);
                 
-                gl_FragColor = vec4(vColor, alpha);
+                gl_FragColor = vec4(vColor * uBrightness, alpha);
             }
         `,
         transparent: true,
@@ -171,20 +184,23 @@ export function createColorhole(renderer, { width, height, mobile }) {
     const eventHorizonMat = new THREE.ShaderMaterial({
         uniforms: {
             uTime: { value: 0 },
-            uCameraPosition: { value: camera.position }
+            uCameraPosition: { value: camera.position },
+            uEntranceGlow: { value: 1 }
         },
         vertexShader: `
             varying vec3 vNormal;
             varying vec3 vPosition;
             void main() {
-                vNormal = normalize(normalMatrix * normal);
-                vPosition = position;
+                // Camera and surface vectors must share world space for a complete rim.
+                vNormal = normalize(mat3(modelMatrix) * normal);
+                vPosition = (modelMatrix * vec4(position, 1.0)).xyz;
                 gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
             }
         `,
         fragmentShader: `
             uniform float uTime;
             uniform vec3 uCameraPosition;
+            uniform float uEntranceGlow;
             varying vec3 vNormal;
             varying vec3 vPosition;
             
@@ -193,10 +209,10 @@ export function createColorhole(renderer, { width, height, mobile }) {
                 float fresnel = 1.0 - abs(dot(vNormal, viewDirection));
                 fresnel = pow(fresnel, 2.5);
                 
-                vec3 glowColor = vec3(1.0, 0.4, 0.1);
+                vec3 glowColor = mix(vec3(1.0, 0.4, 0.1), vec3(0.55, 0.2, 1.0), uEntranceGlow);
                 float pulse = sin(uTime * 2.5) * 0.15 + 0.85;
                 
-                gl_FragColor = vec4(glowColor * fresnel * pulse, fresnel * 0.4);
+                gl_FragColor = vec4(glowColor * fresnel * pulse * (1.0 + 2.5 * uEntranceGlow), fresnel * (0.4 + 0.6 * uEntranceGlow));
             }
         `,
         transparent: true,
@@ -224,9 +240,11 @@ export function createColorhole(renderer, { width, height, mobile }) {
             uColorOuter: { value: new THREE.Color(0x4477ff) },
             uNoiseScale: { value: 2.5 },
             uFlowSpeed: { value: 0.22 },
-            uDensity: { value: 1.3 }
+            uDensity: { value: 1.3 },
+            uDiskExpansion: { value: 0 }
         },
         vertexShader: `
+            uniform float uDiskExpansion;
             varying vec2 vUv;
             varying float vRadius;
             varying float vAngle;
@@ -234,7 +252,11 @@ export function createColorhole(renderer, { width, height, mobile }) {
                 vUv = uv;
                 vRadius = length(position.xy);
                 vAngle = atan(position.y, position.x);
-                gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
+                // Keep the inner rim anchored while the outer radius expands outwards.
+                float expandedRadius = ${DISK_INNER_RADIUS.toFixed(2)} + (vRadius - ${DISK_INNER_RADIUS.toFixed(2)}) * uDiskExpansion;
+                vec3 expandedPosition = position;
+                expandedPosition.xy *= expandedRadius / vRadius;
+                gl_Position = projectionMatrix * modelViewMatrix * vec4(expandedPosition, 1.0);
             }
         `,
         fragmentShader: `
@@ -247,6 +269,7 @@ export function createColorhole(renderer, { width, height, mobile }) {
             uniform float uNoiseScale;
             uniform float uFlowSpeed;
             uniform float uDensity;
+            uniform float uDiskExpansion;
 
             varying vec2 vUv;
             varying float vRadius;
@@ -329,6 +352,7 @@ export function createColorhole(renderer, { width, height, mobile }) {
                 alpha *= smoothstep(0.0, 0.15, normalizedRadius);
                 alpha *= (1.0 - smoothstep(0.85, 1.0, normalizedRadius));
                 alpha = clamp(alpha, 0.0, 1.0);
+                alpha *= smoothstep(0.0, 0.12, uDiskExpansion);
 
                 gl_FragColor = vec4(color * brightness, alpha);
             }
@@ -344,9 +368,10 @@ export function createColorhole(renderer, { width, height, mobile }) {
     accretionDisk.renderOrder = 1;
     scene.add(accretionDisk);
     const destinationDistance = camera.position.length();
+    const entranceDistance = 48;
     const arrivalDirection = new THREE.Vector3();
     const screenPosition = new THREE.Vector3();
-    camera.position.multiplyScalar(84 / destinationDistance);
+    camera.position.multiplyScalar(entranceDistance / destinationDistance);
     controls.enabled = false;
     controls.update();
 
@@ -354,10 +379,20 @@ export function createColorhole(renderer, { width, height, mobile }) {
         get viewDistance() { return camera.position.distanceTo(controls.target); },
         get autoRotate() { return controls.autoRotate; },
         setEntrance(progress) {
-            const distance = THREE.MathUtils.lerp(84, destinationDistance, progress);
+            const coreGrowth = smoothstep(clamp01(progress / CORE_GROWTH_END));
+            const diskExpansion = smoothstep(clamp01((progress - CORE_GROWTH_END) / (1 - CORE_GROWTH_END)));
+            // Interpolate projected size instead of distance so growth is visible from the start.
+            const size = THREE.MathUtils.lerp(destinationDistance / entranceDistance, 1, coreGrowth);
+            const distance = destinationDistance / size;
             arrivalDirection.copy(camera.position).sub(controls.target).normalize();
             camera.position.copy(controls.target).addScaledVector(arrivalDirection, distance);
+            diskMaterial.uniforms.uDiskExpansion.value = diskExpansion;
+            eventHorizonMat.uniforms.uEntranceGlow.value = 1 - diskExpansion;
+            // Keep one clear silhouette before the disk appears; introduce lensing with the disk.
+            lensingPass.uniforms.lensingStrength.value = 0.12 * diskExpansion;
+            eventHorizon.scale.setScalar(1 + 0.05 * (1 - diskExpansion));
             controls.enabled = progress >= 1;
+            return coreGrowth;
         },
         render(deltaTime, elapsedTime) {
             diskMaterial.uniforms.uTime.value = elapsedTime;
@@ -365,6 +400,7 @@ export function createColorhole(renderer, { width, height, mobile }) {
             eventHorizonMat.uniforms.uTime.value = elapsedTime;
             eventHorizonMat.uniforms.uCameraPosition.value.copy(camera.position);
             controls.update(deltaTime);
+            lensingPass.uniforms.lensingScale.value = destinationDistance / camera.position.distanceTo(controls.target);
             screenPosition.copy(blackHoleMesh.position).project(camera);
             lensingPass.uniforms.blackHoleScreenPos.value.set(
                 (screenPosition.x + 1) / 2,
