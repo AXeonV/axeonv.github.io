@@ -2,6 +2,8 @@
 import SiteLayout from '../../layouts/SiteLayout.astro';
 import Publications from '../../components/Publications.astro';
 import { EMAIL, GITHUB_URL } from '../../consts';
+import { Image } from 'astro:assets';
+import portrait from '../../assets/portrait1.jpg';
 const toc = [
  { id: 'about-me', label: 'About Me' },
  { id: 'publications', label: 'Publications' },
@@ -11,6 +13,10 @@ const toc = [
 ---
 <SiteLayout toc={toc}>
  <h1 class="profile-name">Alex Tianyou Liu <span lang="zh-CN">刘天佑</span></h1>
+ <figure class="profile-photo">
+  <Image src={portrait} width={240} height={320} densities={[1, 2]} alt="Portrait of Alex Tianyou Liu 刘天佑" class="profile-portrait" loading="eager"/>
+  <figcaption>Taken in <time datetime="2026-08">August 2026</time></figcaption>
+ </figure>
  <h2 id="about-me">About Me <a class="header-anchor" href="#about-me" aria-label="Link to About Me">​</a></h2>
  <p>I am an undergraduate in the 2025 cohort at the School of Microelectronics, <strong>Southern University of Science and Technology (SUSTech)</strong>.</p>
  <p>My interests focus on <strong title="Computer Science">CS</strong>, <strong title="Microelectronics">MicroE</strong>, and <strong title="Artificial Intelligence">AI</strong>. Recently, I have been interested in CAE (computer-aided engineering), game science, and world models.</p>

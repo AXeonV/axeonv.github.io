@@ -1,6 +1,6 @@
 @import './vendor/vitepress-base.css';
 @import './vendor/vp-icons.css';
-@import './vendor/learn-world-model.css';
+@import './vendor/portfolio-theme.css';
 @font-face { font-family: Inter; src: url('../assets/fonts/inter-roman.woff2') format('woff2'); font-weight: 100 900; font-display: swap; }
 /* Astro adapter: brand colors, centered search, longer personal name and native controls. */
 :root { --vp-c-brand-1: #4338ca; --vp-c-brand-2: #3730a3; --vp-c-brand-3: #312e81; --vp-c-brand-soft: rgba(67,56,202,.1); }
@@ -15,7 +15,9 @@ body { min-width: 0; }
 .VPNavBarTitle .title[data-v-1168a8e4] { border: 0; }
 .VPNavBarSearch { justify-self: center; width: 100%; padding-left: 0 !important; }
 .DocSearch-Button { width: 100%; justify-content: space-between; }
-.alex-nav-actions { display: flex; align-items: center; justify-content: flex-end; height: 64px; gap: 16px; }
+.alex-nav-actions { display: flex; align-items: center; justify-content: flex-end; height: 64px; gap: 28px; }
+/* Use one gap for every visible control, including the compact navigation menu. */
+.alex-languages.VPNavBarTranslations > .button[data-v-cf11d7a2] { padding-inline: 0; }
 .VPNavBarMenu { display: flex; height: 100%; }
 .alex-menu { display: none; }
 .alex-languages.VPNavBarTranslations { display: flex; align-items: center; }
@@ -26,6 +28,9 @@ body { min-width: 0; }
 @media (min-width: 960px) { .alex-mobile-nav { display: none; } }
 .alex-footer { margin-top: 64px; padding-top: 24px; color: var(--vp-c-text-3); font-size: 12px; display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap; }
 .profile-name span { display: inline; font-family: inherit; font-size: inherit; margin-left: .25em; white-space: nowrap; }
+.profile-photo { margin: 32px 0 0; text-align: center; }
+.profile-portrait { display: block; width: 240px; max-width: 100%; height: auto; margin: 0 auto; border-radius: 8px; }
+.profile-photo figcaption { margin-top: 12px; font-size: 14px; line-height: 1.5; color: var(--vp-c-text-3); }
 .alex-muted { color: var(--vp-c-text-3); }
 .alex-gallery { display: grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap: 20px; }
 .alex-gallery img { width: 100%; border-radius: 8px; }
@@ -49,7 +54,7 @@ body { min-width: 0; }
 .sidebar-backdrop { display: none; }
 @media (min-width: 768px) { .VPSidebar { padding-top: 88px; width: calc((100vw - var(--vp-layout-max-width))/2 + var(--vp-sidebar-width)); } }
 @media (min-width: 768px) and (max-width: 1375px) { .VPSidebar { width: var(--vp-sidebar-width); } }
-@media (width < 1200px) { .VPNavBar .container[data-v-6aa21345] { grid-template-columns: 1fr 180px 1fr; gap: 12px; } .VPNavBarTitle { font-size: 1.1rem; } .alex-nav-actions { gap: 10px; } .VPNavBarMenuLink { margin: 0 8px; } }
+@media (width < 1200px) { .VPNavBar .container[data-v-6aa21345] { grid-template-columns: 1fr 180px 1fr; gap: 12px; } .VPNavBarTitle { font-size: 1.1rem; } .alex-nav-actions { gap: 22px; } .VPNavBarMenuLink { margin: 0 8px; } }
 @media (min-width: 960px) and (width < 1200px) { .alex-nav-left { gap: 8px; } .VPNavBarTitle { font-size: .95rem; } .VPNavBarTitle .logo { width: 22px; height: 22px; } .VPNavBarMenuLink { font-size: 13px; margin: 0 6px; } }
 @media (width < 960px) { .VPNavBar .container[data-v-6aa21345] { grid-template-columns: minmax(0,1fr) 180px minmax(0,1fr); } .VPNavBarMenu { display: none; } .alex-menu { display: block; } .VPSidebar { top: 64px; padding-top: 24px; transform: translateX(-100%); visibility: hidden; } .VPSidebar.open { transform: translateX(0); visibility: visible; opacity: 1; } .VPContent.has-sidebar { padding-left: 0; } .sidebar-backdrop.open { display: block; position: fixed; inset: 64px 0 0; z-index: 24; background: rgba(0,0,0,.35); } }
 @media (width < 640px) { .VPNavBar .container[data-v-6aa21345] { grid-template-columns: 1fr auto; gap: 4px; } .VPNavBarTitle { font-size: 1rem; } .VPNavBarTitle .logo { width: 20px; height: 20px; } .VPNavBarSearch { grid-row: 2; grid-column: 1 / -1; padding-bottom: 10px; max-width: 320px; } .VPNavBar { height: 110px; } .VPNavBar .title[data-v-6aa21345] { height: 64px; } .alex-nav-actions { grid-column: 2; grid-row: 1; } .VPNavBarSocialLinks { display: none !important; } .VPContent { padding-top: 110px; } .VPSidebar, .sidebar-backdrop.open { top: 110px; } .vp-doc h1 { font-size: 2.65rem; } .alex-search { margin: 24px auto; max-height: calc(100dvh - 48px); } .alex-gallery { grid-template-columns: 1fr; } }

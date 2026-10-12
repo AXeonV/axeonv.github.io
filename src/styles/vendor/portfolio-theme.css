@@ -1,4 +1,4 @@
-/* ===== Learn World Models: Custom VitePress Styles ===== */
+/* ===== Portfolio Theme: Custom VitePress Styles ===== */
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Newsreader:opsz,wght@6..72,400;6..72,500;6..72,600&family=Noto+Sans+KR:wght@400;500;600;700&display=swap');
 
 /* ---------- CSS Variables (Light) ---------- */
@@ -83,7 +83,7 @@
   letter-spacing: -0.01em;
   margin-top: 2.5rem;
   padding-bottom: 0.4rem;
-  border-bottom: 1px solid var(--vp-c-divider);
+  border-bottom: none;
 }
 
 .vp-doc h3 {
@@ -353,7 +353,7 @@
 
 .VPNav .VPNavBar {
   background-color: transparent;
-  border-bottom: 1px solid var(--vp-c-divider);
+  border-bottom: none;
 }
 
 .VPNavBarTitle {
@@ -518,9 +518,9 @@
 
 /* ---------- Horizontal rule ---------- */
 .vp-doc hr {
+  display: none;
   border: none;
-  border-top: 1px solid var(--vp-c-divider);
-  margin: 2rem 0;
+  margin: 0;
 }
 
 /* ---------- Scrollbar (Webkit) ---------- */
@@ -855,11 +855,11 @@ html.has-mermaid-viewer body {
   font-size: 0.82rem;
   line-height: 1.55;
   color: var(--vp-c-text-3);
-  font-style: italic;
+  font-style: normal;
   text-align: center;
   padding: 0 1.5rem;
-  border-top: 1px solid var(--vp-c-divider);
-  padding-top: 0.5rem;
+  border-top: none;
+  padding-top: 0;
 }
 
 .vp-doc figure figcaption p {

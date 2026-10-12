@@ -1,6 +1,6 @@
 # Alex Tianyou Liu 刘天佑 · Personal Website
 
-Astro 中英文个人主页。直接复用 [Learn World Models](https://github.com/datawhalechina/learn-world-model) 的 VitePress 主题源码、排版、布局和语言菜单，适配 Astro；靛蓝主题，居中搜索，Article / Blog / Gallery 导航。
+Astro 中英文个人主页。使用适配 Astro 的 Portfolio 主题与 VitePress 排版、布局和语言菜单；靛蓝主题，居中搜索，Article / Blog / Gallery 导航。
 
 ## 开发
 
@@ -25,7 +25,7 @@ npm run build
 - 尚未翻译的文章不生成英文正文；语言菜单会跳到目标语言的列表页。补充译文后会自动切换到对应文章。
 - `draft: true` 的草稿不会构建公开页面，也不会进入列表、搜索、RSS 或站点地图。
 - 相册：照片放入 `public/gallery/`，在 `src/data/gallery.ts` 添加路径、alt 和标题。
-- 主题原文件：`src/styles/vendor/learn-world-model.css`，保持原样；仅在 `src/styles/global.css` 覆盖靛蓝配色和 Astro 适配。
+- 主题样式：`src/styles/vendor/portfolio-theme.css`；靛蓝配色、个人主页布局和 Astro 适配位于 `src/styles/global.css`。图片说明采用普通字体，模板的水平分割线已移除。
 - GitHub Pages 保留原有工作流，推送 master 后部署。
 
 文章 frontmatter 示例：

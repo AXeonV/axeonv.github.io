@@ -2,6 +2,8 @@
 import SiteLayout from '../../layouts/SiteLayout.astro';
 import Publications from '../../components/Publications.astro';
 import { EMAIL, GITHUB_URL } from '../../consts';
+import { Image } from 'astro:assets';
+import portrait from '../../assets/portrait1.jpg';
 const toc = [
  { id: 'about-me', label: '关于我' },
  { id: 'publications', label: '学术论文' },
@@ -11,6 +13,10 @@ const toc = [
 ---
 <SiteLayout toc={toc}>
  <h1 class="profile-name">Alex Tianyou Liu <span lang="zh-CN">刘天佑</span></h1>
+ <figure class="profile-photo">
+  <Image src={portrait} width={240} height={320} densities={[1, 2]} alt="Alex Tianyou Liu 刘天佑的头像" class="profile-portrait" loading="eager"/>
+  <figcaption>拍摄于 <time datetime="2026-08">2026 年 8 月</time></figcaption>
+ </figure>
  <h2 id="about-me">关于我 <a class="header-anchor" href="#about-me" aria-label="链接到关于我">​</a></h2>
  <p>我是<strong>南方科技大学</strong>2025级深港微电子学院的本科生。</p>
  <p>专注于<strong>计算机科学与工程</strong>、<strong>微电子科学与工程</strong>、<strong>人工智能</strong>方向。最近感兴趣于 CAE（计算机辅助工程）、博弈科学、世界模型等。</p>
