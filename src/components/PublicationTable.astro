@@ -14,7 +14,7 @@ const dateFormatter = new Intl.DateTimeFormat(HTML_LANG[locale], { year: 'numeri
   <tbody>{publications.map(publication => <tr>
    <td><time datetime={publication.date}>{dateFormatter.format(new Date(`${publication.date}-01T00:00:00Z`))}</time></td>
    <td><a href={publication.url} target="_blank" rel="noopener noreferrer">{publication.title}</a></td>
-   {withVenue && <td>{publication.venue}</td>}
+   {withVenue && <td>{publication.venueItalic && publication.venue?.includes(publication.venueItalic) ? <>{publication.venue.split(publication.venueItalic)[0]}<em>{publication.venueItalic}</em>{publication.venue.split(publication.venueItalic)[1]}</> : publication.venue}</td>}
   </tr>)}</tbody>
  </table>
 </div>

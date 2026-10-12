@@ -6,11 +6,11 @@ import PublicationTable from './PublicationTable.astro';
 const locale = localeFromPath(Astro.url.pathname);
 ---
 {locale === 'zh' ? <p>
- 我的开放获取论文可在 <a href={GOOGLE_SCHOLAR_URL} target="_blank" rel="noopener noreferrer">Alex Tianyou Liu 的 Google Scholar</a> 查阅。欢迎就我的研究与我交流，也期待潜在的合作机会。
+ 我所有的学术论文均已在 Google Scholar 上开放获取：<a href={GOOGLE_SCHOLAR_URL} target="_blank" rel="noopener noreferrer">刘天佑的 Google Scholar</a>。如果您对我的研究有任何问题或寻求学术合作，欢迎随时给我发邮件。
 </p> : <p>
- Browse my open-access publications on <a href={GOOGLE_SCHOLAR_URL} target="_blank" rel="noopener noreferrer">Alex Tianyou Liu’s Google Scholar</a>. If you would like to discuss my research or explore a collaboration, please get in touch.
+ All my academic papers are openly accessible on Google Scholar: <a href={GOOGLE_SCHOLAR_URL} target="_blank" rel="noopener noreferrer">Alex Tianyou Liu’s Google Scholar</a>. If you have any questions about my research or are interested in academic collaboration, please feel free to email me.
 </p>}
-<h3 id="conference-journal">Conference &amp; Journal <a class="header-anchor" href="#conference-journal" aria-label={locale === 'zh' ? '链接到 Conference & Journal' : 'Link to Conference & Journal'}>​</a></h3>
+<h3 id="conference-journal">{locale === 'zh' ? '会议与期刊' : 'Conference & Journal'} <a class="header-anchor" href="#conference-journal" aria-label={locale === 'zh' ? '链接到会议与期刊' : 'Link to Conference & Journal'}>​</a></h3>
 <PublicationTable publications={conferencePublications} headingId="conference-journal" withVenue/>
-<h3 id="preprint">Preprint <a class="header-anchor" href="#preprint" aria-label={locale === 'zh' ? '链接到 Preprint' : 'Link to Preprint'}>​</a></h3>
+<h3 id="preprint">{locale === 'zh' ? '预印本' : 'Preprint'} <a class="header-anchor" href="#preprint" aria-label={locale === 'zh' ? '链接到预印本' : 'Link to Preprint'}>​</a></h3>
 {preprints.length ? <PublicationTable publications={preprints} headingId="preprint"/> : <p class="alex-muted">{locale === 'zh' ? '暂无其他预印本，内容待更新。' : 'No additional preprints yet.'}</p>}

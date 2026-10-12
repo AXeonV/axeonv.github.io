@@ -24,7 +24,7 @@ export const messages = {
  zh: {
   description: SITE_DESCRIPTION, skip: '跳转到内容', mainNav: '主导航', mobileNav: '手机导航',
   menu: '网站菜单', darkMode: '深色模式', changeLanguage: '切换语言', outline: '本页目录',
-  aboutPending: '个人介绍待更新。', publicationsDescription: '论文、会议成果与 Google Scholar。',
+  publicationsDescription: '论文、会议成果与 Google Scholar。',
   articleDescription: '文章与笔记。', blogDescription: '日志与记录。', galleryDescription: '照片与影像。',
   emptyArticles: '暂无文章，内容将陆续更新。', emptyBlog: '暂无日志，内容将陆续更新。',
   emptyGallery: '暂无照片，内容将陆续更新。', updated: '更新于',
@@ -39,7 +39,7 @@ export const messages = {
   description: 'Personal website of Alex Tianyou Liu 刘天佑 · Articles, Blog & Gallery',
   skip: 'Skip to content', mainNav: 'Main navigation', mobileNav: 'Mobile navigation',
   menu: 'Site menu', darkMode: 'Dark mode', changeLanguage: 'Change language', outline: 'On this page',
-  aboutPending: 'Personal introduction coming soon.', publicationsDescription: 'Research publications, conference papers and Google Scholar.',
+  publicationsDescription: 'Research publications, conference papers and Google Scholar.',
   articleDescription: 'Articles and notes.', blogDescription: 'Journal and reflections.', galleryDescription: 'Photos and moments.',
   emptyArticles: 'No articles yet. New writing is on the way.', emptyBlog: 'No posts yet. More stories to come.',
   emptyGallery: 'No photos yet. More moments to come.', updated: 'Updated',

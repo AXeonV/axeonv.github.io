@@ -1,23 +1,26 @@
 ---
 import SiteLayout from '../../layouts/SiteLayout.astro';
 import Publications from '../../components/Publications.astro';
+import { EMAIL, GITHUB_URL } from '../../consts';
 const toc = [
  { id: 'about-me', label: 'About Me' },
  { id: 'publications', label: 'Publications' },
  { id: 'conference-journal', label: 'Conference & Journal', depth: 3 },
  { id: 'preprint', label: 'Preprint', depth: 3 },
- { id: 'notes', label: 'Notes' },
- { id: 'open-source', label: 'Contributions to Open Source Projects' },
 ];
 ---
 <SiteLayout toc={toc}>
  <h1 class="profile-name">Alex Tianyou Liu <span lang="zh-CN">刘天佑</span></h1>
  <h2 id="about-me">About Me <a class="header-anchor" href="#about-me" aria-label="Link to About Me">​</a></h2>
- <p class="alex-muted">Personal introduction coming soon.</p>
+ <p>I am an undergraduate in the 2025 cohort at the School of Microelectronics, <strong>Southern University of Science and Technology (SUSTech)</strong>.</p>
+ <p>My interests focus on <strong title="Computer Science">CS</strong>, <strong title="Microelectronics">MicroE</strong>, and <strong title="Artificial Intelligence">AI</strong>. Recently, I have been interested in CAE (computer-aided engineering), game science, and world models.</p>
+ <ol>
+  <li><p><strong>Competitions:</strong> During secondary school, I participated in NOIP informatics competitions and won provincial first prizes multiple times, building a foundation in algorithms and programming. In my first year at university, I represented the Liii STEM team and <a href="/certificates/cer_hxla_ai_agent.pdf" target="_blank" rel="noopener noreferrer" title="View competition certificate (PDF)">won the AI Agent track</a> at the Guangdong provincial competition of the 21st Cross-Strait, Hong Kong and Macao University Student Computer Innovation Competition in 2026.</p></li>
+  <li><p><strong>Open source:</strong> As a core developer, I contribute code to <a href="https://github.com/MoganLab/mogan" target="_blank" rel="noopener noreferrer">Mogan</a> (a <a href="https://gitee.com/MoganLab/mogan" target="_blank" rel="noopener noreferrer">Gitee GVP Most Valuable Open Source Project</a> and a cross-platform structured scientific writing suite based on GNU TeXmacs), gaining experience in reading large codebases, debugging complex systems, version control, and teamwork.</p></li>
+  <li><p><strong>Internship:</strong> In summer 2026, I participated in <a href="https://summerofcode.withgoogle.com/" target="_blank" rel="noopener noreferrer">Google Summer of Code</a> (<a href="/certificates/cer_GSOC.pdf" target="_blank" rel="noopener noreferrer" title="View GSoC certificate (PDF)">Certification</a>), primarily developing the plugin system.</p></li>
+  <li><p><strong>Research:</strong> I completed <a href="https://arxiv.org/abs/2603.02873" target="_blank" rel="noopener noreferrer">.tmu: A Low-Entropy Tree-Structured Representation for LLM-Assisted Scientific Writing</a> as first author. The paper has been accepted to EMNLP.</p></li>
+ </ol>
+ <p>Email: <a href={`mailto:${EMAIL}`}>{EMAIL}</a><br/>GitHub: <a href={GITHUB_URL} target="_blank" rel="noopener noreferrer">github.com/AXeonV</a></p>
  <h2 id="publications">Publications <a class="header-anchor" href="#publications" aria-label="Link to Publications">​</a></h2>
  <Publications/>
- <h2 id="notes">Notes <a class="header-anchor" href="#notes" aria-label="Link to Notes">​</a></h2>
- <p>This website collects notes from my studies and research. Feedback, additions and corrections are welcome. You can find the complete collection in <a href="/en/articles/">Articles</a>.</p>
- <h2 id="open-source">Contributions to Open Source Projects <a class="header-anchor" href="#open-source" aria-label="Link to open source contributions">​</a></h2>
- <p class="alex-muted">Open source contributions coming soon.</p>
 </SiteLayout>

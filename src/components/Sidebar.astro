@@ -3,7 +3,7 @@ import { localeFromPath, localePath, messages } from '../lib/i18n';
 const locale = localeFromPath(Astro.url.pathname);
 const home = localePath(locale);
 const groups = [
- { text: messages[locale].personal, items: [{ text: locale === 'zh' ? '欢迎 · Welcome' : 'Welcome', href: home }, { text: 'About Me', href: `${home}#about-me` }, { text: 'Publications', href: `${home}#publications` }, { text: 'Notes', href: `${home}#notes` }, { text: locale === 'zh' ? '开源项目贡献' : 'Open source contributions', href: `${home}#open-source` }] },
+ { text: messages[locale].personal, items: [{ text: locale === 'zh' ? '欢迎' : 'Welcome', href: home }, { text: locale === 'zh' ? '关于我' : 'About Me', href: `${home}#about-me` }, { text: locale === 'zh' ? '学术论文' : 'Publications', href: `${home}#publications` }] },
  { text: messages[locale].writing, items: [{ text: locale === 'zh' ? 'Article · 文章' : 'Article', href: localePath(locale, 'articles/') }, { text: locale === 'zh' ? 'Blog · 日志' : 'Blog', href: localePath(locale, 'blog/') }, { text: locale === 'zh' ? 'Gallery · 相册' : 'Gallery', href: localePath(locale, 'gallery/') }] },
 ];
 const path = Astro.url.pathname;
