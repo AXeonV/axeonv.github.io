@@ -15,7 +15,7 @@ npm run build
 
 ## 内容
 
-- 中文首页：`src/pages/zh/index.astro`；英文首页：`src/pages/en/index.astro`。先编辑中文文件，再将译文写入英文文件。根地址 `/` 默认跳转至 `/zh/`。
+- 中文首页：`src/pages/zh/index.astro`；英文首页：`src/pages/en/index.astro`。先编辑中文文件，再将译文写入英文文件。根地址 `/` 直接复用中文首页，不经过重定向；修改中文首页会同时更新 `/` 和 `/zh/`。
 - 姓名与站点描述：`src/consts.ts`；中英文界面文字：`src/lib/i18n.ts`。
 - 学术成果：`src/data/publications.ts`，中英文首页共用同一份记录。Google Scholar 链接位于 `src/consts.ts`。
 - 左侧导航暂时关闭；需要恢复时，将 `src/consts.ts` 中的 `SIDEBAR_ENABLED` 改为 `true`。组件与原框架保留。
