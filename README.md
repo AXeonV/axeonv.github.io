@@ -24,7 +24,7 @@ npm run build
 - 两种语言使用相同的相对文件名即可自动配对，例如 `zh/my-note.md` 与 `en/my-note.md`。若文件名不同，两者设置相同的 `translationKey`。每个语言的列表、搜索、RSS 只收录该语言已发布的内容。
 - 尚未翻译的文章不生成英文正文；语言菜单会跳到目标语言的列表页。补充译文后会自动切换到对应文章。
 - `draft: true` 的草稿不会构建公开页面，也不会进入列表、搜索、RSS 或站点地图。
-- 相册：照片放入 `public/gallery/`，在 `src/data/gallery.ts` 添加路径、alt 和标题。
+- Gallery：`src/components/CosmicGallery.astro` 提供入口按钮；星海、黑洞和过渡逻辑分别位于 `src/lib/gallery/starfield.js`、`colorhole.js`、`controller.js`。`palettes.js` 仅保留八组色彩丰富的主题，每次刷新随机选择，并避免连续两次重复。星点贴图位于 `public/gallery/star-sprite.png`。两个场景共享一个画布，点击后加速、渐暗，再进入自动旋转的黑洞场景；悬浮只影响轻微视角倾斜。
 - 主题样式：`src/styles/vendor/portfolio-theme.css`；靛蓝配色、个人主页布局和 Astro 适配位于 `src/styles/global.css`。图片说明采用普通字体，模板的水平分割线已移除。
 - GitHub Pages 保留原有工作流，推送 master 后部署。
 

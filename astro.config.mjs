@@ -7,6 +7,7 @@ import { defineConfig } from 'astro/config';
 export default defineConfig({
 	site: 'https://axeonv.github.io',
 	devToolbar: { enabled: false },
+	vite: { optimizeDeps: { include: ['three/addons/controls/OrbitControls.js'] } },
 	integrations: [sitemap()],
 	i18n: {
 		locales: ['zh', 'en'],

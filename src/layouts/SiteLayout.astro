@@ -5,9 +5,9 @@ import Sidebar from '../components/Sidebar.astro';
 import Footer from '../components/Footer.astro';
 import { SITE_TITLE, SIDEBAR_ENABLED } from '../consts';
 import { localeFromPath, HTML_LANG, messages, pageTranslations, type Translations } from '../lib/i18n';
-interface Props { title?: string; description?: string; toc?: { id: string; label: string; depth?: number }[]; translations?: Translations; }
+interface Props { title?: string; description?: string; toc?: { id: string; label: string; depth?: number }[]; translations?: Translations; immersive?: boolean; }
 const locale = localeFromPath(Astro.url.pathname);
-const { title = SITE_TITLE, description = messages[locale].description, toc = [], translations = pageTranslations(Astro.url.pathname) } = Astro.props;
+const { title = SITE_TITLE, description = messages[locale].description, toc = [], translations = pageTranslations(Astro.url.pathname), immersive = false } = Astro.props;
 ---
 <!doctype html>
 <html lang={HTML_LANG[locale]}>
@@ -15,12 +15,12 @@ const { title = SITE_TITLE, description = messages[locale].description, toc = []
  <body><div class="Layout"><Header translations={translations}/>{SIDEBAR_ENABLED && <Sidebar/>}
   <!-- Structure and scoped attributes retained from the upstream VitePress document layout. -->
   <div class:list={['VPContent', { 'has-sidebar': SIDEBAR_ENABLED }]} id="VPContent" data-v-1428d186>
-   <div class:list={['VPDoc', { 'has-sidebar': SIDEBAR_ENABLED, 'has-aside': toc.length > 0 }]} data-v-39a288b8><div class="container" data-v-39a288b8>
+   {immersive ? <main class="gallery-main"><slot/></main> : <div class:list={['VPDoc', { 'has-sidebar': SIDEBAR_ENABLED, 'has-aside': toc.length > 0 }]} data-v-39a288b8><div class="container" data-v-39a288b8>
     {toc.length > 0 && <div class="aside" data-v-39a288b8><div class="aside-curtain" data-v-39a288b8></div><div class="aside-container" data-v-39a288b8><div class="aside-content" data-v-39a288b8>
      <div class="VPDocAside" data-v-3f215769>{toc.length > 0 && <nav class="VPDocAsideOutline has-outline" aria-label={messages[locale].outline} data-v-a5bbad30><div class="content" data-v-a5bbad30><div class="outline-title" data-v-a5bbad30>{messages[locale].outline}</div><ul class="VPDocOutlineItem root" data-v-b933a997>{toc.map(item => <li data-v-b933a997><a class:list={['outline-link', { nested: item.depth === 3 }]} href={`#${item.id}`} data-v-b933a997>{item.label}</a></li>)}</ul></div></nav>}</div>
     </div></div></div>}
     <div class="content" data-v-39a288b8><div class="content-container" data-v-39a288b8><main class="main" data-v-39a288b8><div class="vp-doc" data-v-39a288b8><slot/></div></main><Footer/></div></div>
-   </div></div>
+   </div></div>}
   </div>
  </div></body>
 </html>

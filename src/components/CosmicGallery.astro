@@ -1,0 +1,36 @@
+---
+import { localeFromPath } from '../lib/i18n';
+const zh = localeFromPath(Astro.url.pathname) === 'zh';
+---
+<section class="cosmic-gallery" tabindex="-1" aria-label={zh ? '星海与黑洞' : 'Starfield and black hole'} aria-busy="false" data-phase="starfield" data-speed="1.00"
+ data-error-text={zh ? '当前浏览器无法显示三维动画，请使用支持 WebGL 的浏览器。' : 'This browser cannot display the animation. Please use a browser with WebGL support.'}
+ data-entering-text={zh ? '正在进入新世界…' : 'Entering a new world…'}
+ data-arrived-text={zh ? '已进入黑洞世界。拖动可调整视角。' : 'Entered the black hole world. Drag to change the view.'}
+ data-retry-text={zh ? '暂时无法进入，请再试一次。' : 'Could not enter. Please try again.'}>
+ <div class="cosmic-canvas"></div>
+ <button class="cosmic-enter" type="button">{zh ? '进入新世界' : 'Enter a new world'}</button>
+ <div class="cosmic-veil" aria-hidden="true"></div>
+ <p class="cosmic-status visually-hidden" role="status" aria-live="polite"></p>
+ <noscript><p class="cosmic-noscript">{zh ? '请启用 JavaScript 以浏览星海。' : 'Enable JavaScript to explore the starfield.'}</p></noscript>
+</section>
+<script>
+ import { mountCosmicGallery } from '../lib/gallery/controller.js';
+ const root = document.querySelector<HTMLElement>('.cosmic-gallery');
+ if (root) {
+  const dispose = mountCosmicGallery(root);
+  if (import.meta.hot) import.meta.hot.dispose(dispose);
+ }
+</script>
+<style>
+ .cosmic-gallery { --veil-opacity: 0; position: relative; width: 100%; height: 100%; overflow: hidden; background: #000002; isolation: isolate; }
+ .cosmic-canvas { position: absolute; inset: 0; touch-action: none; }
+ .cosmic-canvas :global(canvas) { display: block; width: 100%; height: 100%; }
+ .cosmic-enter { position: absolute; z-index: 2; left: 50%; top: 50%; transform: translate(-50%, -50%); width: min(300px, calc(100% - 48px)); min-height: 50px; padding: 10px 24px; border: 1px solid #fff; border-radius: 50px; color: #fff; background: rgb(0 0 0 / 50%); font: inherit; font-size: 20px; font-weight: 600; line-height: 1.4; cursor: pointer; transition: opacity .35s, background-color .2s; }
+ .cosmic-enter:hover { background: rgb(0 0 0 / 70%); }
+ .cosmic-enter:focus-visible { outline: 2px solid #fff; outline-offset: 6px; }
+ .cosmic-gallery[data-phase="warp"] .cosmic-enter { opacity: 0; pointer-events: none; }
+ .cosmic-enter[hidden] { display: none; }
+ .cosmic-veil { position: absolute; z-index: 3; inset: 0; pointer-events: none; background: #000002; opacity: var(--veil-opacity); }
+ .visually-hidden { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; border: 0; }
+ .cosmic-gallery[data-error="true"] .cosmic-status, .cosmic-noscript { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: min(420px, calc(100% - 48px)); color: #ddd; text-align: center; }
+</style>

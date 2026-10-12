@@ -11,7 +11,7 @@ export async function createSearchIndex(locale: Locale) {
   { title: locale === 'zh' ? '学术论文' : 'Publications', description: text.publicationsDescription, url: localePath(locale, '#publications'), section: 'Home', text: locale === 'zh' ? '论文 成果 学术 会议 期刊 预印本' : 'Research papers publications scholar conference journal preprint' },
   { title: 'Article', description: text.articleDescription, url: localePath(locale, 'articles/'), section: 'Article', text: locale === 'zh' ? '文章' : 'Articles' },
   { title: 'Blog', description: text.blogDescription, url: localePath(locale, 'blog/'), section: 'Blog', text: locale === 'zh' ? '日志 日常' : 'Journal reflections' },
-  { title: 'Gallery', description: text.galleryDescription, url: localePath(locale, 'gallery/'), section: 'Gallery', text: locale === 'zh' ? '相册 照片' : 'Photos moments' },
+  { title: 'Gallery', description: text.galleryDescription, url: localePath(locale, 'gallery/'), section: 'Gallery', text: locale === 'zh' ? '星海 黑洞 世界 动画 starfield colorhole' : 'Starfield black hole world animation colorhole' },
  ];
  const posts = await getPublishedPosts(undefined, locale);
  const publications = [...new Map([

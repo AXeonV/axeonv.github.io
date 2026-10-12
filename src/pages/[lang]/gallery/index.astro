@@ -1,8 +1,8 @@
 ---
 import SiteLayout from '../../../layouts/SiteLayout.astro';
-import { gallery } from '../../../data/gallery';
-import { LOCALES, localeFromPath, messages } from '../../../lib/i18n';
+import CosmicGallery from '../../../components/CosmicGallery.astro';
+import { LOCALES, localeFromPath } from '../../../lib/i18n';
 export function getStaticPaths() { return LOCALES.map(lang => ({ params: { lang } })); }
-const text = messages[localeFromPath(Astro.url.pathname)];
+const zh = localeFromPath(Astro.url.pathname) === 'zh';
 ---
-<SiteLayout title="Gallery"><h1>Gallery</h1><p>{text.galleryDescription}</p>{gallery.length ? <div class="alex-gallery">{gallery.map(photo => <figure><a href={photo.src} target="_blank" rel="noopener noreferrer"><img src={photo.src} alt={photo.alt} loading="lazy"/></a><figcaption>{photo.caption}</figcaption></figure>)}</div> : <p class="alex-muted">{text.emptyGallery}</p>}</SiteLayout>
+<SiteLayout title="Gallery" description={zh ? '穿越星海，探索黑洞。' : 'Travel through the starfield and explore a black hole.'} immersive><CosmicGallery/></SiteLayout>
