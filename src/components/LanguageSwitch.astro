@@ -1,0 +1,36 @@
+---
+import { LOCALES, LANGUAGE_LABELS, localeFromPath, localePath, pageTranslations, messages, type Translations } from '../lib/i18n';
+interface Props { translations?: Translations; }
+const locale = localeFromPath(Astro.url.pathname);
+const { translations = pageTranslations(Astro.url.pathname) } = Astro.props;
+const section = Astro.url.pathname.replace(/^\/(zh|en)\//, '').split('/')[0];
+const fallbackSection = ['articles', 'blog', 'gallery'].includes(section) ? `${section}/` : '';
+---
+<!-- VitePress VPNavBarTranslations / VPFlyout / VPMenu / VPMenuLink, adapted from the reference site's rendered markup. -->
+<div class="VPFlyout VPNavBarTranslations translations alex-languages" data-v-88af2de4 data-v-cf11d7a2>
+ <button type="button" class="button" aria-haspopup="true" aria-expanded="false" aria-label={messages[locale].changeLanguage} aria-controls="language-menu" data-v-cf11d7a2>
+  <span class="text" data-v-cf11d7a2><span class="vpi-languages option-icon" data-v-cf11d7a2></span><span class="vpi-chevron-down text-icon" data-v-cf11d7a2></span></span>
+ </button>
+ <div id="language-menu" class="menu" data-v-cf11d7a2><div class="VPMenu" data-v-cf11d7a2 data-v-b98bc113>
+  <div class="items" data-v-88af2de4><p class="title" data-v-88af2de4>{LANGUAGE_LABELS[locale]}</p>
+   {LOCALES.filter(lang => lang !== locale).map(lang => <div class="VPMenuLink" data-v-88af2de4 data-v-35975db6>
+    <a class="VPLink link" href={translations[lang] ?? localePath(lang, fallbackSection)} lang={lang === 'zh' ? 'zh-CN' : 'en'} hreflang={lang === 'zh' ? 'zh-CN' : 'en'} title={!translations[lang] ? messages[lang].translationPending : undefined} data-preserve-hash={Boolean(translations[lang])} data-v-35975db6><span data-v-35975db6>{LANGUAGE_LABELS[lang]}</span></a>
+   </div>)}
+  </div>
+ </div></div>
+</div>
+<script>
+ const flyout = document.querySelector<HTMLElement>('.alex-languages')!;
+ const button = flyout.querySelector<HTMLButtonElement>('button')!;
+ const links = Array.from(flyout.querySelectorAll<HTMLAnchorElement>('a'));
+ let clickedOpen = false;
+ const setOpen = (open: boolean) => { button.setAttribute('aria-expanded', String(open)); if (!open) clickedOpen = false; };
+ flyout.addEventListener('mouseenter', () => setOpen(true));
+ flyout.addEventListener('mouseleave', () => { if (!flyout.contains(document.activeElement)) setOpen(false); });
+ button.addEventListener('click', () => { clickedOpen = !clickedOpen; setOpen(clickedOpen); });
+ button.addEventListener('keydown', e => { if (e.key === 'ArrowDown') { e.preventDefault(); setOpen(true); links[0]?.focus(); } });
+ flyout.addEventListener('focusout', e => { if (!flyout.contains(e.relatedTarget as Node | null)) setOpen(false); });
+ document.addEventListener('click', e => { if (e.target instanceof Node && !flyout.contains(e.target)) setOpen(false); });
+ flyout.addEventListener('keydown', e => { if (e.key === 'Escape') { e.preventDefault(); button.focus(); setOpen(false); } });
+ links.forEach(link => link.addEventListener('click', () => { if (link.dataset.preserveHash === 'true' && location.hash) link.hash = location.hash; }));
+</script>

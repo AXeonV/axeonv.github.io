@@ -2,12 +2,14 @@
 interface Props {
 	date: Date;
 }
+import { localeFromPath } from '../lib/i18n';
 
 const { date } = Astro.props;
 ---
 
 <time datetime={date.toISOString()}>
-	{date.toLocaleDateString('en-us', {
+	{date.toLocaleDateString(localeFromPath(Astro.url.pathname) === 'zh' ? 'zh-CN' : 'en-US', {
+		timeZone: 'UTC',
 		year: 'numeric',
 		month: 'short',
 		day: 'numeric',

@@ -1,5 +1,6 @@
-// Place any global data in this file.
-// You can import this data from anywhere in your site by using the `import` keyword.
-
-export const SITE_TITLE = 'Astro Blog';
-export const SITE_DESCRIPTION = 'Welcome to my website!';
+export const SITE_TITLE = 'Alex Tianyou Liu 刘天佑';
+export const SITE_DESCRIPTION = 'Alex Tianyou Liu 刘天佑的个人主页 · Articles, Blog & Gallery';
+export const GITHUB_URL = 'https://github.com/axeonv';
+export const GOOGLE_SCHOLAR_URL = 'https://scholar.google.com/citations?user=nC0IiZ4AAAAJ&hl=en';
+// Keep the sidebar framework available, but hide it until it is needed.
+export const SIDEBAR_ENABLED = false;

@@ -1,0 +1,20 @@
+---
+import { localeFromPath, localePath, messages } from '../lib/i18n';
+const locale = localeFromPath(Astro.url.pathname);
+const home = localePath(locale);
+const groups = [
+ { text: messages[locale].personal, items: [{ text: locale === 'zh' ? '欢迎 · Welcome' : 'Welcome', href: home }, { text: 'About Me', href: `${home}#about-me` }, { text: 'Publications', href: `${home}#publications` }, { text: 'Notes', href: `${home}#notes` }, { text: locale === 'zh' ? '开源项目贡献' : 'Open source contributions', href: `${home}#open-source` }] },
+ { text: messages[locale].writing, items: [{ text: locale === 'zh' ? 'Article · 文章' : 'Article', href: localePath(locale, 'articles/') }, { text: locale === 'zh' ? 'Blog · 日志' : 'Blog', href: localePath(locale, 'blog/') }, { text: locale === 'zh' ? 'Gallery · 相册' : 'Gallery', href: localePath(locale, 'gallery/') }] },
+];
+const path = Astro.url.pathname;
+---
+<div class="sidebar-backdrop"></div>
+<aside id="site-sidebar" class="VPSidebar" data-v-319d5ca6>
+ <div class="curtain" data-v-319d5ca6></div>
+ <nav class="nav" aria-label={messages[locale].mainNav} data-v-319d5ca6>
+ {groups.map(group => <div class="group" data-v-c40bc020><section class="VPSidebarItem level-0" data-v-b3fd67f8>
+  <div class="item" data-v-b3fd67f8><h2 class="text" data-v-b3fd67f8>{group.text}</h2></div>
+  <div class="items" data-v-b3fd67f8>{group.items.map(link => <div class:list={['VPSidebarItem level-1 is-link', { 'is-active': !link.href.includes('#') && (link.href === home ? path === home : path.startsWith(link.href)) }]} data-v-b3fd67f8><div class="item" data-v-b3fd67f8><a class="VPLink link" href={link.href} data-v-b3fd67f8><p class="text" data-v-b3fd67f8>{link.text}</p></a></div></div>)}</div>
+ </section></div>)}
+ </nav>
+</aside>

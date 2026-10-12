@@ -1,0 +1,23 @@
+---
+import SiteLayout from '../../layouts/SiteLayout.astro';
+import Publications from '../../components/Publications.astro';
+const toc = [
+ { id: 'about-me', label: 'About Me' },
+ { id: 'publications', label: 'Publications' },
+ { id: 'conference-journal', label: 'Conference & Journal', depth: 3 },
+ { id: 'preprint', label: 'Preprint', depth: 3 },
+ { id: 'notes', label: 'Notes' },
+ { id: 'open-source', label: 'Contributions to Open Source Projects' },
+];
+---
+<SiteLayout toc={toc}>
+ <h1 class="profile-name">Alex Tianyou Liu <span lang="zh-CN">刘天佑</span></h1>
+ <h2 id="about-me">About Me <a class="header-anchor" href="#about-me" aria-label="链接到 About Me">​</a></h2>
+ <p class="alex-muted">个人介绍待更新。</p>
+ <h2 id="publications">Publications <a class="header-anchor" href="#publications" aria-label="链接到 Publications">​</a></h2>
+ <Publications/>
+ <h2 id="notes">Notes <a class="header-anchor" href="#notes" aria-label="链接到 Notes">​</a></h2>
+ <p>这里会分享我在学习与研究过程中的笔记。欢迎反馈问题、补充内容或提出修正。完整笔记列表请参阅 <a href="/zh/articles/">Articles</a>。</p>
+ <h2 id="open-source">Contributions to Open Source Projects <a class="header-anchor" href="#open-source" aria-label="链接到开源项目贡献">​</a></h2>
+ <p class="alex-muted">开源项目贡献待更新。</p>
+</SiteLayout>

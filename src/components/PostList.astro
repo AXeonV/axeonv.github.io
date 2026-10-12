@@ -1,0 +1,16 @@
+---
+import { getPublishedPosts, getPostUrl, type PostCategory } from '../lib/posts';
+import FormattedDate from './FormattedDate.astro';
+import { localeFromPath, messages } from '../lib/i18n';
+interface Props { category: PostCategory; }
+const { category } = Astro.props;
+const locale = localeFromPath(Astro.url.pathname);
+const posts = await getPublishedPosts(category, locale);
+---
+{posts.length ? posts.map(post => (
+	<article class="alex-post">
+		<FormattedDate date={post.data.pubDate}/>
+		<h2><a href={getPostUrl(post)}>{post.data.title}</a></h2>
+		<p>{post.data.description}</p>
+	</article>
+)) : <p class="alex-muted">{category === 'article' ? messages[locale].emptyArticles : messages[locale].emptyBlog}</p>}

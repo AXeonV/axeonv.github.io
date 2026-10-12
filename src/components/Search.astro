@@ -1,0 +1,58 @@
+---
+import Icon from './Icon.astro';
+import { localeFromPath, localePath, messages } from '../lib/i18n';
+const locale = localeFromPath(Astro.url.pathname);
+const text = messages[locale];
+---
+<div class="VPNavBarSearch search" data-v-6aa21345>
+ <button type="button" class="DocSearch DocSearch-Button" aria-label={text.search} aria-haspopup="dialog"><span class="DocSearch-Button-Container"><span class="vp-icon DocSearch-Search-Icon"></span><span class="DocSearch-Button-Placeholder">Search</span></span><span class="DocSearch-Button-Keys"><kbd class="DocSearch-Button-Key"></kbd><kbd class="DocSearch-Button-Key">K</kbd></span></button>
+</div>
+<dialog class="alex-search" aria-label={text.search} data-search-config={JSON.stringify({ index: localePath(locale, 'search-index.json'), strings: text })}>
+ <div class="alex-search-row"><Icon name="search"/><input type="search" placeholder={text.searchPlaceholder} aria-label={text.searchKeyword} autocomplete="off"/><button class="alex-search-close" type="button" aria-label={text.searchClose}><Icon name="close"/></button></div>
+ <p class="alex-search-status" role="status" aria-live="polite">{text.searchInitial}</p><ul class="alex-search-results" aria-label={text.searchResults}></ul>
+ <p class="alex-search-help">{text.searchHelp}</p>
+</dialog>
+<script>
+ type Entry = { title: string; description: string; url: string; text: string; section: string };
+ const dialog = document.querySelector<HTMLDialogElement>('.alex-search')!;
+ const config = JSON.parse(dialog.dataset.searchConfig!) as { index: string; strings: Record<string, string> };
+ const text = config.strings;
+ const trigger = document.querySelector<HTMLButtonElement>('.DocSearch-Button')!;
+ const input = dialog.querySelector<HTMLInputElement>('input')!;
+ const results = dialog.querySelector<HTMLUListElement>('.alex-search-results')!;
+ const status = dialog.querySelector<HTMLElement>('.alex-search-status')!;
+ let entries: Entry[] = [];
+ let loaded = false;
+ let loading: Promise<void> | undefined;
+ const render = () => {
+  results.replaceChildren();
+  if (!loaded) return;
+  const query = input.value.trim().toLocaleLowerCase();
+  const terms = query.split(/\s+/);
+  const matches = query ? entries.filter(e => terms.every(t => (e.title + ' ' + e.description + ' ' + e.text).toLocaleLowerCase().includes(t))).slice(0,20) : entries.slice(0,6);
+  status.textContent = query ? (matches.length ? text.searchFound.replace('{count}', String(matches.length)) : text.searchEmpty) : text.searchQuick;
+  matches.forEach(entry => {
+   const li = document.createElement('li'), a = document.createElement('a'), small = document.createElement('small'), strong = document.createElement('strong'), span = document.createElement('span');
+   a.href = entry.url; small.textContent = entry.section; strong.textContent = entry.title; span.textContent = entry.description;
+   a.append(small,strong,span); li.append(a); results.append(li);
+  });
+ };
+ const load = async () => {
+  if (loaded) return;
+  status.textContent = text.searchLoading;
+  if (!loading) loading = fetch(config.index).then(async response => { if (!response.ok) throw new Error('Search unavailable'); entries = await response.json(); loaded = true; }).finally(() => { loading = undefined; });
+  try { await loading; render(); } catch { status.textContent = text.searchError; }
+ };
+ const open = () => { if (!dialog.open) dialog.showModal(); input.focus(); render(); void load(); };
+ trigger.addEventListener('click', open);
+ input.addEventListener('input', render);
+ dialog.querySelector('.alex-search-close')?.addEventListener('click', () => dialog.close());
+ dialog.addEventListener('click', e => { if (e.target === dialog) dialog.close(); });
+ dialog.addEventListener('close', () => trigger.focus());
+ document.addEventListener('keydown', e => { if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === 'k') { e.preventDefault(); open(); } });
+ dialog.addEventListener('keydown', e => {
+  const links = Array.from(results.querySelectorAll<HTMLAnchorElement>('a')), index = links.indexOf(document.activeElement as HTMLAnchorElement);
+  if (links.length && (e.key === 'ArrowDown' || e.key === 'ArrowUp')) { e.preventDefault(); links[e.key === 'ArrowDown' ? (index+1)%links.length : (index <= 0 ? links.length-1 : index-1)].focus(); }
+  if (links.length && e.key === 'Enter' && document.activeElement === input) { e.preventDefault(); links[0].click(); }
+ });
+</script>

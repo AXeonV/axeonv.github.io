@@ -1,0 +1,17 @@
+---
+import { Image } from 'astro:assets';
+import { POST_SECTIONS, getPostLocale, getPostTranslations, type Post } from '../lib/posts';
+import { localePath, messages } from '../lib/i18n';
+import SiteLayout from './SiteLayout.astro';
+import FormattedDate from '../components/FormattedDate.astro';
+interface Props { post: Post; headings?: { depth: number; slug: string; text: string }[]; }
+const { post, headings = [] } = Astro.props;
+const { title, description, pubDate, updatedDate, heroImage, category } = post.data;
+const locale = getPostLocale(post);
+const section = POST_SECTIONS[category];
+const translations = await getPostTranslations(post);
+---
+<SiteLayout title={title} description={description} translations={translations} toc={headings.filter(h => h.depth === 2).map(h => ({ id: h.slug, label: h.text }))}>
+ <a href={localePath(locale, section.path)}>← {section.label}</a>
+ <article><h1>{title}</h1><p class="alex-muted"><FormattedDate date={pubDate}/>{updatedDate && <> · {messages[locale].updated} <FormattedDate date={updatedDate}/></>}</p>{heroImage && <Image width={1100} src={heroImage} alt={title}/>}<slot/></article>
+</SiteLayout>

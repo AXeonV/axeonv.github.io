@@ -1,0 +1,20 @@
+---
+import type { Publication } from '../data/publications';
+import { localeFromPath, HTML_LANG } from '../lib/i18n';
+
+interface Props { publications: Publication[]; headingId: string; withVenue?: boolean; }
+const { publications, headingId, withVenue = false } = Astro.props;
+const locale = localeFromPath(Astro.url.pathname);
+const dateFormatter = new Intl.DateTimeFormat(HTML_LANG[locale], { year: 'numeric', month: 'short', timeZone: 'UTC' });
+---
+<div class="publication-table-wrap" role="region" aria-labelledby={headingId} tabindex="0">
+ <table class="publication-table">
+  <colgroup><col class="publication-date"/><col/>{withVenue && <col class="publication-venue"/>}</colgroup>
+  <thead><tr><th scope="col">{locale === 'zh' ? '日期' : 'Date'}</th><th scope="col">{locale === 'zh' ? '标题' : 'Title'}</th>{withVenue && <th scope="col">{locale === 'zh' ? '会议 / 期刊' : 'Venue'}</th>}</tr></thead>
+  <tbody>{publications.map(publication => <tr>
+   <td><time datetime={publication.date}>{dateFormatter.format(new Date(`${publication.date}-01T00:00:00Z`))}</time></td>
+   <td><a href={publication.url} target="_blank" rel="noopener noreferrer">{publication.title}</a></td>
+   {withVenue && <td>{publication.venue}</td>}
+  </tr>)}</tbody>
+ </table>
+</div>
