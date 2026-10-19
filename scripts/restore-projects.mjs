@@ -12,6 +12,13 @@ const insideRoot = (value) => {
   return path;
 };
 const git = (directory, ...args) => execFileSync('git', ['-C', directory, ...args], { encoding: 'utf8', stdio: ['ignore', 'pipe', 'pipe'] }).trim();
+// .gitmodules declares URLs, but only committed Git links make checkout restore the repositories.
+const tracked = git(root, 'ls-files', '--stage', '--', 'production/repos').split('\n');
+const missing = projects.filter((project) => project.directory && !tracked.some((line) =>
+  line.startsWith(`160000 ${project.commit} `) && line.endsWith(`\t${project.directory}`)));
+if (missing.length) {
+  throw new Error(`Missing or mismatched Git submodule entries (${missing.length}): ${missing.map((project) => project.name).join(', ')}. Run npm run projects:sync, then commit the staged production/repos entries together with .gitmodules and production/projects.json before deploying.`);
+}
 mkdirSync(resolve(root, 'production/repos'), { recursive: true });
 if (process.platform === 'win32') {
   for (const project of projects.filter((item) => item.windowsMetadataOnly)) {
