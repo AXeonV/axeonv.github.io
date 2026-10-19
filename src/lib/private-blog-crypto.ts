@@ -5,13 +5,13 @@ export interface PrivateCatalog {
  index: Ciphertext;
 }
 export interface PrivatePostSummary {
- id: string; title: string; description: string; author: string; date: string;
+ id: string; title: string; description: string;
 }
-export interface PrivatePost extends PrivatePostSummary { markdown: string; html: string; }
+export interface PrivatePost { title: string; author: string; date: string; html: string; }
 
-export const PRIVATE_BLOG_SESSION = 'alex-private-blog-key-v1';
+const PRIVATE_BLOG_SESSION = 'alex-private-blog-key-v1';
 const encoder = new TextEncoder();
-export function fromBase64(value: string): Uint8Array<ArrayBuffer> {
+function fromBase64(value: string): Uint8Array<ArrayBuffer> {
  return Uint8Array.from(atob(value), character => character.charCodeAt(0));
 }
 export async function derivePrivateKey(password: string, catalog: PrivateCatalog): Promise<CryptoKey> {

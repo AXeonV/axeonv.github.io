@@ -6,7 +6,6 @@ import SiteLayout from '../../../layouts/SiteLayout.astro';
 import PrivateBlog from '../../../components/PrivateBlog.astro';
 import privateRoutes from '../../../data/private-blog-routes.json';
 import { LOCALES, localeFromPath, localePath } from '../../../lib/i18n';
-import { privateBlogText } from '../../../lib/private-blog-text';
 export async function getStaticPaths() {
  const posts = await getPublishedPosts('blog');
  return [
@@ -21,7 +20,7 @@ const Content = rendered?.Content;
 const locale = localeFromPath(Astro.url.pathname);
 ---
 {post && rendered && Content ? <PostLayout post={post} headings={rendered.headings}><Content/></PostLayout> :
- <SiteLayout title={privateBlogText[locale].post} noindex>
+ <SiteLayout title="Blog" noindex>
   <a href={localePath(locale, 'blog/')}>← Blog</a>
   <PrivateBlog postId={privateId}/>
  </SiteLayout>

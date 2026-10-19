@@ -22,7 +22,6 @@ function initPrivateBlog(root: HTMLElement) {
  const submit = form.querySelector<HTMLButtonElement>('button')!;
  const status = root.querySelector<HTMLElement>('[data-private-status]')!;
  const content = root.querySelector<HTMLElement>('[data-private-content]')!;
- const placeholder = root.querySelector<HTMLElement>('[data-private-placeholder]');
  let unlocked = false;
  let catalog: PrivateCatalog | undefined;
  let operation = 0;
@@ -38,24 +37,26 @@ function initPrivateBlog(root: HTMLElement) {
   if (lock) lock.disabled = value;
   root.setAttribute('aria-busy', String(value));
  }
+ function setUnlocked(value: boolean) {
+  unlocked = value;
+  shackle?.setAttribute('d', value ? 'M8 10V6a4 4 0 0 1 8 0' : 'M8 10V6a4 4 0 0 1 8 0v4');
+  input.value = '';
+  form.hidden = value || !postId;
+  row.hidden = value && !!postId;
+  if (lock) lock.hidden = !value;
+  content.hidden = !value;
+  toggle?.setAttribute('aria-expanded', String(value));
+  showStatus();
+ }
  function reset() {
   operation++;
-  unlocked = false;
-  shackle?.setAttribute('d', 'M8 10V6a4 4 0 0 1 8 0v4');
   forgetPrivateKey();
-  input.value = '';
-  form.hidden = !postId;
-  row.hidden = false;
-  if (lock) lock.hidden = true;
-  content.hidden = true;
-  toggle?.setAttribute('aria-expanded', 'false');
-  showStatus();
+  setUnlocked(false);
   if (postId) {
    root.querySelector('[data-private-title]')!.textContent = '';
    root.querySelector('[data-private-meta]')!.replaceChildren();
    root.querySelector('[data-private-body]')!.replaceChildren();
-   placeholder!.hidden = false;
-   document.title = `${text.post} | ${SITE_TITLE}`;
+   document.title = `Blog | ${SITE_TITLE}`;
   } else content.replaceChildren();
  }
  async function getCatalog() {
@@ -79,7 +80,6 @@ function initPrivateBlog(root: HTMLElement) {
    root.querySelector('[data-private-meta]')!.replaceChildren(document.createTextNode(`${post.author} · `), date);
    // The HTML was rendered locally and is authenticated by AES-GCM before insertion.
    root.querySelector('[data-private-body]')!.innerHTML = post.html;
-   placeholder!.hidden = true;
    document.title = `${post.title} | ${SITE_TITLE}`;
   } else {
    const fragment = document.createDocumentFragment();
@@ -99,15 +99,7 @@ function initPrivateBlog(root: HTMLElement) {
    if (token !== operation) return;
    content.replaceChildren(fragment);
   }
-  unlocked = true;
-  shackle?.setAttribute('d', 'M8 10V6a4 4 0 0 1 8 0');
-  form.hidden = true;
-  row.hidden = !!postId;
-  input.value = '';
-  if (lock) lock.hidden = false;
-  content.hidden = false;
-  toggle?.setAttribute('aria-expanded', 'true');
-  showStatus();
+  setUnlocked(true);
  }
 
  toggle?.addEventListener('click', () => {

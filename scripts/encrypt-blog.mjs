@@ -12,7 +12,8 @@ const output = resolve(root, 'public/private-blog');
 const routesPath = resolve(root, 'src/data/private-blog-routes.json');
 const iterations = 600_000;
 const context = (id) => Buffer.from(`alex-private-blog:v1:${id}`);
-const idFor = (title) => createHash('sha256').update(`private-blog\0${title}`).digest('hex');
+const sha256 = (value) => createHash('sha256').update(value).digest('hex');
+const idFor = (title) => sha256(`private-blog\0${title}`);
 const deriveKey = (password, salt, rounds = iterations) => pbkdf2Sync(password, salt, rounds, 32, 'sha256');
 
 function encrypt(value, key, id) {
@@ -58,6 +59,11 @@ function renderMarkdown(markdown) {
  }).html;
 }
 
+const summaryFor = ({ id, title, description }) => ({ id, title, description });
+const articleFor = ({ title, author, date, markdown }) => ({
+ title, author, date, sourceHash: sha256(markdown), html: renderMarkdown(markdown),
+});
+
 async function readSources() {
  const { posts } = JSON.parse(await readFile(configPath, 'utf8'));
  return Promise.all(posts.map(async source => {
@@ -74,15 +80,13 @@ async function check(sources, password) {
  const catalog = JSON.parse(await readFile(resolve(output, 'index.json'), 'utf8'));
  const key = deriveKey(password, Buffer.from(catalog.kdf.salt, 'base64'), catalog.kdf.iterations);
  const index = decrypt(catalog.index, key, 'index');
- if (index.length !== sources.length) throw new Error('Article count mismatch.');
+ if (JSON.stringify(index) !== JSON.stringify(sources.map(summaryFor))) throw new Error('Index metadata mismatch.');
  for (const source of sources) {
   const payload = JSON.parse(await readFile(resolve(output, `${source.id}.json`), 'utf8'));
   const article = decrypt(payload, key, source.id);
-  for (const field of ['title', 'description', 'author', 'date', 'markdown']) {
-   if (article[field] !== source[field]) throw new Error(`Source mismatch: ${source.id} / ${field}`);
+  for (const [field, expected] of Object.entries(articleFor(source))) {
+   if (article[field] !== expected) throw new Error(`Source mismatch: ${source.id} / ${field}`);
   }
-  if (article.html !== renderMarkdown(source.markdown)) throw new Error('Rendered content mismatch.');
-  if (!index.some(entry => ['id', 'title', 'description', 'author', 'date'].every(field => entry[field] === source[field]))) throw new Error('Index metadata mismatch.');
   const tampered = { ...payload, data: Buffer.from(payload.data, 'base64') };
   tampered.data[0] ^= 1;
   try { decrypt({ ...tampered, data: tampered.data.toString('base64') }, key, source.id); throw new Error('Tampered ciphertext accepted.'); }
@@ -90,7 +94,7 @@ async function check(sources, password) {
  }
  try { decrypt(catalog.index, deriveKey(`${password}x`, Buffer.from(catalog.kdf.salt, 'base64')), 'index'); throw new Error('Wrong password accepted.'); }
  catch (error) { if (error.message === 'Wrong password accepted.') throw error; }
- console.log(`Verified ${sources.length} exact source copies, modification dates, and authenticated encryption.`);
+ console.log(`Verified ${sources.length} source fingerprints, rendered articles, modification dates, and authenticated encryption.`);
 }
 
 const password = await readPassword();
@@ -102,8 +106,8 @@ if (process.argv.includes('--check')) {
 } else {
  const salt = randomBytes(16);
  const key = deriveKey(password, salt);
- const index = sources.map(({ markdown, ...metadata }) => metadata);
- const encryptedPosts = sources.map(post => [post.id, encrypt({ ...post, html: renderMarkdown(post.markdown) }, key, post.id)]);
+ const index = sources.map(summaryFor);
+ const encryptedPosts = sources.map(post => [post.id, encrypt(articleFor(post), key, post.id)]);
  await mkdir(output, { recursive: true });
  for (const [id, payload] of encryptedPosts) await writeFile(resolve(output, `${id}.json`), JSON.stringify(payload));
  await writeFile(resolve(output, 'index.json'), JSON.stringify({ version: 1, kdf: { iterations, salt: salt.toString('base64') }, index: encrypt(index, key, 'index') }));
