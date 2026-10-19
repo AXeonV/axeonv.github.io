@@ -8,6 +8,8 @@ const posts = defineCollection({
 		z.object({
 			title: z.string(),
 			description: z.string(),
+			author: z.string().optional(),
+		format: z.enum(['markdown', 'text']).default('markdown'),
 			draft: z.boolean().default(false),
 			category: z.enum(['article', 'blog']).default('blog'),
 			translationKey: z.string().optional(),

@@ -6,12 +6,22 @@ import SiteLayout from './SiteLayout.astro';
 import FormattedDate from '../components/FormattedDate.astro';
 interface Props { post: Post; headings?: { depth: number; slug: string; text: string }[]; }
 const { post, headings = [] } = Astro.props;
-const { title, description, pubDate, updatedDate, heroImage, category } = post.data;
+const { title, description, author, pubDate, updatedDate, heroImage, category, format } = post.data;
+const paragraphs = format === 'text' ? (post.body ?? '').split(/\r?\n(?:[\t ]*\r?\n)+/).filter(paragraph => paragraph.trim()) : [];
 const locale = getPostLocale(post);
 const section = POST_SECTIONS[category];
 const translations = await getPostTranslations(post);
 ---
 <SiteLayout title={title} description={description} translations={translations} toc={headings.filter(h => h.depth === 2).map(h => ({ id: h.slug, label: h.text }))}>
  <a href={localePath(locale, section.path)}>← {section.label}</a>
- <article><h1>{title}</h1><p class="alex-muted"><FormattedDate date={pubDate}/>{updatedDate && <> · {messages[locale].updated} <FormattedDate date={updatedDate}/></>}</p>{heroImage && <Image width={1100} src={heroImage} alt={title}/>}<slot/></article>
+ <article>
+  <h1>{title}</h1>
+  <p class="alex-muted">{author && <><span>{author}</span> · </>}<FormattedDate date={pubDate}/>{updatedDate && <> · {messages[locale].updated} <FormattedDate date={updatedDate}/></>}</p>
+  {heroImage && <Image width={1100} src={heroImage} alt={title}/>}
+  {format === 'text' ? <div class="plain-text">{paragraphs.map(paragraph => <p>{paragraph}</p>)}</div> : <slot/>}
+ </article>
 </SiteLayout>
+
+<style>
+ .plain-text p { white-space: pre-wrap; }
+</style>

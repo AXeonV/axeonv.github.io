@@ -44,8 +44,10 @@ body { min-width: 0; }
 .alex-gallery { display: grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap: 20px; }
 .alex-gallery img { width: 100%; border-radius: 8px; }
 .alex-post { padding: 24px 0; }
-.alex-post h2 { margin-top: 12px; border: 0; }
-.alex-post time { font-size: 14px; color: var(--vp-c-text-3); }
+.vp-doc .alex-post h2 { margin-top: 0; border: 0; }
+.alex-section-header { display: flex; align-items: baseline; flex-wrap: wrap; gap: 8px 24px; margin-bottom: 24px; }
+.vp-doc .alex-section-header h1 { margin: 0; }
+.vp-doc .alex-section-header p { margin: 0; color: var(--vp-c-text-3); }
 .alex-search { margin: 80px auto; padding: 16px; width: min(600px, calc(100vw - 32px)); max-height: calc(100dvh - 120px); border: 1px solid var(--vp-c-divider); border-radius: 12px; color: var(--vp-c-text-1); background: var(--vp-c-bg); }
 .alex-search::backdrop { background: rgba(0,0,0,.45); }
 .alex-search-row { display: flex; align-items: center; gap: 12px; border: 1px solid var(--vp-c-brand-1); border-radius: 6px; padding: 12px; }

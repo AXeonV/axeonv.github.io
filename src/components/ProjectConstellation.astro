@@ -1,15 +1,23 @@
 ---
 import catalog from '../../production/projects.json';
+import { existsSync } from 'node:fs';
 import { localeFromPath } from '../lib/i18n';
 import { projectColor } from '../lib/gallery/project-colors.js';
 const zh = localeFromPath(Astro.url.pathname) === 'zh';
+// Local builds can be tried in Gallery before their source repository is committed.
+const projects = catalog.projects.map((project) => {
+ const preview = import.meta.env.DEV && existsSync(new URL(`../../public/previews/${project.slug}/index.html`, import.meta.url));
+ const view = preview ? `/previews/${project.slug}/index.html`
+  : project.entry ? `/projects/${project.slug}/${project.entry.split('/').map(encodeURIComponent).join('/')}` : null;
+ return { ...project, view };
+});
 ---
 <div class="project-constellation" aria-label={zh ? '项目星图' : 'Project constellation'} hidden>
- {catalog.projects.map((project, index) => (
+ {projects.map((project, index) => (
   <article class="project-node" data-project-index={index} tabindex="0" aria-label={project.name} style={`--project-color: ${projectColor(index)}`} hidden>
    <h2 class="project-label">{project.name}</h2>
    <div class="project-actions">
-    {project.entry && <a href={`/projects/${project.slug}/${project.entry.split('/').map(encodeURIComponent).join('/')}`} data-project-view data-project-name={project.name} data-project-repo={project.repo}>Web View ↗</a>}
+    {project.view && <a href={project.view} data-project-view data-project-name={project.name} data-project-repo={project.repo}>Web View ↗</a>}
     <a href={project.repo} target="_blank" rel="noopener noreferrer">Open Repo ↗</a>
    </div>
   </article>

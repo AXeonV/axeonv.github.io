@@ -5,4 +5,10 @@ import { LOCALES, localeFromPath, messages } from '../../../lib/i18n';
 export function getStaticPaths() { return LOCALES.map(lang => ({ params: { lang } })); }
 const text = messages[localeFromPath(Astro.url.pathname)];
 ---
-<SiteLayout title="Blog"><h1>Blog</h1><p>{text.blogDescription}</p><PostList category="blog"/></SiteLayout>
+<SiteLayout title="Blog">
+	<header class="alex-section-header">
+		<h1>Blog</h1>
+		<p>{text.blogDescription}</p>
+	</header>
+	<PostList category="blog"/>
+</SiteLayout>
