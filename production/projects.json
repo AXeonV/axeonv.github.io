@@ -398,10 +398,10 @@
       "language": "C",
       "localDirectory": "OpenGL-demo",
       "directory": "production/repos/opengl-demo",
-      "commit": "068db4396072700e777799040b60486e1a4e0ca8",
-      "entry": null,
+      "commit": "d1561b616bf54bcde64f2f5a572e2ef6000e98ff",
+      "entry": "index.html",
       "windowsMetadataOnly": false,
-      "bundle": "production/bundles/opengl-demo.bundle"
+      "bundle": null
     },
     {
       "slug": "particle",
