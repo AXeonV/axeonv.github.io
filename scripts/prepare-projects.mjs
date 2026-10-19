@@ -1,8 +1,9 @@
 import { execFileSync } from 'node:child_process';
-import { cpSync, existsSync, mkdirSync, readFileSync, readdirSync, realpathSync, rmSync } from 'node:fs';
+import { existsSync, mkdirSync, readFileSync, readdirSync, realpathSync, rmSync, writeFileSync } from 'node:fs';
 import { isAbsolute, join, relative, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { buildsProject, prepareBuiltProject } from './build-projects.mjs';
+import { previewContents } from './project-preview.mjs';
 
 const root = fileURLToPath(new URL('../', import.meta.url));
 const manifest = join(root, 'production/projects.json');
@@ -46,7 +47,8 @@ if (existsSync(manifest)) {
       wanted.add(file);
       mkdirSync(resolve(to, '..'), { recursive: true });
       // Preserve unchanged assets' mtimes to avoid needless Vite reloads after synchronization.
-      if (!existsSync(to) || !readFileSync(from).equals(readFileSync(to))) cpSync(from, to);
+      const contents = previewContents(project, file, readFileSync(from));
+      if (!existsSync(to) || !contents.equals(readFileSync(to))) writeFileSync(to, contents);
     }
     const removeStaleFiles = (directory) => {
       for (const item of readdirSync(directory, { withFileTypes: true })) {

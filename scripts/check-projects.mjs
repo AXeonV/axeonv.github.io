@@ -5,6 +5,7 @@ import { existsSync, readFileSync, readdirSync } from 'node:fs';
 import { join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { buildsProject } from './build-projects.mjs';
+import { previewContents } from './project-preview.mjs';
 
 const root = fileURLToPath(new URL('../', import.meta.url));
 const { projects } = JSON.parse(readFileSync(join(root, 'production/projects.json'), 'utf8'));
@@ -32,6 +33,12 @@ for (const project of projects) {
     if (buildsProject(project)) {
       assert.equal(git(join(root, project.directory), 'status', '--porcelain'), '', `${project.name}: build must not modify the Git replica`);
       assert(readFileSync(prepared, 'utf8').includes('type="module"'), `${project.name}: missing bundled module`);
+    }
+    if (project.slug === 'jigsaw') {
+      const expectedScript = previewContents(project, 'script.js', readFileSync(join(root, project.directory, 'script.js')));
+      assert(expectedScript.equals(readFileSync(join(root, 'public/projects/jigsaw/script.js'))), 'Jigsaw: iframe preview adapter');
+      if (existsSync(join(root, 'dist'))) assert(expectedScript.equals(readFileSync(join(root, 'dist/projects/jigsaw/script.js'))), 'Jigsaw: deployed iframe preview adapter');
+      assert.equal(git(join(root, project.directory), 'status', '--porcelain'), '', 'Jigsaw: source replica must remain unchanged');
     }
     if (existsSync(join(root, 'dist'))) assert.equal(digest(join(root, 'dist/projects', project.slug, project.entry)), hash, `${project.name}: deployed H5 must match its source`);
     h5++;
