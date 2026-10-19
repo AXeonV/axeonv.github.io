@@ -3,43 +3,48 @@ import { EffectComposer } from 'three/addons/postprocessing/EffectComposer.js';
 import { RenderPass } from 'three/addons/postprocessing/RenderPass.js';
 import { UnrealBloomPass } from 'three/addons/postprocessing/UnrealBloomPass.js';
 import { ShaderPass } from 'three/addons/postprocessing/ShaderPass.js';
-import { disposeScene } from './resources.js';
+import { disposeScene, smoothstep } from './resources.js';
 import { randomStarfieldPalette } from './palettes.js';
 
 const HOVER_SPEED = 10;
 const WARP_SPEED = 100;
-// Higher values make the starfield reach WARP_SPEED sooner after clicking.
-const WARP_ACCELERATION = 3.4;
+const SPEED_RESPONSE = 3.4;
+const TILT_RESPONSE = 1.212;
+const ZOOM_DURATION = 0.45; // Seconds to blend the streaks in/out.
+const ZOOM_STRENGTH = 0.004;
+const FIELD_WIDTH = 200;
+const FIELD_DEPTH = 300;
 
-// Particle shaders and flight motion retained from the supplied Starfield H5.
 const vertexShader = `
-  uniform float uTime;
+  const float FIELD_DEPTH = ${FIELD_DEPTH.toFixed(1)};
+  uniform float uTravel;
+  uniform float uPixelRatio;
   attribute vec3 color;
   attribute float size;
-  varying vec4 vColor;
+  varying vec3 vColor;
   void main() {
-    vColor = vec4(color, 1.0);
+    vColor = color;
     vec3 p = vec3(position);
-    p.z = -150. + mod(position.z + uTime, 300.);
+    p.z = mod(position.z + uTravel, FIELD_DEPTH) - FIELD_DEPTH * 0.5;
     vec4 mvPosition = modelViewMatrix * vec4(p, 1.0);
-    gl_PointSize = size * (-50.0 / mvPosition.z);
+    gl_PointSize = size * uPixelRatio * (-50.0 / mvPosition.z);
     gl_Position = projectionMatrix * mvPosition;
   }
 `;
 const fragmentShader = `
   uniform sampler2D uTexture;
-  varying vec4 vColor;
+  varying vec3 vColor;
   void main() {
-    gl_FragColor = vColor * texture2D(uTexture, gl_PointCoord);
+    gl_FragColor = vec4(vColor, 1.0) * texture2D(uTexture, gl_PointCoord);
   }
 `;
 
-// The original zoom blur pass, hosted locally instead of loading the Vue wrapper.
-const zoomBlur = {
+// Crossfade sharp stars into radial trails, using normalized sample weights.
+const zoomShader = {
   uniforms: {
     tDiffuse: { value: null },
-    center: { value: new THREE.Vector2(0.5, 0.5) },
     strength: { value: 0 },
+    blend: { value: 0 },
   },
   vertexShader: `
     varying vec2 vUv;
@@ -50,27 +55,29 @@ const zoomBlur = {
   `,
   fragmentShader: `
     uniform sampler2D tDiffuse;
-    uniform vec2 center;
     uniform float strength;
+    uniform float blend;
     varying vec2 vUv;
-    float random(vec3 scale, float seed) {
-      return fract(sin(dot(gl_FragCoord.xyz + seed, scale)) * 43758.5453 + seed);
-    }
     void main() {
-      vec4 color = vec4(0.0);
-      float total = 0.0;
-      vec2 toCenter = center - vUv;
-      float offset = random(vec3(12.9898, 78.233, 151.7182), 0.0);
-      for (float t = 0.0; t <= 40.0; t++) {
-        float percent = (t + offset) / 40.0;
-        float weight = 4.0 * (percent - percent * percent);
-        vec4 texel = texture2D(tDiffuse, vUv + toCenter * percent * strength);
-        texel.rgb *= texel.a;
-        color += texel * weight;
-        total += weight;
+      vec4 original = texture2D(tDiffuse, vUv);
+      if (blend <= 0.0001) {
+        gl_FragColor = original;
+        return;
       }
-      gl_FragColor = color / total;
-      gl_FragColor.rgb /= gl_FragColor.a + 0.00001;
+      const float SAMPLES = 40.0;
+      vec3 weightedColor = vec3(0.0);
+      float weightSum = 0.0;
+      vec2 toCenter = vec2(0.5) - vUv;
+      // Jitter sample positions to prevent visible bands in the trails.
+      float jitter = fract(sin(dot(gl_FragCoord.xyz, vec3(12.9898, 78.233, 151.7182))) * 43758.5453);
+      for (float i = 0.0; i < SAMPLES; i++) {
+        float percent = (i + jitter) / SAMPLES;
+        float weight = 4.0 * (percent - percent * percent);
+        vec3 texel = texture2D(tDiffuse, vUv + toCenter * percent * strength).rgb;
+        weightedColor += texel * weight;
+        weightSum += weight;
+      }
+      gl_FragColor = vec4(mix(original.rgb, weightedColor / weightSum, blend), original.a);
     }
   `,
 };
@@ -86,7 +93,11 @@ export function createStarfield(renderer, { width, height, mobile }) {
   const color = new THREE.Color();
   const position = new THREE.Vector3();
   for (let i = 0; i < count; i++) {
-    position.set(THREE.MathUtils.randFloatSpread(200), THREE.MathUtils.randFloatSpread(200), THREE.MathUtils.randFloatSpread(300));
+    position.set(
+      THREE.MathUtils.randFloatSpread(FIELD_WIDTH),
+      THREE.MathUtils.randFloatSpread(FIELD_WIDTH),
+      THREE.MathUtils.randFloatSpread(FIELD_DEPTH),
+    );
     position.toArray(positions, i * 3);
     color.set(palette[THREE.MathUtils.randInt(0, palette.length - 1)]);
     color.toArray(colors, i * 3);
@@ -98,7 +109,11 @@ export function createStarfield(renderer, { width, height, mobile }) {
   geometry.setAttribute('size', new THREE.BufferAttribute(sizes, 1));
   const texture = new THREE.TextureLoader().load('/gallery/star-sprite.png');
   const material = new THREE.ShaderMaterial({
-    uniforms: { uTime: { value: 0 }, uTexture: { value: texture } },
+    uniforms: {
+      uTravel: { value: 0 },
+      uTexture: { value: texture },
+      uPixelRatio: { value: renderer.getPixelRatio() },
+    },
     vertexShader, fragmentShader,
     blending: THREE.AdditiveBlending,
     depthTest: false,
@@ -106,33 +121,40 @@ export function createStarfield(renderer, { width, height, mobile }) {
     transparent: true,
   });
   const points = new THREE.Points(geometry, material);
-  points.position.z = -150;
+  // Keep the rotation pivot at the field's center while placing it in front of the camera.
+  points.position.z = -FIELD_DEPTH / 2;
   // Points wrap in the vertex shader; their CPU-side bounds must not cull the field.
   points.frustumCulled = false;
   scene.add(points);
 
   const composer = new EffectComposer(renderer);
   composer.addPass(new RenderPass(scene, camera));
-  const bloom = new UnrealBloomPass(new THREE.Vector2(width, height), 2, 0, 0);
-  composer.addPass(bloom);
-  const zoom = new ShaderPass(zoomBlur);
+  const zoom = new ShaderPass(zoomShader);
   composer.addPass(zoom);
+  zoom.enabled = false;
+  // Bloom always remains the final pass, preserving its display output when zoom toggles.
+  composer.addPass(new UnrealBloomPass(new THREE.Vector2(width, height), 2, 0, 0));
   let speed = 1;
-  let targetSpeed = 1;
   let hovered = false;
   let warping = false;
-  const updateTargetSpeed = () => { targetSpeed = warping ? WARP_SPEED : hovered ? HOVER_SPEED : 1; };
+  let zoomProgress = 0;
 
   return {
-    setHover(active) { hovered = active; updateTargetSpeed(); },
-    setWarp(active) { warping = active; updateTargetSpeed(); },
+    setHover(active) { hovered = active; },
+    setWarp(active) { warping = active; },
     get speed() { return speed; },
-    render(delta, _elapsed, pointer) {
-      const speedSmoothing = 1 - Math.exp(-delta * WARP_ACCELERATION);
-      const tiltSmoothing = 1 - Math.exp(-delta * 1.212);
+    render(delta, pointer) {
+      const targetSpeed = warping ? WARP_SPEED : hovered ? HOVER_SPEED : 1;
+      const speedSmoothing = 1 - Math.exp(-delta * SPEED_RESPONSE);
+      const tiltSmoothing = 1 - Math.exp(-delta * TILT_RESPONSE);
       speed = THREE.MathUtils.lerp(speed, targetSpeed, speedSmoothing);
-      material.uniforms.uTime.value += delta * speed * 4;
-      zoom.uniforms.strength.value = speed * 0.004;
+      material.uniforms.uTravel.value += delta * speed * 4;
+      const zoomDirection = warping ? 1 : -1;
+      zoomProgress = THREE.MathUtils.clamp(zoomProgress + zoomDirection * delta / ZOOM_DURATION, 0, 1);
+      const zoomBlend = smoothstep(zoomProgress);
+      zoom.uniforms.blend.value = zoomBlend;
+      zoom.uniforms.strength.value = zoomBlend * speed * ZOOM_STRENGTH;
+      zoom.enabled = zoomProgress > 0;
       points.rotation.x = THREE.MathUtils.lerp(points.rotation.x, pointer.y * 0.05, tiltSmoothing);
       points.rotation.y = THREE.MathUtils.lerp(points.rotation.y, -pointer.x * 0.05, tiltSmoothing);
       composer.render(delta);
@@ -140,6 +162,7 @@ export function createStarfield(renderer, { width, height, mobile }) {
     resize(width, height) {
       camera.aspect = width / height;
       camera.updateProjectionMatrix();
+      material.uniforms.uPixelRatio.value = renderer.getPixelRatio();
       composer.setPixelRatio(renderer.getPixelRatio());
       composer.setSize(width, height);
     },
