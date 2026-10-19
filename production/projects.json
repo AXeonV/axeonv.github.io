@@ -10,7 +10,7 @@
       "localDirectory": "abstraction",
       "directory": "production/repos/abstraction",
       "commit": "0f7a65654b59a6e6fb43b7bcaee22ed13a548b5b",
-      "entry": "abstraction.html",
+      "entry": "index.html",
       "windowsMetadataOnly": false,
       "bundle": null
     },
@@ -23,7 +23,7 @@
       "localDirectory": "alien",
       "directory": "production/repos/alien",
       "commit": "b484c073661957f2cb92360ed8df36019fc9266d",
-      "entry": "alien.html",
+      "entry": "index.html",
       "windowsMetadataOnly": false,
       "bundle": null
     },
@@ -87,7 +87,7 @@
       "localDirectory": "beam",
       "directory": "production/repos/beam",
       "commit": "91bcfa5fa5617e0b643d6e15a89fae6c2b26384f",
-      "entry": "beam.html",
+      "entry": "index.html",
       "windowsMetadataOnly": false,
       "bundle": null
     },
@@ -113,7 +113,7 @@
       "localDirectory": "christmas2025",
       "directory": "production/repos/christmas2025",
       "commit": "9a04b3298da3e2b8c3e125f0bd0dd5e826edcc30",
-      "entry": "christmas2025.html",
+      "entry": "index.html",
       "windowsMetadataOnly": false,
       "bundle": null
     },
@@ -139,7 +139,7 @@
       "localDirectory": "clock-rings",
       "directory": "production/repos/clock-rings",
       "commit": "4fb9de37b3e6bf30891f79082c2b119f724691bb",
-      "entry": "clock-rings.html",
+      "entry": "index.html",
       "windowsMetadataOnly": false,
       "bundle": null
     },
@@ -152,7 +152,7 @@
       "localDirectory": "cloth",
       "directory": "production/repos/cloth",
       "commit": "e185b3531c5640efc114b5740538bc4d1a66e6ff",
-      "entry": "cloth.html",
+      "entry": "index.html",
       "windowsMetadataOnly": false,
       "bundle": null
     },
@@ -243,7 +243,7 @@
       "localDirectory": "firework",
       "directory": "production/repos/firework",
       "commit": "fb4b63a769cd6ce05505f65533549b312ef02205",
-      "entry": "firework.html",
+      "entry": "index.html",
       "windowsMetadataOnly": false,
       "bundle": null
     },
@@ -256,7 +256,7 @@
       "localDirectory": "galaxy",
       "directory": "production/repos/galaxy",
       "commit": "f51178ea9cac8112dacf888900efb69c6d100a62",
-      "entry": "galaxy.html",
+      "entry": "index.html",
       "windowsMetadataOnly": false,
       "bundle": null
     },
@@ -269,7 +269,7 @@
       "localDirectory": "gargantua",
       "directory": "production/repos/gargantua",
       "commit": "836a8d88b31c7d365b62a8e2d67ee1d0c2097af8",
-      "entry": "gargantua(purple).html",
+      "entry": "sources/index.html",
       "windowsMetadataOnly": false,
       "bundle": null
     },
@@ -295,7 +295,7 @@
       "localDirectory": "hermes",
       "directory": "production/repos/hermes",
       "commit": "d6c71deebf3021243b8d34f99c93437f31acea47",
-      "entry": "starlight_v2.html",
+      "entry": "index.html",
       "windowsMetadataOnly": false,
       "bundle": null
     },
@@ -347,7 +347,7 @@
       "localDirectory": "neuro",
       "directory": "production/repos/neuro",
       "commit": "e22dbf550b6d7e8b2cff70511567e8cfba04419a",
-      "entry": "neuro.html",
+      "entry": "index.html",
       "windowsMetadataOnly": false,
       "bundle": null
     },
@@ -373,7 +373,7 @@
       "localDirectory": "nova",
       "directory": "production/repos/nova",
       "commit": "4d8f74164fa64016afdfd874c3007c60fe1a07b8",
-      "entry": "nova.html",
+      "entry": "index.html",
       "windowsMetadataOnly": false,
       "bundle": null
     },
@@ -412,7 +412,7 @@
       "localDirectory": "particle",
       "directory": "production/repos/particle",
       "commit": "b0545fb798c9dac1b14f712faa23d81d35bb4a24",
-      "entry": "particle.html",
+      "entry": "index.html",
       "windowsMetadataOnly": false,
       "bundle": null
     },
@@ -425,7 +425,7 @@
       "localDirectory": "particle2024",
       "directory": "production/repos/particle2024",
       "commit": "69dfd14692fc6e1c38dbfb58071cbadbd3185c6a",
-      "entry": "particle2024.html",
+      "entry": "index.html",
       "windowsMetadataOnly": false,
       "bundle": null
     },
@@ -438,7 +438,7 @@
       "localDirectory": "particle2025",
       "directory": "production/repos/particle2025",
       "commit": "c9c55c5b9d72be36e524dcbe17119df1493e32e4",
-      "entry": "particle2025.html",
+      "entry": "index.html",
       "windowsMetadataOnly": false,
       "bundle": null
     },
@@ -464,7 +464,7 @@
       "localDirectory": "powehi",
       "directory": "production/repos/powehi",
       "commit": "8e0cabdcfe30fd42bd7cf591e82935c07d611c99",
-      "entry": "powehi.html",
+      "entry": "index.html",
       "windowsMetadataOnly": false,
       "bundle": null
     },
@@ -529,7 +529,7 @@
       "localDirectory": "waveform",
       "directory": "production/repos/waveform",
       "commit": "89caebfc2e13339413231193c424c14dcb291240",
-      "entry": "waveform.html",
+      "entry": "index.html",
       "windowsMetadataOnly": false,
       "bundle": null
     },

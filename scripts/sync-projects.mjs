@@ -2,6 +2,7 @@ import { execFileSync } from 'node:child_process';
 import { existsSync, mkdirSync, readFileSync, readdirSync, renameSync, rmSync, statSync, writeFileSync } from 'node:fs';
 import { basename, dirname, join, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { selectProjectEntry } from './project-entry.mjs';
 
 const root = fileURLToPath(new URL('../', import.meta.url));
 const workspace = resolve(process.env.PROJECT_WORKSPACE || dirname(root));
@@ -32,21 +33,6 @@ for (const folder of readdirSync(workspace, { withFileTypes: true }).filter((ite
 const publicRepos = github.filter((repo) => !repo.isPrivate && repo.nameWithOwner.toLowerCase().startsWith(`${owner.toLowerCase()}/`))
   .sort((a, b) => a.name.localeCompare(b.name, 'en'));
 mkdirSync(join(root, 'production/repos'), { recursive: true });
-
-function selectEntry(folder, name) {
-  const files = readdirSync(folder, { withFileTypes: true }).filter((file) => file.isFile()).map((file) => file.name);
-  const preferred = [
-    ...(name.toLowerCase() === 'hermes' ? ['starlight_v2.html'] : []),
-    ...(name.toLowerCase() === 'gargantua' ? ['gargantua(purple).html'] : []),
-    `${name}.html`, 'index.html',
-  ];
-  for (const candidate of preferred) {
-    const match = files.find((file) => file.toLowerCase() === candidate.toLowerCase());
-    if (match) return match;
-  }
-  const html = files.filter((file) => file.toLowerCase().endsWith('.html'));
-  return html.length === 1 ? html[0] : null;
-}
 
 const projects = [];
 let pendingSources = 0;
@@ -102,7 +88,7 @@ for (const repo of publicRepos) {
     git(root, 'add', '--', '.gitmodules');
     // The parent's gitlink records the exact version used for the next deployment.
     git(root, 'update-index', '--add', '--cacheinfo', `160000,${commit},${relative}`);
-    entry = metadataOnly ? null : old?.entry && existsSync(join(destination, old.entry)) ? old.entry : selectEntry(destination, repo.name);
+    entry = metadataOnly ? null : selectProjectEntry(destination, repo.name, old?.entry);
   }
   projects.push({
     slug, name: repo.name, repo: repo.url, description: repo.description || '',

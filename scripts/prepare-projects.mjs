@@ -2,6 +2,7 @@ import { execFileSync } from 'node:child_process';
 import { cpSync, existsSync, mkdirSync, readFileSync, readdirSync, realpathSync, rmSync } from 'node:fs';
 import { isAbsolute, join, relative, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { buildsProject, prepareBuiltProject } from './build-projects.mjs';
 
 const root = fileURLToPath(new URL('../', import.meta.url));
 const manifest = join(root, 'production/projects.json');
@@ -28,11 +29,15 @@ if (existsSync(manifest)) {
     const destination = resolve(output, project.slug);
     assertInside(output, destination);
     mkdirSync(destination, { recursive: true });
-    const files = execFileSync('git', ['-C', source, 'ls-files', '-z'], { encoding: 'utf8' }).split('\0').filter(Boolean);
+    const files = execFileSync('git', ['-C', source, 'ls-files', '-z'], { encoding: 'utf8' }).split('\0').filter(Boolean)
+      .filter((file) => !file.split('/').some((part) => ['.git', '.github', 'node_modules', '.env', '.env.local', '.env.production'].includes(part)));
+    if (buildsProject(project)) {
+      await prepareBuiltProject(project, source, destination, files);
+      count++;
+      continue;
+    }
     const wanted = new Set();
     for (const file of files) {
-      const segments = file.split('/');
-      if (segments.some((part) => ['.git', '.github', 'node_modules', '.env', '.env.local', '.env.production'].includes(part))) continue;
       const from = resolve(source, file);
       const to = resolve(destination, file);
       assertInside(source, from);
@@ -54,5 +59,5 @@ if (existsSync(manifest)) {
     removeStaleFiles(destination);
     count++;
   }
-  console.log(`Prepared ${count} unmodified H5 project copies in public/projects (Git metadata stays in production/repos).`);
+  console.log(`Prepared ${count} H5 projects in public/projects; module-based projects are bundled without changing their source repositories.`);
 }

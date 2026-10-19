@@ -4,6 +4,7 @@ import { createHash } from 'node:crypto';
 import { existsSync, readFileSync, readdirSync } from 'node:fs';
 import { join } from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { buildsProject } from './build-projects.mjs';
 
 const root = fileURLToPath(new URL('../', import.meta.url));
 const { projects } = JSON.parse(readFileSync(join(root, 'production/projects.json'), 'utf8'));
@@ -22,8 +23,16 @@ for (const project of projects) {
     if (project.bundle) assert(git(root, 'bundle', 'list-heads', project.bundle, 'refs/heads/homepage-snapshot').startsWith(`${project.commit} `), `${project.name}: bundled commit`);
   }
   if (project.entry) {
-    const hash = digest(join(root, project.directory, project.entry));
-    assert.equal(digest(join(root, 'public/projects', project.slug, project.entry)), hash, `${project.name}: source must remain unchanged`);
+    const prepared = join(root, 'public/projects', project.slug, project.entry);
+    const expected = buildsProject(project)
+      ? join(root, '.astro/project-builds', project.slug, 'output/index.html')
+      : join(root, project.directory, project.entry);
+    const hash = digest(expected);
+    assert.equal(digest(prepared), hash, `${project.name}: prepared entry must match its source or build output`);
+    if (buildsProject(project)) {
+      assert.equal(git(join(root, project.directory), 'status', '--porcelain'), '', `${project.name}: build must not modify the Git replica`);
+      assert(readFileSync(prepared, 'utf8').includes('type="module"'), `${project.name}: missing bundled module`);
+    }
     if (existsSync(join(root, 'dist'))) assert.equal(digest(join(root, 'dist/projects', project.slug, project.entry)), hash, `${project.name}: deployed H5 must match its source`);
     h5++;
   }
@@ -43,7 +52,7 @@ for (const locale of ['zh', 'en']) {
     for (const project of projects) assert(html.includes(`href="${project.repo}"`), `${locale}: missing ${project.name}`);
   }
 }
-console.log(`Checked ${projects.length} public project links, ${projects.filter((project) => project.directory).length} pinned Git replicas, and ${h5} byte-identical H5 entries. No Git metadata is published.`);
+console.log(`Checked ${projects.length} public project links, ${projects.filter((project) => project.directory).length} pinned Git replicas, and ${h5} prepared H5 entries (bundled or byte-identical). No Git metadata is published.`);
 if (process.argv.includes('--remote')) {
   const replicas = projects.filter((project) => project.directory);
   const fields = replicas.map((project, index) => `r${index}:repository(owner:"AXeonV",name:${JSON.stringify(project.name)}){object(oid:${JSON.stringify(project.commit)}){oid}}`);
