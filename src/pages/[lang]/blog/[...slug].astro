@@ -2,12 +2,27 @@
 import { render } from 'astro:content';
 import { getPublishedPosts, getPostLocale, getPostSlug, type Post } from '../../../lib/posts';
 import PostLayout from '../../../layouts/PostLayout.astro';
+import SiteLayout from '../../../layouts/SiteLayout.astro';
+import PrivateBlog from '../../../components/PrivateBlog.astro';
+import privateRoutes from '../../../data/private-blog-routes.json';
+import { LOCALES, localeFromPath, localePath } from '../../../lib/i18n';
+import { privateBlogText } from '../../../lib/private-blog-text';
 export async function getStaticPaths() {
  const posts = await getPublishedPosts('blog');
- return posts.map(post => ({ params: { lang: getPostLocale(post), slug: getPostSlug(post) }, props: post }));
+ return [
+  ...posts.map(post => ({ params: { lang: getPostLocale(post), slug: getPostSlug(post) }, props: { post } })),
+  ...LOCALES.flatMap(lang => privateRoutes.ids.map(privateId => ({ params: { lang, slug: privateId }, props: { privateId } }))),
+ ];
 }
-type Props = Post;
-const post = Astro.props;
-const { Content, headings } = await render(post);
+type Props = { post: Post; privateId?: never } | { post?: never; privateId: string };
+const { post, privateId } = Astro.props;
+const rendered = post ? await render(post) : null;
+const Content = rendered?.Content;
+const locale = localeFromPath(Astro.url.pathname);
 ---
-<PostLayout post={post} headings={headings}><Content/></PostLayout>
+{post && rendered && Content ? <PostLayout post={post} headings={rendered.headings}><Content/></PostLayout> :
+ <SiteLayout title={privateBlogText[locale].post} noindex>
+  <a href={localePath(locale, 'blog/')}>← Blog</a>
+  <PrivateBlog postId={privateId}/>
+ </SiteLayout>
+}

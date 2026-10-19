@@ -3,13 +3,14 @@ import '../styles/global.css';
 import type { ImageMetadata } from 'astro';
 import { SITE_TITLE } from '../consts';
 import { localeFromPath, localePath, HTML_LANG, type Translations } from '../lib/i18n';
-interface Props { title: string; description: string; image?: ImageMetadata; translations?: Translations; }
-const { title, description, image, translations = {} } = Astro.props;
+interface Props { title: string; description: string; image?: ImageMetadata; translations?: Translations; noindex?: boolean; }
+const { title, description, image, translations = {}, noindex = false } = Astro.props;
 const locale = localeFromPath(Astro.url.pathname);
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 ---
 <meta charset="utf-8"/>
 <meta name="viewport" content="width=device-width,initial-scale=1"/>
+{noindex && <meta name="robots" content="noindex, nofollow"/>}
 <link rel="icon" type="image/svg+xml" href="/favicon.svg"/>
 <link rel="sitemap" href="/sitemap-index.xml"/>
 <link rel="alternate" type="application/rss+xml" title={SITE_TITLE} href={new URL(localePath(locale, 'rss.xml'), Astro.site)}/>

@@ -1,6 +1,7 @@
 ---
 import SiteLayout from '../../../layouts/SiteLayout.astro';
 import PostList from '../../../components/PostList.astro';
+import PrivateBlog from '../../../components/PrivateBlog.astro';
 import { LOCALES, localeFromPath, messages } from '../../../lib/i18n';
 export function getStaticPaths() { return LOCALES.map(lang => ({ params: { lang } })); }
 const text = messages[localeFromPath(Astro.url.pathname)];
@@ -11,4 +12,5 @@ const text = messages[localeFromPath(Astro.url.pathname)];
 		<p>{text.blogDescription}</p>
 	</header>
 	<PostList category="blog"/>
+	<PrivateBlog/>
 </SiteLayout>

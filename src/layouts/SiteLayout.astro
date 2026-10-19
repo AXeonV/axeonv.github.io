@@ -5,13 +5,13 @@ import Sidebar from '../components/Sidebar.astro';
 import Footer from '../components/Footer.astro';
 import { SITE_TITLE, SIDEBAR_ENABLED } from '../consts';
 import { localeFromPath, HTML_LANG, messages, pageTranslations, type Translations } from '../lib/i18n';
-interface Props { title?: string; description?: string; toc?: { id: string; label: string; depth?: number }[]; translations?: Translations; immersive?: boolean; }
+interface Props { title?: string; description?: string; toc?: { id: string; label: string; depth?: number }[]; translations?: Translations; immersive?: boolean; noindex?: boolean; }
 const locale = localeFromPath(Astro.url.pathname);
-const { title = SITE_TITLE, description = messages[locale].description, toc = [], translations = pageTranslations(Astro.url.pathname), immersive = false } = Astro.props;
+const { title = SITE_TITLE, description = messages[locale].description, toc = [], translations = pageTranslations(Astro.url.pathname), immersive = false, noindex = false } = Astro.props;
 ---
 <!doctype html>
 <html lang={HTML_LANG[locale]}>
- <head><BaseHead title={title === SITE_TITLE ? title : `${title} | ${SITE_TITLE}`} description={description} translations={translations}/></head>
+ <head><BaseHead title={title === SITE_TITLE ? title : `${title} | ${SITE_TITLE}`} description={description} translations={translations} noindex={noindex}/></head>
  <body class:list={{ 'gallery-page': immersive }}><div class="Layout"><Header translations={translations}/>{SIDEBAR_ENABLED && <Sidebar/>}
   <!-- Structure and scoped attributes retained from the upstream VitePress document layout. -->
   <div class:list={['VPContent', { 'has-sidebar': SIDEBAR_ENABLED }]} id="VPContent" data-v-1428d186>

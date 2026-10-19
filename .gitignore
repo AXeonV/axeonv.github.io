@@ -21,6 +21,9 @@ pnpm-debug.log*
 .env
 .env.production
 
+# Local private-blog source paths and metadata; publish ciphertext only.
+.private-blog/
+
 # macOS-specific files
 .DS_Store
 

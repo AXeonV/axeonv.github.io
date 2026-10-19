@@ -4,6 +4,7 @@ import { POST_SECTIONS, getPostLocale, getPostTranslations, type Post } from '..
 import { localePath, messages } from '../lib/i18n';
 import SiteLayout from './SiteLayout.astro';
 import FormattedDate from '../components/FormattedDate.astro';
+import PlainText from '../components/PlainText.astro';
 interface Props { post: Post; headings?: { depth: number; slug: string; text: string }[]; }
 const { post, headings = [] } = Astro.props;
 const { title, description, author, pubDate, updatedDate, heroImage, category, format } = post.data;
@@ -18,7 +19,7 @@ const translations = await getPostTranslations(post);
   <h1>{title}</h1>
   <p class="alex-muted">{author && <><span>{author}</span> · </>}<FormattedDate date={pubDate}/>{updatedDate && <> · {messages[locale].updated} <FormattedDate date={updatedDate}/></>}</p>
   {heroImage && <Image width={1100} src={heroImage} alt={title}/>}
-  {format === 'text' ? <div class="plain-text">{paragraphs.map(paragraph => <p>{paragraph}</p>)}</div> : <slot/>}
+  {format === 'text' ? <div class="plain-text">{paragraphs.map(paragraph => <p><PlainText text={paragraph}/></p>)}</div> : <slot/>}
  </article>
 </SiteLayout>
 

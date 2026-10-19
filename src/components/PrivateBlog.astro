@@ -1,0 +1,55 @@
+---
+import { localeFromPath } from '../lib/i18n';
+import { privateBlogText } from '../lib/private-blog-text';
+interface Props { postId?: string; }
+const { postId = '' } = Astro.props;
+const locale = localeFromPath(Astro.url.pathname);
+const text = privateBlogText[locale];
+const panelId = postId ? `private-${postId}` : 'private-blog-list';
+---
+<section class="private-blog" data-private-blog data-locale={locale} data-post-id={postId}>
+ {postId && <h1 data-private-placeholder>{text.post}</h1>}
+ <div class="private-row" data-private-row>
+  {!postId && <button class="private-button private-toggle" type="button" data-private-toggle aria-expanded="false" aria-controls={`${panelId}-form ${panelId}`}>
+   <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><rect x="5" y="10" width="14" height="11" rx="2"/><path data-private-shackle d="M8 10V6a4 4 0 0 1 8 0v4"/></svg>
+   {text.space}
+  </button>}
+  <form id={`${panelId}-form`} class="private-form" data-private-form hidden={!postId}>
+   <input name="password" type="password" inputmode="numeric" pattern="[0-9]+" autocomplete="current-password" aria-label={text.password} placeholder={text.hint} required/>
+   <button class="private-button" type="submit">{text.unlock}</button>
+  </form>
+  {!postId && <button type="button" class="private-button private-lock" data-private-lock hidden>{text.lock}</button>}
+ </div>
+ <div id={panelId}>
+  <p class="private-status" role="status" aria-live="polite" data-private-status hidden></p>
+  {postId ? <article data-private-content hidden><h1 data-private-title></h1><p class="alex-muted" data-private-meta></p><div data-private-body></div></article> : <div data-private-content hidden></div>}
+ </div>
+ <noscript><p class="alex-muted">{text.noScript}</p></noscript>
+</section>
+<script>
+ import { initPrivateBlogs } from '../scripts/private-blog';
+ initPrivateBlogs();
+</script>
+<style>
+ .private-blog { margin-top: 24px; }
+ .private-blog[hidden], .private-blog [hidden] { display: none !important; }
+ .private-row { display: flex; align-items: center; gap: 12px; min-height: 36px; }
+ .private-button { flex-shrink: 0; padding: 6px 12px; border: 1px solid var(--vp-c-divider); border-radius: 6px; background: var(--vp-c-bg-soft); color: var(--vp-c-text-2); font: inherit; font-size: 14px; line-height: 22px; white-space: nowrap; transition: color .2s, border-color .2s, box-shadow .2s; }
+ .private-button:is(:hover, :focus-visible):not(:disabled) { border-color: var(--vp-c-brand-1); color: var(--vp-c-brand-1); box-shadow: 0 0 0 1px var(--vp-c-brand-soft), 0 0 14px var(--vp-c-brand-soft); }
+ .private-toggle { display: inline-flex; align-items: center; gap: 8px; }
+ .private-toggle svg { flex-shrink: 0; }
+ .private-form { display: flex; flex: 0 1 260px; min-width: 0; align-items: center; gap: 8px; margin: 0; }
+ .private-form input { flex: 1; width: 160px; min-width: 0; padding: 6px 10px; border: 1px solid var(--vp-c-divider); border-radius: 6px; background: var(--vp-c-bg-alt); color: var(--vp-c-text-1); font: inherit; font-size: 14px; line-height: 22px; }
+ .private-form input:focus-visible { border-color: var(--vp-c-brand-1); }
+ .private-button:disabled, .private-form input:disabled { cursor: wait; opacity: .65; }
+ .private-status { font-size: 14px; color: var(--vp-c-text-2); }
+ .private-status[data-error] { color: var(--vp-c-danger-1, #c33); }
+ @media (width < 400px) {
+  .private-row { gap: 8px; }
+  .private-button { padding-inline: 8px; font-size: 13px; }
+  .private-toggle { gap: 6px; }
+  .private-form { gap: 6px; }
+  .private-form input { padding-inline: 8px; font-size: 13px; }
+ }
+ @media (prefers-reduced-motion: reduce) { .private-button { transition: none; } }
+</style>

@@ -1,0 +1,14 @@
+---
+interface Props { text: string; }
+const { text } = Astro.props;
+const parts: { text: string; href?: string }[] = [];
+let offset = 0;
+// Allow explicit web links without applying Markdown typography to the prose.
+for (const match of text.matchAll(/\[([^\]\r\n]+)\]\((https?:\/\/[^\s)]+)\)/g)) {
+ parts.push({ text: text.slice(offset, match.index) });
+ parts.push({ text: match[1], href: match[2] });
+ offset = match.index + match[0].length;
+}
+parts.push({ text: text.slice(offset) });
+---
+{parts.map(part => part.href ? <a href={part.href}>{part.text}</a> : part.text)}
