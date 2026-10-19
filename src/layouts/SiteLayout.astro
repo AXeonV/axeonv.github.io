@@ -12,7 +12,7 @@ const { title = SITE_TITLE, description = messages[locale].description, toc = []
 <!doctype html>
 <html lang={HTML_LANG[locale]}>
  <head><BaseHead title={title === SITE_TITLE ? title : `${title} | ${SITE_TITLE}`} description={description} translations={translations}/></head>
- <body><div class="Layout"><Header translations={translations}/>{SIDEBAR_ENABLED && <Sidebar/>}
+ <body class:list={{ 'gallery-page': immersive }}><div class="Layout"><Header translations={translations}/>{SIDEBAR_ENABLED && <Sidebar/>}
   <!-- Structure and scoped attributes retained from the upstream VitePress document layout. -->
   <div class:list={['VPContent', { 'has-sidebar': SIDEBAR_ENABLED }]} id="VPContent" data-v-1428d186>
    {immersive ? <main class="gallery-main"><slot/></main> : <div class:list={['VPDoc', { 'has-sidebar': SIDEBAR_ENABLED, 'has-aside': toc.length > 0 }]} data-v-39a288b8><div class="container" data-v-39a288b8>

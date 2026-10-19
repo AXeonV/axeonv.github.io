@@ -5,13 +5,15 @@ import { RenderPass } from 'three/addons/postprocessing/RenderPass.js';
 import { UnrealBloomPass } from 'three/addons/postprocessing/UnrealBloomPass.js';
 import { ShaderPass } from 'three/addons/postprocessing/ShaderPass.js';
 import { clamp01, disposeScene, smoothstep } from './resources.js';
+import { createProjectSpace } from './project-space.js';
 
 // First grow the central black hole, then unfold its disk from the inner edge.
 const CORE_GROWTH_END = 0.55;
 const STAR_BRIGHTNESS = 10;
 
 // Black hole, accretion disk, star and lensing shaders retained from the supplied H5.
-export function createColorhole(renderer, { width, height, mobile }) {
+export function createColorhole(renderer, { width, height, mobile, controlElement, projectCount, reducedMotion }) {
+    let viewportHeight = height;
     const BLACK_HOLE_RADIUS = 1.3;
     const DISK_INNER_RADIUS = BLACK_HOLE_RADIUS + 0.2;
     const DISK_OUTER_RADIUS = 8.0;
@@ -87,7 +89,7 @@ export function createColorhole(renderer, { width, height, mobile }) {
     const lensingPass = new ShaderPass(lensingShader);
     composer.addPass(lensingPass);
 
-    const controls = new OrbitControls(camera, renderer.domElement);
+    const controls = new OrbitControls(camera, controlElement || renderer.domElement);
     controls.enableDamping = true; controls.dampingFactor = 0.035;
     controls.rotateSpeed = 0.4; controls.autoRotate = true;
     controls.autoRotateSpeed = 0.1;
@@ -371,6 +373,33 @@ export function createColorhole(renderer, { width, height, mobile }) {
     const entranceDistance = 48;
     const arrivalDirection = new THREE.Vector3();
     const screenPosition = new THREE.Vector3();
+    const projectSpace = createProjectSpace({ scene, camera, texture: starTexture,
+        disk: accretionDisk, diskRadius: DISK_INNER_RADIUS + 3.3, count: projectCount, reducedMotion, width, height,
+        occluder: new THREE.Sphere(new THREE.Vector3(), BLACK_HOLE_RADIUS) });
+    const projectToScreen = (point) => {
+        const center = lensingPass.uniforms.blackHoleScreenPos.value;
+        const dx = (point.x - center.x) * camera.aspect;
+        const dy = point.y - center.y;
+        const sourceRadius = Math.hypot(dx, dy);
+        const scale = lensingPass.uniforms.lensingScale.value;
+        const radius = lensingPass.uniforms.lensingRadius.value * scale;
+        let displayRadius = sourceRadius;
+        if (sourceRadius > 0 && sourceRadius < radius) {
+            // Invert the postprocess mapping so HTML labels follow the glowing 3D stars.
+            let low = 0;
+            let high = radius;
+            const strength = lensingPass.uniforms.lensingStrength.value * scale ** 3;
+            for (let step = 0; step < 20; step++) {
+                const distance = (low + high) / 2;
+                const falloff = smoothstep(clamp01((radius - distance) / (radius * 0.7)));
+                const offset = Math.min(strength / (distance * distance + 0.003 * scale * scale), 0.7 * scale) * falloff;
+                if (distance - offset < sourceRadius) low = distance; else high = distance;
+            }
+            displayRadius = (low + high) / 2;
+        }
+        const factor = sourceRadius ? displayRadius / sourceRadius : 1;
+        return { x: center.x + dx * factor / camera.aspect, y: 1 - (center.y + dy * factor) };
+    };
     camera.position.multiplyScalar(entranceDistance / destinationDistance);
     controls.enabled = false;
     controls.update();
@@ -378,6 +407,7 @@ export function createColorhole(renderer, { width, height, mobile }) {
     return {
         get viewDistance() { return camera.position.distanceTo(controls.target); },
         get autoRotate() { return controls.autoRotate; },
+        getProjectPositions() { return projectSpace.project(viewportHeight, projectToScreen); },
         setEntrance(progress) {
             const coreGrowth = smoothstep(clamp01(progress / CORE_GROWTH_END));
             const diskExpansion = smoothstep(clamp01((progress - CORE_GROWTH_END) / (1 - CORE_GROWTH_END)));
@@ -394,11 +424,12 @@ export function createColorhole(renderer, { width, height, mobile }) {
             controls.enabled = progress >= 1;
             return coreGrowth;
         },
-        render(deltaTime, elapsedTime) {
+        render(deltaTime, elapsedTime, projects) {
             diskMaterial.uniforms.uTime.value = elapsedTime;
             starMaterial.uniforms.uTime.value = elapsedTime;
             eventHorizonMat.uniforms.uTime.value = elapsedTime;
             eventHorizonMat.uniforms.uCameraPosition.value.copy(camera.position);
+            controls.autoRotate = projects.hovered < 0;
             controls.update(deltaTime);
             lensingPass.uniforms.lensingScale.value = destinationDistance / camera.position.distanceTo(controls.target);
             screenPosition.copy(blackHoleMesh.position).project(camera);
@@ -409,9 +440,12 @@ export function createColorhole(renderer, { width, height, mobile }) {
             stars.rotation.y += deltaTime * 0.003;
             stars.rotation.x += deltaTime * 0.001;
             accretionDisk.rotation.z += deltaTime * 0.005;
+            projectSpace.update(projects, deltaTime);
             composer.render(deltaTime);
         },
         resize(width, height) {
+            viewportHeight = height;
+            projectSpace.resize(width, height);
             camera.aspect = width / height;
             camera.updateProjectionMatrix();
             composer.setPixelRatio(renderer.getPixelRatio());

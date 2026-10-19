@@ -1,5 +1,8 @@
 # build output
 dist/
+# Generated browser copies; Git repositories are retained as submodules in production/repos.
+/public/projects/
+/production/bundles/*.next
 # generated types
 .astro/
 

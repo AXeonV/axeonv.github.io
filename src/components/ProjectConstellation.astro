@@ -1,0 +1,144 @@
+---
+import catalog from '../../production/projects.json';
+import { localeFromPath } from '../lib/i18n';
+import { projectColor } from '../lib/gallery/project-colors.js';
+const zh = localeFromPath(Astro.url.pathname) === 'zh';
+---
+<div class="project-constellation" aria-label={zh ? '项目星图' : 'Project constellation'} hidden>
+ {catalog.projects.map((project, index) => (
+  <article class="project-node" data-project-index={index} tabindex="0" aria-label={project.name} style={`--project-color: ${projectColor(index)}`} hidden>
+   <h2 class="project-label">{project.name}</h2>
+   <div class="project-actions">
+    {project.entry && <a href={`/projects/${project.slug}/${project.entry.split('/').map(encodeURIComponent).join('/')}`} data-project-view data-project-name={project.name} data-project-repo={project.repo}>Web View ↗</a>}
+    <a href={project.repo} target="_blank" rel="noopener noreferrer">Open Repo ↗</a>
+   </div>
+  </article>
+ ))}
+</div>
+<dialog class="project-viewer" aria-label={zh ? '项目 Web View' : 'Project Web View'}>
+ <div class="project-viewer-header">
+  <strong data-viewer-title></strong>
+  <div>
+   <a data-viewer-repo target="_blank" rel="noopener noreferrer">Open Repo ↗</a>
+   <button type="button" data-viewer-close aria-label={zh ? '关闭项目预览' : 'Close project preview'}>×</button>
+  </div>
+ </div>
+ <iframe title="Project Web View" allow="autoplay; fullscreen" sandbox="allow-scripts allow-same-origin allow-forms allow-pointer-lock allow-downloads"></iframe>
+</dialog>
+<style>
+ .project-constellation {
+  position: absolute;
+  z-index: 2;
+  inset: 0;
+  pointer-events: none;
+  color: #f3efff;
+ }
+ .project-constellation[hidden], .project-node[hidden] { display: none; }
+ .project-node {
+  position: absolute;
+  top: 0;
+  left: 0;
+  border-radius: 50%;
+  pointer-events: auto;
+  cursor: grab;
+  outline: none;
+ }
+ .project-node:active { cursor: grabbing; }
+ .project-node:focus-visible { outline: 1px solid var(--project-color); outline-offset: 4px; }
+ .project-label {
+  position: absolute;
+  top: calc(50% + 14px);
+  left: 50%;
+  width: max-content;
+  max-width: 220px;
+  margin: 0;
+  opacity: var(--label-opacity, 0);
+  transform: translate(calc(-50% + var(--label-shift, 0px)), calc((1 - var(--label-opacity, 0)) * 6px));
+  color: #fff;
+  font-size: 16px;
+  line-height: 24px;
+  font-weight: 500;
+  text-shadow: 0 1px 5px #000, 0 0 9px #000;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+ }
+ .project-actions {
+  position: absolute;
+  top: calc(50% + 30px);
+  left: 50%;
+  display: flex;
+  gap: 8px;
+  width: 208px;
+  padding-top: 12px;
+  transform: translateX(calc(-50% + var(--actions-shift, 0px)));
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transition: opacity .18s, visibility .18s;
+ }
+ .project-node:hover .project-actions,
+ .project-node:focus-visible .project-actions,
+ .project-node:has(:focus-visible) .project-actions {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+ }
+ .actions-above .project-actions { top: auto; bottom: calc(50% + 12px); padding: 0 0 12px; }
+ .project-actions a {
+  flex: 1;
+  padding: 6px 5px;
+  border: 1px solid color-mix(in srgb, var(--project-color) 40%, transparent);
+  border-radius: 5px;
+  background: #090b17e6;
+  color: #eeeaff;
+  font-size: 11px;
+  line-height: 18px;
+  text-align: center;
+  white-space: nowrap;
+  transition: color .2s, border-color .2s, box-shadow .2s;
+ }
+ .project-actions a:hover, .project-actions a:focus-visible {
+  color: var(--project-color);
+  border-color: var(--project-color);
+  box-shadow: 0 0 12px color-mix(in srgb, var(--project-color) 30%, transparent);
+ }
+ .project-viewer {
+  position: fixed;
+  inset: 0;
+  width: calc(100vw - 48px);
+  max-width: 1600px;
+  height: calc(100dvh - 64px);
+  max-height: none;
+  padding: 0;
+  margin: auto;
+  border: 1px solid #bba7ff88;
+  border-radius: 12px;
+  background: #05040d;
+  color: #eee8ff;
+  box-shadow: 0 0 55px #a083ff33;
+ }
+ .project-viewer[open] { display: grid; grid-template-rows: 48px minmax(0, 1fr); }
+ .project-viewer::backdrop { background: #020108d9; backdrop-filter: blur(8px); }
+ .project-viewer-header { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 0 16px; background: #100b20; }
+ .project-viewer-header strong { font-size: 13px; font-weight: 500; }
+ .project-viewer-header > div { display: flex; align-items: center; gap: 20px; }
+ .project-viewer-header a { font-size: 11px; color: #c7b5ff; }
+ .project-viewer-header button { width: 30px; height: 30px; font-size: 25px; line-height: 30px; color: #e5dcff; }
+ /* WebGL demos use integer innerWidth/innerHeight; fractional iframe sizes can overflow at browser zoom. */
+ .project-viewer iframe {
+  display: block;
+  border: 0;
+  min-width: 0;
+  min-height: 0;
+  width: 100%;
+  height: 100%;
+  width: round(down, 100%, 1px);
+  height: round(down, 100%, 1px);
+  background: #000;
+ }
+ @media (width < 640px) {
+  .project-viewer { width: calc(100vw - 16px); height: calc(100dvh - 24px); }
+ }
+ @media (prefers-reduced-motion: reduce) { .project-actions, .project-actions a { transition: none; } }
+</style>

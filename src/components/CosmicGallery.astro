@@ -1,5 +1,6 @@
 ---
 import { localeFromPath } from '../lib/i18n';
+import ProjectConstellation from './ProjectConstellation.astro';
 const zh = localeFromPath(Astro.url.pathname) === 'zh';
 ---
 <section class="cosmic-gallery" tabindex="-1" aria-label={zh ? '星海与黑洞' : 'Starfield and black hole'} aria-busy="false" data-phase="starfield" data-speed="1.00"
@@ -10,6 +11,7 @@ const zh = localeFromPath(Astro.url.pathname) === 'zh';
  <div class="cosmic-canvas"></div>
  <button class="cosmic-enter alex-action-button" type="button">{zh ? '进入 Gallery' : 'Enter Gallery'}</button>
  <div class="cosmic-veil" aria-hidden="true"></div>
+ <ProjectConstellation/>
  <p class="cosmic-status visually-hidden" role="status" aria-live="polite"></p>
  <noscript><p class="cosmic-noscript">{zh ? '请启用 JavaScript 以浏览星海。' : 'Enable JavaScript to explore the starfield.'}</p></noscript>
 </section>

@@ -4,3 +4,121 @@
 [submodule "alien"]
 	path = production/repos/alien
 	url = https://github.com/AXeonV/alien.git
+[submodule "animation-show"]
+	path = production/repos/animation-show
+	url = https://github.com/AXeonV/animation-show.git
+[submodule "ascii"]
+	path = production/repos/ascii
+	url = https://github.com/AXeonV/ascii.git
+[submodule "auto-gxks"]
+	path = production/repos/auto-gxks
+	url = https://github.com/AXeonV/auto-gxks.git
+[submodule "beam"]
+	path = production/repos/beam
+	url = https://github.com/AXeonV/beam.git
+[submodule "bomb"]
+	path = production/repos/bomb
+	url = https://github.com/AXeonV/bomb.git
+[submodule "christmas2025"]
+	path = production/repos/christmas2025
+	url = https://github.com/AXeonV/christmas2025.git
+[submodule "clock-orbit"]
+	path = production/repos/clock-orbit
+	url = https://github.com/AXeonV/clock-orbit.git
+[submodule "clock-rings"]
+	path = production/repos/clock-rings
+	url = https://github.com/AXeonV/clock-rings.git
+[submodule "cloth"]
+	path = production/repos/cloth
+	url = https://github.com/AXeonV/cloth.git
+[submodule "cubemix"]
+	path = production/repos/cubemix
+	url = https://github.com/AXeonV/cubemix.git
+[submodule "detector"]
+	path = production/repos/detector
+	url = https://github.com/AXeonV/detector.git
+[submodule "dic-demo"]
+	path = production/repos/dic-demo
+	url = https://github.com/AXeonV/DIC-demo.git
+[submodule "earth"]
+	path = production/repos/earth
+	url = https://github.com/AXeonV/earth.git
+[submodule "elements"]
+	path = production/repos/elements
+	url = https://github.com/AXeonV/elements.git
+[submodule "find"]
+	path = production/repos/find
+	url = https://github.com/AXeonV/find.git
+[submodule "firework"]
+	path = production/repos/firework
+	url = https://github.com/AXeonV/firework.git
+[submodule "galaxy"]
+	path = production/repos/galaxy
+	url = https://github.com/AXeonV/galaxy.git
+[submodule "gargantua"]
+	path = production/repos/gargantua
+	url = https://github.com/AXeonV/gargantua.git
+[submodule "gene"]
+	path = production/repos/gene
+	url = https://github.com/AXeonV/gene.git
+[submodule "hermes"]
+	path = production/repos/hermes
+	url = https://github.com/AXeonV/hermes.git
+[submodule "java-demo"]
+	path = production/repos/java-demo
+	url = https://github.com/AXeonV/Java-demo.git
+[submodule "jigsaw"]
+	path = production/repos/jigsaw
+	url = https://github.com/AXeonV/jigsaw.git
+[submodule "junqi"]
+	path = production/repos/junqi
+	url = https://github.com/AXeonV/JunQi.git
+[submodule "neuro"]
+	path = production/repos/neuro
+	url = https://github.com/AXeonV/neuro.git
+[submodule "nonograms"]
+	path = production/repos/nonograms
+	url = https://github.com/AXeonV/nonograms.git
+[submodule "nova"]
+	path = production/repos/nova
+	url = https://github.com/AXeonV/nova.git
+[submodule "oi-template"]
+	path = production/repos/oi-template
+	url = https://github.com/AXeonV/OI-Template.git
+	ignore = all
+[submodule "opengl-demo"]
+	path = production/repos/opengl-demo
+	url = https://github.com/AXeonV/OpenGL-demo.git
+[submodule "particle"]
+	path = production/repos/particle
+	url = https://github.com/AXeonV/particle.git
+[submodule "particle2024"]
+	path = production/repos/particle2024
+	url = https://github.com/AXeonV/particle2024.git
+[submodule "particle2025"]
+	path = production/repos/particle2025
+	url = https://github.com/AXeonV/particle2025.git
+[submodule "piano"]
+	path = production/repos/piano
+	url = https://github.com/AXeonV/piano.git
+[submodule "powehi"]
+	path = production/repos/powehi
+	url = https://github.com/AXeonV/powehi.git
+[submodule "pyrga"]
+	path = production/repos/pyrga
+	url = https://github.com/AXeonV/Pyrga.git
+[submodule "scissors"]
+	path = production/repos/scissors
+	url = https://github.com/AXeonV/scissors.git
+[submodule "temp"]
+	path = production/repos/temp
+	url = https://github.com/AXeonV/temp.git
+[submodule "w0r1d-m0d31"]
+	path = production/repos/w0r1d-m0d31
+	url = https://github.com/AXeonV/w0r1d-m0d31.git
+[submodule "waveform"]
+	path = production/repos/waveform
+	url = https://github.com/AXeonV/waveform.git
+[submodule "xiangqi"]
+	path = production/repos/xiangqi
+	url = https://github.com/AXeonV/XiangQi.git

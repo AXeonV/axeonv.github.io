@@ -1,6 +1,7 @@
 import * as THREE from 'three';
 import { createStarfield } from './starfield.js';
 import { clamp01, smoothstep } from './resources.js';
+import { mountProjectConstellation } from './projects.js';
 
 // Starfield acceleration/fade duration in milliseconds; smaller means a quicker transition.
 const WARP_DURATION = 1200;
@@ -22,6 +23,7 @@ export function mountCosmicGallery(root) {
   let previousTime = 0;
   let frame = 0;
   const pointer = { x: 0, y: 0 };
+  const projectUI = mountProjectConstellation(root);
   const dimensions = () => ({ width: Math.max(1, host.clientWidth), height: Math.max(1, host.clientHeight) });
 
   const setPhase = (value) => {
@@ -51,6 +53,7 @@ export function mountCosmicGallery(root) {
   } catch (error) {
     console.error('Gallery renderer could not start.', error);
     renderer?.dispose();
+    projectUI?.dispose();
     showError();
     return () => {};
   }
@@ -76,7 +79,7 @@ export function mountCosmicGallery(root) {
     try {
       const { createColorhole } = await import('./colorhole.js');
       if (destroyed) return;
-      hole = createColorhole(renderer, { ...dimensions(), mobile });
+      hole = createColorhole(renderer, { ...dimensions(), mobile, controlElement: root, projectCount: projectUI.count, reducedMotion });
     } catch (error) {
       if (destroyed) return;
       console.error('Gallery destination could not load.', error);
@@ -105,6 +108,11 @@ export function mountCosmicGallery(root) {
 
   const render = (now) => {
     if (destroyed) return;
+    if (projectUI?.isViewing) {
+      previousTime = now;
+      frame = requestAnimationFrame(render);
+      return;
+    }
     const clockDelta = previousTime ? Math.max(0, (now - previousTime) / 1000) : 0;
     const delta = Math.min(clockDelta, 0.05);
     previousTime = now;
@@ -135,13 +143,15 @@ export function mountCosmicGallery(root) {
         setPhase('colorhole');
         status.textContent = root.dataset.arrivedText;
         root.focus({ preventScroll: true });
+        projectUI?.show();
       }
     }
     if (stars) {
-      stars.render(delta, elapsed / 1000, pointer);
+      stars.render(delta, pointer);
       root.dataset.speed = stars.speed.toFixed(2);
     } else {
-      hole.render(delta, elapsed / 1000);
+      hole.render(delta, elapsed / 1000, projectUI.state);
+      projectUI.update(hole.getProjectPositions());
       root.dataset.viewDistance = hole.viewDistance.toFixed(2);
       root.dataset.autoRotate = String(hole.autoRotate);
     }
@@ -176,6 +186,7 @@ export function mountCosmicGallery(root) {
     root.removeEventListener('pointerleave', resetPointer);
     stars?.dispose();
     hole?.dispose();
+    projectUI?.dispose();
     renderer.dispose();
     renderer.domElement.remove();
   }

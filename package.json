@@ -6,7 +6,13 @@
     "node": ">=22.12.0"
   },
   "scripts": {
+    "projects:sync": "node scripts/sync-projects.mjs",
+    "projects:prepare": "node scripts/prepare-projects.mjs",
+    "projects:check": "node scripts/check-projects.mjs",
+    "projects:restore": "node scripts/restore-projects.mjs",
+    "predev": "npm run projects:prepare",
     "dev": "astro dev",
+    "prebuild": "npm run projects:prepare",
     "build": "astro build",
     "preview": "astro preview",
     "astro": "astro"

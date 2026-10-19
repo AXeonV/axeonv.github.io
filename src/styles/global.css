@@ -38,6 +38,8 @@ body { min-width: 0; }
 .profile-photo figcaption { margin-top: 12px; font-size: 14px; line-height: 1.5; color: var(--vp-c-text-3); }
 .alex-muted { color: var(--vp-c-text-3); }
 .gallery-main { width: 100%; height: calc(100svh - 64px); }
+.gallery-page { -webkit-user-select: none; user-select: none; }
+.gallery-page :is(input, textarea, [contenteditable="true"]) { -webkit-user-select: text; user-select: text; }
 @media (width < 640px) { .gallery-main { height: calc(100svh - 110px); } }
 .alex-gallery { display: grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap: 20px; }
 .alex-gallery img { width: 100%; border-radius: 8px; }
