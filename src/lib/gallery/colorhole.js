@@ -405,8 +405,6 @@ export function createColorhole(renderer, { width, height, mobile, controlElemen
     controls.update();
 
     return {
-        get viewDistance() { return camera.position.distanceTo(controls.target); },
-        get autoRotate() { return controls.autoRotate; },
         getProjectPositions() { return projectSpace.project(viewportHeight, projectToScreen); },
         setEntrance(progress) {
             const coreGrowth = smoothstep(clamp01(progress / CORE_GROWTH_END));

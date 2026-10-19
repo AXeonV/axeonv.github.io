@@ -9,8 +9,6 @@ export function mountProjectConstellation(root) {
   let width = root.clientWidth;
   let height = root.clientHeight;
   const indexOf = (target) => Number(target?.closest?.('.project-node')?.dataset.projectIndex ?? -1);
-  const observer = new ResizeObserver(() => { width = root.clientWidth; height = root.clientHeight; });
-  observer.observe(root);
 
   listen(panel, 'pointerover', (event) => { hovered = indexOf(event.target); });
   listen(panel, 'pointerout', (event) => { hovered = indexOf(event.relatedTarget); });
@@ -28,6 +26,7 @@ export function mountProjectConstellation(root) {
     get isViewing() { return viewer.isOpen; },
     get state() { return { visible: !panel.hidden, hovered: hovered >= 0 ? hovered : focused }; },
     show() { panel.hidden = false; },
+    resize(nextWidth, nextHeight) { width = nextWidth; height = nextHeight; },
     update(positions) {
       if (panel.hidden) return;
       for (const point of positions) {
@@ -50,7 +49,6 @@ export function mountProjectConstellation(root) {
     },
     dispose() {
       events.abort();
-      observer.disconnect();
       viewer.dispose();
     },
   };
@@ -60,14 +58,16 @@ function mountProjectViewer(root, panel, listen) {
   const dialog = root.querySelector('.project-viewer');
   const frame = dialog.querySelector('iframe');
   const closeButton = dialog.querySelector('[data-viewer-close]');
+  const title = dialog.querySelector('[data-viewer-title]');
+  const repo = dialog.querySelector('[data-viewer-repo]');
   let returnFocus;
   listen(panel, 'click', (event) => {
     const link = event.target.closest('[data-project-view]');
     if (!link || event.ctrlKey || event.metaKey || event.shiftKey || event.altKey) return;
     event.preventDefault();
     returnFocus = link;
-    dialog.querySelector('[data-viewer-title]').textContent = link.dataset.projectName;
-    dialog.querySelector('[data-viewer-repo]').href = link.dataset.projectRepo;
+    title.textContent = link.dataset.projectName;
+    repo.href = link.dataset.projectRepo;
     frame.title = `${link.dataset.projectName} — Web View`;
     frame.src = link.href;
     dialog.showModal();

@@ -142,7 +142,6 @@ export function createStarfield(renderer, { width, height, mobile }) {
   return {
     setHover(active) { hovered = active; },
     setWarp(active) { warping = active; },
-    get speed() { return speed; },
     render(delta, pointer) {
       const targetSpeed = warping ? WARP_SPEED : hovered ? HOVER_SPEED : 1;
       const speedSmoothing = 1 - Math.exp(-delta * SPEED_RESPONSE);

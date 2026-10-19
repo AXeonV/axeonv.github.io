@@ -16,12 +16,14 @@ export function mountCosmicGallery(root) {
   let renderer;
   let stars;
   let hole;
+  let observer;
   let destroyed = false;
   let phase = 'starfield';
   let phaseTime = 0;
   let elapsed = 0;
   let previousTime = 0;
   let frame = 0;
+  const events = new AbortController();
   const pointer = { x: 0, y: 0 };
   const projectUI = mountProjectConstellation(root);
   const dimensions = () => ({ width: Math.max(1, host.clientWidth), height: Math.max(1, host.clientHeight) });
@@ -52,10 +54,9 @@ export function mountCosmicGallery(root) {
     stars = createStarfield(renderer, { ...size, mobile });
   } catch (error) {
     console.error('Gallery renderer could not start.', error);
-    renderer?.dispose();
-    projectUI?.dispose();
+    dispose();
     showError();
-    return () => {};
+    return dispose;
   }
 
   const resize = () => {
@@ -64,8 +65,9 @@ export function mountCosmicGallery(root) {
     renderer.setSize(width, height, false);
     stars?.resize(width, height);
     hole?.resize(width, height);
+    projectUI.resize(width, height);
   };
-  const observer = new ResizeObserver(resize);
+  observer = new ResizeObserver(resize);
   observer.observe(host);
 
   const enter = async () => {
@@ -90,25 +92,25 @@ export function mountCosmicGallery(root) {
       status.textContent = root.dataset.retryText;
     }
   };
-  button.addEventListener('click', enter);
+  button.addEventListener('click', enter, { signal: events.signal });
   const hoverButton = (event) => {
     if (phase === 'starfield' && !reducedMotion && event.pointerType === 'mouse') stars.setHover(true);
   };
   const leaveButton = () => stars?.setHover(false);
-  button.addEventListener('pointerenter', hoverButton);
-  button.addEventListener('pointerleave', leaveButton);
+  button.addEventListener('pointerenter', hoverButton, { signal: events.signal });
+  button.addEventListener('pointerleave', leaveButton, { signal: events.signal });
   const movePointer = (event) => {
     const rect = host.getBoundingClientRect();
     pointer.x = ((event.clientX - rect.left) / rect.width) * 2 - 1;
     pointer.y = 1 - ((event.clientY - rect.top) / rect.height) * 2;
   };
   const resetPointer = () => { pointer.x = 0; pointer.y = 0; };
-  root.addEventListener('pointermove', movePointer);
-  root.addEventListener('pointerleave', resetPointer);
+  root.addEventListener('pointermove', movePointer, { signal: events.signal });
+  root.addEventListener('pointerleave', resetPointer, { signal: events.signal });
 
   const render = (now) => {
     if (destroyed) return;
-    if (projectUI?.isViewing) {
+    if (projectUI.isViewing) {
       previousTime = now;
       frame = requestAnimationFrame(render);
       return;
@@ -143,17 +145,14 @@ export function mountCosmicGallery(root) {
         setPhase('colorhole');
         status.textContent = root.dataset.arrivedText;
         root.focus({ preventScroll: true });
-        projectUI?.show();
+        projectUI.show();
       }
     }
     if (stars) {
       stars.render(delta, pointer);
-      root.dataset.speed = stars.speed.toFixed(2);
     } else {
       hole.render(delta, elapsed / 1000, projectUI.state);
-      projectUI.update(hole.getProjectPositions());
-      root.dataset.viewDistance = hole.viewDistance.toFixed(2);
-      root.dataset.autoRotate = String(hole.autoRotate);
+      if (phase === 'colorhole') projectUI.update(hole.getProjectPositions());
     }
     frame = requestAnimationFrame(render);
   };
@@ -162,33 +161,26 @@ export function mountCosmicGallery(root) {
     previousTime = 0;
     frame = requestAnimationFrame(render);
   };
-  const pause = () => { cancelAnimationFrame(frame); frame = 0; previousTime = 0; };
+  function pause() { cancelAnimationFrame(frame); frame = 0; previousTime = 0; }
   const visibility = () => { document.hidden ? pause() : resume(); };
   const pageHide = (event) => { event.persisted ? pause() : dispose(); };
   const pageShow = (event) => { if (event.persisted) resume(); };
-  document.addEventListener('visibilitychange', visibility);
-  window.addEventListener('pagehide', pageHide);
-  window.addEventListener('pageshow', pageShow);
+  document.addEventListener('visibilitychange', visibility, { signal: events.signal });
+  window.addEventListener('pagehide', pageHide, { signal: events.signal });
+  window.addEventListener('pageshow', pageShow, { signal: events.signal });
   resume();
 
   function dispose() {
     if (destroyed) return;
     destroyed = true;
     pause();
-    observer.disconnect();
-    document.removeEventListener('visibilitychange', visibility);
-    window.removeEventListener('pagehide', pageHide);
-    window.removeEventListener('pageshow', pageShow);
-    button.removeEventListener('click', enter);
-    button.removeEventListener('pointerenter', hoverButton);
-    button.removeEventListener('pointerleave', leaveButton);
-    root.removeEventListener('pointermove', movePointer);
-    root.removeEventListener('pointerleave', resetPointer);
+    events.abort();
+    observer?.disconnect();
     stars?.dispose();
     hole?.dispose();
-    projectUI?.dispose();
-    renderer.dispose();
-    renderer.domElement.remove();
+    projectUI.dispose();
+    renderer?.dispose();
+    renderer?.domElement.remove();
   }
   return dispose;
 }

@@ -3,7 +3,7 @@ import { localeFromPath } from '../lib/i18n';
 import ProjectConstellation from './ProjectConstellation.astro';
 const zh = localeFromPath(Astro.url.pathname) === 'zh';
 ---
-<section class="cosmic-gallery" tabindex="-1" aria-label={zh ? '星海与黑洞' : 'Starfield and black hole'} aria-busy="false" data-phase="starfield" data-speed="1.00"
+<section class="cosmic-gallery" tabindex="-1" aria-label={zh ? '星海与黑洞' : 'Starfield and black hole'} aria-busy="false" data-phase="starfield"
  data-error-text={zh ? '当前浏览器无法显示三维动画，请使用支持 WebGL 的浏览器。' : 'This browser cannot display the animation. Please use a browser with WebGL support.'}
  data-entering-text={zh ? '正在进入 Gallery…' : 'Entering Gallery…'}
  data-arrived-text={zh ? '已进入黑洞世界。拖动可调整视角。' : 'Entered the black hole world. Drag to change the view.'}
