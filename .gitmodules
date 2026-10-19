@@ -1,0 +1,6 @@
+[submodule "abstraction"]
+	path = production/repos/abstraction
+	url = https://github.com/AXeonV/abstraction.git
+[submodule "alien"]
+	path = production/repos/alien
+	url = https://github.com/AXeonV/alien.git

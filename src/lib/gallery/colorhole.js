@@ -125,7 +125,8 @@ export function createColorhole(renderer, { width, height, mobile }) {
         const starColor = starPalette[Math.floor(Math.random() * starPalette.length)].clone();
         starColor.multiplyScalar(Math.random() * 0.7 + 0.3);
         starColors[i3] = starColor.r; starColors[i3 + 1] = starColor.g; starColors[i3 + 2] = starColor.b;
-        starSizes[i] = THREE.MathUtils.randFloat(0.6, 3.0);
+        // Leave room for the same soft halo used in the introductory starfield.
+        starSizes[i] = THREE.MathUtils.randFloat(6, 20);
         starTwinkle[i] = Math.random() * Math.PI * 2;
     }
     starGeometry.setAttribute('position', new THREE.BufferAttribute(starPositions, 3));
@@ -133,10 +134,12 @@ export function createColorhole(renderer, { width, height, mobile }) {
     starGeometry.setAttribute('size', new THREE.BufferAttribute(starSizes, 1));
     starGeometry.setAttribute('twinkle', new THREE.BufferAttribute(starTwinkle, 1));
 
+    const starTexture = new THREE.TextureLoader().load('/gallery/star-sprite.png');
     const starMaterial = new THREE.ShaderMaterial({
         uniforms: {
             uTime: { value: 0 },
             uBrightness: { value: STAR_BRIGHTNESS },
+            uTexture: { value: starTexture },
             uPixelRatio: { value: renderer.getPixelRatio() }
         },
         vertexShader: `
@@ -158,17 +161,14 @@ export function createColorhole(renderer, { width, height, mobile }) {
         `,
         fragmentShader: `
             uniform float uBrightness;
+            uniform sampler2D uTexture;
             varying vec3 vColor;
             varying float vTwinkle;
             
             void main() {
-                float dist = distance(gl_PointCoord, vec2(0.5));
-                if (dist > 0.5) discard;
-                
-                float alpha = 1.0 - smoothstep(0.0, 0.5, dist);
-                alpha *= (0.2 + vTwinkle * 0.8);
-                
-                gl_FragColor = vec4(vColor * uBrightness, alpha);
+                vec4 sprite = texture2D(uTexture, gl_PointCoord);
+                float alpha = 0.2 + vTwinkle * 0.8;
+                gl_FragColor = vec4(vColor * uBrightness, alpha) * sprite;
             }
         `,
         transparent: true,
@@ -421,6 +421,7 @@ export function createColorhole(renderer, { width, height, mobile }) {
         },
         dispose() {
             controls.dispose();
+            starTexture.dispose();
             disposeScene(scene, composer);
         },
     };
