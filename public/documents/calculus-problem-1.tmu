@@ -1,0 +1,356 @@
+<TMU|<tuple|1.1.0|2026.3.0>>
+
+<style|<tuple|generic|number-europe|preview-ref|doc-tmu|reduced-margins|page-numbers|smart-ref>>
+
+<\body>
+  <doc-data|<doc-title|An incredible integral>|<doc-author|<author-data|<author-name|Tianyou Liu>|<\author-affiliation>
+    SUSTech
+  </author-affiliation>|<author-email|liuty2025@mail.sustech.edu.cn>>>>
+
+  \;
+
+  <\framed>
+    <\question>
+      Compute the follwing integral:
+
+      <\equation*>
+        <cfrac|<cfrac|<big|int><rsup|\<infty\>><rsub|0>\<mathe\><rsup|-s>s<rsup|5> \<mathd\>s|2>+<cfrac|<big|int><rsub|-\<infty\>><rsup|\<infty\>>\<mathe\><rsup|-<frac|t<rsup|2>|2>> \<mathd\>t|<big|int><rsub|0><rsup|\<infty\>>sin t<rsup|2>*\<mathd\>t>\<times\><around*|[|<cfrac|<below|<above|<big|sum>|\<infty\>>|n=0><cfrac|<around|(|-1|)><rsup|n>|2*n+1>|<big|int><rsub|0><rsup|\<infty\>><cfrac|sin*x|x> \<mathd\>x>+<cfrac|<below|<above|<big|sum>|\<infty\>>|n=1>arctan <cfrac|2|n<rsup|2>>|<below|lim|t\<rightarrow\>0<rsup|+>><around*|(|<big|int><rsub|-2026><rsup|2026><cfrac|t*cos*x|x<rsup|2>+t<rsup|2>> \<mathd\>x|)>>|]>|<below|lim|n\<rightarrow\>\<infty\>><around*|{|<around*|[|<around*|(|<big|int><rsup|1><rsub|0><dfrac|x<rsup|n-1>|1+x> \<mathd\>x|)>n-<frac|1|2>|]><frac|n|2>|}>>
+      </equation*>
+    </question>
+  </framed>
+
+  \;
+
+  <\answer*>
+    We break the integral expression into 8 part:
+
+    <\equation*>
+      <cfrac|<cfrac|A|2>+<cfrac|B|C>\<times\><around*|[|<cfrac|D|E>+<cfrac|F|G>|]>|H>
+    </equation*>
+
+    For 1st part,
+
+    <\equation*>
+      A=<big|int><rsup|\<infty\>><rsub|0>\<mathe\><rsup|-s>s<rsup|5> \<mathd\>s
+    </equation*>
+
+    <\definition>
+      The definition of \<Gamma\> function:
+
+      <\equation>
+        \<Gamma\><around*|(|\<alpha\>|)>=<big|int><rsup|\<infty\>><rsub|0>x<rsup|\<alpha\>-1>\<mathe\><rsup|-x>\<mathd\>x<label|eq1>
+      </equation>
+    </definition>
+
+    <\lemma>
+      For <math|\<forall\>n\<in\>\<bbb-N\>>, we have
+
+      <\equation>
+        \<Gamma\><around*|(|n+1|)>=n!<label|eq2>
+      </equation>
+    </lemma>
+
+    <\proof>
+      By calculation,
+
+      <\equation*>
+        <big|int><rsup|\<infty\>><rsub|0>x<rsup|\<alpha\>-1>\<mathe\><rsup|-x>\<mathd\>x=<around*|[|-x<rsup|\<alpha\>-1>\<mathe\><rsup|-x>|]><rsub|0><rsup|\<infty\>>+<around*|(|\<alpha\>-1|)><big|int><rsup|\<infty\>><rsub|0>x<rsup|\<alpha\>-2>\<mathe\><rsup|-x>\<mathd\>x=<around*|(|\<alpha\>-1|)>\<times\>\<Gamma\><around*|(|\<alpha\>-1|)>
+      </equation*>
+
+      We notice that,
+
+      <\equation*>
+        \<Gamma\><around*|(|\<alpha\>|)>=<around*|(|\<alpha\>-1|)>\<times\>\<Gamma\><around*|(|\<alpha\>-1|)>
+      </equation*>
+
+      Let <math|\<alpha\>=1> in <smart-ref|eq1>
+
+      <\equation*>
+        \<Gamma\><around*|(|1|)>=<big|int><rsup|\<infty\>><rsub|0>\<mathe\><rsup|-x>\<mathd\>x=<around*|[|-\<mathe\><rsup|-x>|]><rsub|0><rsup|\<infty\>>=1
+      </equation*>
+
+      So for <math|\<forall\>n\<in\>\<bbb-N\>>,
+
+      <\equation*>
+        \<Gamma\><around*|(|n+1|)>=n\<times\>\<Gamma\><around*|(|n|)>=\<cdots\>=n!\<times\>\<Gamma\><around*|(|1|)>=n!
+      </equation*>
+
+      \;
+    </proof>
+
+    Then,
+
+    <\equation*>
+      A=<big|int><rsup|\<infty\>><rsub|0>\<mathe\><rsup|-s>s<rsup|5> \<mathd\>s<above|\<longequal\>|<smart-ref|eq1>>\<Gamma\><around*|(|6|)><above|\<longequal\>|<smart-ref|eq2>>5!=<with|color|blue|120>
+    </equation*>
+
+    For 2nd part,
+
+    <\equation*>
+      B=<big|int><rsub|-\<infty\>><rsup|\<infty\>>\<mathe\><rsup|-<frac|t<rsup|2>|2>> \<mathd\>t
+    </equation*>
+
+    By substitution of <math|u=<frac|t|<sqrt|2>>>,
+
+    <\equation*>
+      <big|int><rsub|-\<infty\>><rsup|\<infty\>>\<mathe\><rsup|-<frac|t<rsup|2>|2>> \<mathd\>t=<sqrt|2><big|int><rsup|\<infty\>><rsub|-\<infty\>>\<mathe\><rsup|-u<rsup|2>> \<mathd\>u
+    </equation*>
+
+    <\lemma>
+      The Gaussian integral:
+
+      <\equation>
+        <big|int><rsup|\<infty\>><rsub|-\<infty\>>\<mathe\><rsup|-x<rsup|2>> \<mathd\>x=<sqrt|\<pi\>><label|eq3>
+      </equation>
+    </lemma>
+
+    <\proof>
+      Let <math|I=<big|int><rsup|\<infty\>><rsub|-\<infty\>>e<rsup|-x<rsup|2>>\<mathd\>x>,
+
+      <\equation*>
+        I<rsup|2>=<around*|(|<big|int><rsup|\<infty\>><rsub|-\<infty\>>\<mathe\><rsup|-x<rsup|2>> \<mathd\>x|)><around*|(|<big|int><rsup|\<infty\>><rsub|-\<infty\>>\<mathe\><rsup|-y<rsup|2>> \<mathd\>y|)>=<big|int><rsup|\<infty\>><rsub|-\<infty\>><big|int><rsup|\<infty\>><rsub|-\<infty\>>\<mathe\><rsup|-<around*|(|x<rsup|2>+y<rsup|2>|)>> \<mathd\>x \<mathd\>y
+      </equation*>
+
+      Let <math|x=r cos \<theta\>>, <math|y=r sin \<theta\>>, from geometry perspective:
+
+      <with|gr-mode|<tuple|edit|point>|gr-frame|<tuple|scale|1cm|<tuple|0.4gw|0.5gh>>|gr-geometry|<tuple|geometry|1par|0.6par>|gr-grid|<tuple|cartesian|<point|0|0>|1>|gr-edit-grid-aspect|<tuple|<tuple|axes|none>|<tuple|1|none>|<tuple|10|none>>|gr-edit-grid|<tuple|cartesian|<point|0|0>|1>|gr-color|<pattern|C:\\Program Files\\LiiiLabs\\LiiiSTEM-2026.1.2\\misc\\patterns\\vintage\\wood-xdark.png|1gu|>|gr-fill-color|yellow|<graphics||<circle|<point|0|0>|<point|5.0|0.0>>|<point|0|0>|<point|0|0>|<circle|<point|0|0>|<point|4.0|0.0>>|<line|<point|0|0>|<point|3.0|4.0>>|<line|<point|0|0>|<point|4.0|3.0>>|<with|color|none|fill-color|red|opacity|50%|<cline|<point|3|4>|<point|3.0|3.0>|<point|4.0|3.0>|<point|4.0|4.0>>>|<with|color|none|fill-color|blue|opacity|50%|<std-arc-counterclockwise|<point|0|0>|<point|4.0|3.0>|<point|3.0|4.0>>>|<with|color|none|fill-color|blue|opacity|50%|<cline|<point|3.2|2.4>|<point|2.400000000000001|3.2>|<point|3.0|4.0>|<point|4.0|3.0>>>|<with|color|<pattern|C:\\Program Files\\LiiiLabs\\LiiiSTEM-2026.1.2\\misc\\patterns\\vintage\\wood-xdark.png|1gu|>|<line|<point|3.3|2.7>|<point|3.7|2.4>>>|<with|color|<pattern|C:\\Program Files\\LiiiLabs\\LiiiSTEM-2026.1.2\\misc\\patterns\\vintage\\wood-xdark.png|1gu|>|<text-at|<math|\<mathd\><around*|(|r\<theta\>|)> \<mathd\>r>|<point|3.7|2.2>>>|<with|color|<pattern|C:\\Program Files\\LiiiLabs\\LiiiSTEM-2026.1.2\\misc\\patterns\\vintage\\wood-xdark.png|1gu|>|<text-at|<math|\<mathd\>x>|<point|3.3|4.0>>>|<with|color|<pattern|C:\\Program Files\\LiiiLabs\\LiiiSTEM-2026.1.2\\misc\\patterns\\vintage\\wood-xdark.png|1gu|>|<text-at|<math|\<mathd\>y>|<point|4|3.4>>>|<with|color|<pattern|C:\\Program Files\\LiiiLabs\\LiiiSTEM-2026.1.2\\misc\\patterns\\vintage\\wood-xdark.png|1gu|>|<text-at|<math|\<mathd\>x \<mathd\>y>|<point|4.5|4.2>>>|<with|color|<pattern|C:\\Program Files\\LiiiLabs\\LiiiSTEM-2026.1.2\\misc\\patterns\\vintage\\wood-xdark.png|1gu|>|<line|<point|3.7|3.7>|<point|4.4|4.2>>>|<with|color|<pattern|C:\\Program Files\\LiiiLabs\\LiiiSTEM-2026.1.2\\misc\\patterns\\vintage\\wood-xdark.png|1gu|>|<text-at|<math|\<theta\>>|<point|0.5999999999999992|0.2>>>|<with|color|none|fill-color|yellow|opacity|50%|<std-arc-counterclockwise|<point|0|0>|<point|3.2|2.4>|<point|2.400000000000001|3.2>>>|<with|color|none|fill-color|yellow|opacity|50%|<cline|<point|0|0>|<point|3.2|2.4>|<point|2.400000000000001|3.1999999999999997>>>|<with|color|<pattern|C:\\Program Files\\LiiiLabs\\LiiiSTEM-2026.1.2\\misc\\patterns\\vintage\\wood-xdark.png|1gu|>|<text-at|<math|\<mathd\>\<theta\>>|<point|0.7000000000000004|0.8>>>|<with|color|<pattern|C:\\Program Files\\LiiiLabs\\LiiiSTEM-2026.1.2\\misc\\patterns\\vintage\\wood-xdark.png|1gu|>|<std-arc-counterclockwise|<point|0|0>|<point|0.5999999999999992|0.0>|<point|0.22499999999999923|0.3>>>|<with|color|<pattern|C:\\Program Files\\LiiiLabs\\LiiiSTEM-2026.1.2\\misc\\patterns\\vintage\\wood-xdark.png|1gu|>|<text-at|<math|r>|<point|2.0|1.3>>>|<with|color|<pattern|C:\\Program Files\\LiiiLabs\\LiiiSTEM-2026.1.2\\misc\\patterns\\vintage\\wood-xdark.png|1gu|>|<text-at|<math|\<mathd\>r>|<point|2.3|3.6>>>|<with|color|<pattern|C:\\Program Files\\LiiiLabs\\LiiiSTEM-2026.1.2\\misc\\patterns\\vintage\\wood-xdark.png|1gu|>|fill-color|yellow|<std-arc-counterclockwise|<point|0|0>|<point|0.7999999999999996|0.6>|<point|0.7000000000000004|0.9333333333333348>>>|<with|color|<pattern|C:\\Program Files\\LiiiLabs\\LiiiSTEM-2026.1.2\\misc\\patterns\\vintage\\wood-xdark.png|1gu|>|<text-at|when <math|\<mathd\>\<theta\>>, <math|\<mathd\>r> is arbitarily small|<point|5.3|1.3>>>|<with|color|<pattern|C:\\Program Files\\LiiiLabs\\LiiiSTEM-2026.1.2\\misc\\patterns\\vintage\\wood-xdark.png|1gu|>|<text-at|the <with|color|blue|blue Area>=<with|color|red|red Area>|<point|5.7|0.7>>>>>
+
+      <\equation*>
+        \<mathd\>x \<mathd\>y=\<mathd\>r \<mathd\><around*|(|r\<theta\>|)>=r \<mathd\>r \<mathd\>\<theta\>
+      </equation*>
+
+      <\equation*>
+        <big|int><rsup|\<infty\>><rsub|-\<infty\>><big|int><rsup|\<infty\>><rsub|-\<infty\>>\<mathe\><rsup|-<around*|(|x<rsup|2>+y<rsup|2>|)>>\<mathd\>x \<mathd\>y=<big|int><rsup|2\<pi\>><rsub|0>d\<theta\><big|int><rsup|\<infty\>><rsub|0>\<mathe\><rsup|-r<rsup|2>> r \<mathd\>r=2\<pi\><around*|(|-<frac|1|2>|)><around*|[|e<rsup|-r<rsup|2>>|]><rsub|0><rsup|\<infty\>>=\<pi\>
+      </equation*>
+
+      \;
+    </proof>
+
+    Then,
+
+    <\equation*>
+      B=<sqrt|2>I<above|\<longequal\>|<smart-ref|eq3>><with|color|blue|<sqrt|2\<pi\>>>
+    </equation*>
+
+    For 3rd part,
+
+    <\equation*>
+      C=<big|int><rsub|0><rsup|\<infty\>>sin t<rsup|2>*\<mathd\>t
+    </equation*>
+
+    By substitution of <math|t=<sqrt|x>>,
+
+    <\equation*>
+      <big|int><rsub|0><rsup|\<infty\>>sin t<rsup|2>*\<mathd\>t=<frac|1|2><big|int><rsup|\<infty\>><rsub|0><frac|sin x|<sqrt|x>>\<mathd\>x
+    </equation*>
+
+    From <smart-ref|eq3>, we know that:
+
+    <\equation>
+      <frac|<sqrt|\<pi\>>|2>=<big|int><rsup|\<infty\>><rsub|0>\<mathe\><rsup|-u<rsup|2>> \<mathd\>u=<sqrt|t><big|int><rsup|\<infty\>><rsub|0>\<mathe\><rsup|-t x<rsup|2>> \<mathd\>x\<Longrightarrow\><frac|1|<sqrt|t>>=<frac|2|<sqrt|\<pi\>>><big|int><rsup|\<infty\>><rsub|0>\<mathe\><rsup|-t x<rsup|2>> \<mathd\>x<label|eq4>
+    </equation>
+
+    Then,
+
+    <\align>
+      <tformat|<table|<row|<cell|C=>|<cell|<frac|1|2><big|int><rsup|\<infty\>><rsub|0>sin x <around*|(|<frac|2|<sqrt|\<pi\>>><big|int><rsup|\<infty\>><rsub|0>\<mathe\><rsup|-x u<rsup|2>> \<mathd\>u|)> \<mathd\>x>>|<row|<cell|=>|<cell|<frac|1|<sqrt|\<pi\>>><big|int><rsup|\<infty\>><rsub|0><around*|(|<big|int><rsup|\<infty\>><rsub|0>\<mathe\><rsup|-x u<rsup|2>> \<mathd\>u|)> sin x \<mathd\>x>>|<row|<cell|=>|<cell|<frac|1|<sqrt|\<pi\>>><big|int><rsup|\<infty\>><rsub|0><around*|(|<big|int><rsup|\<infty\>><rsub|0>\<mathe\><rsup|-x u<rsup|2>> sin x \<mathd\>x|)> \<mathd\>u>>|<row|<cell|=>|<cell|<frac|1|<sqrt|\<pi\>>><big|int><rsup|\<infty\>><rsub|0><around*|[|<frac|-\<mathe\><rsup|-a x>|a<rsup|2>+1><around*|(|a sin x+cos x|)>|]><rsub|0><rsup|\<infty\>> \<mathd\>u<label|eq5><eq-number>>>|<row|<cell|=>|<cell|<frac|1|<sqrt|\<pi\>>><big|int><rsup|\<infty\>><rsub|0><frac|1|u<rsup|4>+1> \<mathd\>u>>|<row|<cell|=>|<cell|<frac|1|2<sqrt|\<pi\>>><around*|(|<big|int><rsup|\<infty\>><rsub|0><frac|u<rsup|2>+1|u<rsup|4>+1> \<mathd\>u-<big|int><rsup|\<infty\>><rsub|0><frac|u<rsup|2>-1|u<rsup|4>+1> \<mathd\>u|)>>>|<row|<cell|=>|<cell|<frac|1|2<sqrt|\<pi\>>><around*|(|<big|int><rsup|\<infty\>><rsub|0><frac|1+<frac|1|u<rsup|2>>|u<rsup|2>+<frac|1|u<rsup|2>>> \<mathd\>u-<big|int><rsup|\<infty\>><rsub|0><frac|1-<frac|1|u<rsup|2>>|u<rsup|2>+<frac|1|u<rsup|2>>> \<mathd\>u|)>>>|<row|<cell|=>|<cell|<frac|1|2<sqrt|\<pi\>>><around*|(|<big|int><rsup|\<infty\>><rsub|0><frac|\<mathd\><around*|(|u-<frac|1|u>|)>|<around*|(|u-<frac|1|u>|)><rsup|2>+2> -<big|int><rsup|\<infty\>><rsub|0><frac|\<mathd\><around*|(|u+<frac|1|u>|)>|<around*|(|u+<frac|1|u>|)><rsup|2>-2>|)><label|eq6><eq-number>>>|<row|<cell|=>|<cell|<frac|1|2<sqrt|\<pi\>>><around*|(|<big|int><rsup|\<infty\>><rsub|-\<infty\>><frac|\<mathd\>t|t<rsup|2>+2> -<big|int><rsup|\<infty\>><rsub|0><frac|\<mathd\>t|t<rsup|2>-2>|)>>>|<row|<cell|=>|<cell|<frac|1|2<sqrt|2\<pi\>>><around*|{|<around*|[|arctan<frac|t|<sqrt|2>>|]><rsub|-\<infty\>><rsup|\<infty\>>-<around*|[|ln<around*|(|<frac|t-<sqrt|2>|t+<sqrt|2>>|)>|]><rsub|-\<infty\>><rsup|\<infty\>>|}>>>|<row|<cell|=>|<cell|<frac|1|2<sqrt|2\<pi\>>><around*|(|\<pi\>-0|)>>>|<row|<cell|=>|<cell|<with|color|blue|<sqrt|<frac|\<pi\>|8>>>>>>>
+    </align>
+  </answer*>
+
+  The process in <smart-ref|eq5> and <smart-ref|eq6> requires a little bit tricks, but makes sence.
+
+  For 4th part,
+
+  <\equation*>
+    D=<below|<above|<big|sum>|\<infty\>>|n=0><cfrac|<around|(|-1|)><rsup|n>|2*n+1>
+  </equation*>
+
+  By taylor series of <math|arctan x>, for <math|<around*|\||x|\|>\<leq\>1> we have
+
+  <\equation>
+    arctan x=<below|<above|<big|sum>|\<infty\>>|k=0><cfrac|<around|(|-1|)><rsup|k> x<rsup|2k+1>|2*k+1><label|eq7>
+  </equation>
+
+  Then,
+
+  <\equation*>
+    D<above|\<longequal\>|<smart-ref|eq7>>arctan 1=<with|color|blue|<frac|\<pi\>|4>>
+  </equation*>
+
+  For 5th part,
+
+  <\equation*>
+    E=<big|int><rsub|0><rsup|\<infty\>><cfrac|sin*x|x> \<mathd\>x
+  </equation*>
+
+  Let <math|f<around*|(|x|)>=sin x>, by Laplace transform, we have
+
+  <\equation*>
+    F<around*|(|s|)>=\<cal-L\><around*|[|sin x|]>=<frac|1|s<rsup|2>+1>
+  </equation*>
+
+  So,
+
+  <\equation>
+    \<cal-L\><around*|[|<frac|sin x|x>|]>=<big|int><rsup|\<infty\>><rsub|s>F<around*|(|u|)> \<mathd\>u=<big|int><rsup|\<infty\>><rsub|0><frac|1|u<rsup|2>+1> \<mathd\>u<label|eq8>
+  </equation>
+
+  And,
+
+  <\equation*>
+    <big|int><rsup|\<infty\>><rsub|0><frac|1|u<rsup|2>+1> \<mathd\>u=<around*|[|arctan u|]><rsub|s><rsup|\<infty\>>=<frac|\<pi\>|2>-arctan s
+  </equation*>
+
+  Then,
+
+  <\equation*>
+    <big|int><rsub|0><rsup|\<infty\>><cfrac|sin*x|x> \<mathd\>x=<below|lim|s\<rightarrow\>0>\<cal-L\><around*|[|<frac|sin x|x>|]><above|\<longequal\>|<smart-ref|eq8>><below|lim|s\<rightarrow\>0><around*|(|<frac|\<pi\>|2>-artan s|)>
+  </equation*>
+
+  <\equation*>
+    E=<with|color|blue|<frac|\<pi\>|2>>
+  </equation*>
+
+  For 6th part,
+
+  <\equation*>
+    F=<below|<above|<big|sum>|\<infty\>>|n=1>arctan <cfrac|2|n<rsup|2>>
+  </equation*>
+
+  We know that,
+
+  <\equation*>
+    artan x+arctan y=arctan <frac|x+y|1-x y>
+  </equation*>
+
+  By observation,
+
+  <\equation>
+    arctan <frac|2|n<rsup|2>>=arctan <frac|<around*|(|1+n|)>+<around*|(|1-n|)>|1-<around*|(|1+n|)><around*|(|1-n|)>>=arctan<around*|(|1+n|)>+arctan<around*|(|1-n|)><label|eq9>
+  </equation>
+
+  Then,
+
+  <\equation*>
+    <below|<above|<big|sum>|\<infty\>>|n=1>arctan <cfrac|2|n<rsup|2>><above|\<longequal\>|<smart-ref|eq9>><below|<above|<big|sum>|\<infty\>>|n=1><around*|[|arctan<around*|(|1+n|)>+arctan<around*|(|1-n|)>|]>=<below|<above|<big|sum>|\<infty\>>|n=1><around*|[|arctan<around*|(|1+n|)>-arctan<around*|(|n-1|)>|]>
+  </equation*>
+
+  Sum up them togather,
+
+  <\equation*>
+    F=<below|<above|<big|sum>|\<infty\>>|n=1><around*|(|arctan 2-arctan 0+arctan 3-arctan 1+\<cdots\>+arctan<around*|(|\<infty\>|)>|)>=<with|color|blue|<frac|3|4>\<pi\>>
+  </equation*>
+
+  For 7th part,
+
+  <\equation*>
+    G=<below|lim|t\<rightarrow\>0<rsup|+>><around*|(|<big|int><rsub|-2026><rsup|2026><cfrac|t*cos*x|x<rsup|2>+t<rsup|2>> \<mathd\>x|)>
+  </equation*>
+
+  By substitution of <math|u=<frac|x|t>>,
+
+  <\equation*>
+    <big|int><rsub|-2026><rsup|2026><cfrac|t*cos*x|x<rsup|2>+t<rsup|2>> \<mathd\>x=<big|int><rsub|-2026/t><rsup|2026/t><cfrac|t<rsup|2>*cos<around*|(|t u|)>|t<rsup|2><around*|(|u<rsup|2>+1|)>> \<mathd\>u=<big|int><rsub|-2026/t><rsup|2026/t><cfrac|cos<around*|(|t u|)>|u<rsup|2>+1> \<mathd\>u
+  </equation*>
+
+  And <math|t\<rightarrow\>0<rsup|+>,>
+
+  <\equation*>
+    <big|int><rsub|-2026/t><rsup|2026/t><cfrac|cos<around*|(|t u|)>|u<rsup|2>+1> \<mathd\>u=<big|int><rsup|\<infty\>><rsub|-\<infty\>><frac|1|u<rsup|2>+1> \<mathd\>u=<around*|[|arctan u|]><rsub|-\<infty\>><rsup|\<infty\>>=\<pi\>
+  </equation*>
+
+  Then,
+
+  <\equation*>
+    G=<with|color|blue|\<pi\>>
+  </equation*>
+
+  For 8th part,
+
+  <\equation*>
+    H=<below|lim|n\<rightarrow\>\<infty\>><around*|{|<around*|[|<around*|(|<big|int><rsup|1><rsub|0><dfrac|x<rsup|n-1>|1+x> \<mathd\>x|)>n-<frac|1|2>|]><frac|n|2>|}>
+  </equation*>
+
+  By calculation,
+
+  <\equation*>
+    <big|int><rsup|1><rsub|0><dfrac|x<rsup|n-1>|1+x> \<mathd\>x=<frac|1|n><around*|(|<around*|[|<frac|x<rsup|n>|1+x>|]><rsub|0><rsup|1>+<big|int><rsup|1><rsub|0><frac|x<rsup|n>|<around*|(|1+x|)><rsup|2>> \<mathd\>x|)>=<frac|1|n><around*|(|<frac|1|2>+<big|int><rsup|1><rsub|0><frac|x<rsup|n>|<around*|(|1+x|)><rsup|2>> \<mathd\>x|)>
+  </equation*>
+
+  And,
+
+  <\align>
+    <tformat|<table|<row|<cell|<big|int><rsup|1><rsub|0><frac|x<rsup|n>|<around*|(|1+x|)><rsup|2>> \<mathd\>x=>|<cell|<frac|1|n+1><around*|(|<frac|1|4>+<big|int><rsup|1><rsub|0><frac|x<rsup|n+1>|<around*|(|1+x|)><rsup|3>> \<mathd\>x|)>>>|<row|<cell|=>|<cell|<frac|1|4<around*|(|n+1|)>>+<frac|1|<around*|(|n+1|)><around*|(|n+2|)>><around*|(|<frac|1|8>+<big|int><rsup|1><rsub|0><frac|x<rsup|n+1>|<around*|(|1+x|)><rsup|4>> \<mathd\>x|)>>>>>
+  </align>
+
+  By simplification,
+
+  <\equation*>
+    H=<below|lim|n\<rightarrow\>\<infty\>><around*|(|<frac|n|8<around*|(|n+1|)>>+<frac|1|2<around*|(|1+<frac|1|n>|)><around*|(|n+2|)>><around*|(|<frac|1|8>+<big|int><rsup|1><rsub|0><frac|x<rsup|n+1>|<around*|(|1+x|)><rsup|4>> \<mathd\>x|)>|)>
+  </equation*>
+
+  Since <math|n\<rightarrow\>\<infty\>>,
+
+  <\equation*>
+    <frac|n|8<around*|(|n+1|)>>\<rightarrow\><frac|1|8>
+  </equation*>
+
+  <\equation*>
+    <frac|1|2<around*|(|1+<frac|1|n>|)><around*|(|n+2|)>>\<rightarrow\>0
+  </equation*>
+
+  Then,
+
+  <\equation*>
+    H=<with|color|blue|<frac|1|8>>
+  </equation*>
+
+  To sum up,
+
+  <\equation*>
+    <cfrac|<cfrac|A|2>+<cfrac|B|C>\<times\><around*|[|<cfrac|D|E>+<cfrac|F|G>|]>|H>=<cfrac|<cfrac|<with|color|blue|120>|2>+<cfrac|<with|color|blue|<sqrt|2\<pi\>>>|<with|color|blue|<sqrt|<frac|\<pi\>|8>>>>\<times\><around*|[|<cfrac|<with|color|blue|<frac|\<pi\>|4>>|<with|color|blue|<frac|\<pi\>|2>>>+<cfrac|<with|color|blue|<frac|3|4>\<pi\>>|<with|color|blue|\<pi\>>>|]>|<with|color|blue|<frac|1|8>>>=<with|color|red|520>
+  </equation*>
+
+  <appendix|Useful shortcuts>
+
+  <big-table|<block|<tformat|<cwith|1|1|1|-1|cell-vmode|exact>|<cwith|2|2|1|-1|cell-vmode|exact>|<cwith|1|1|1|-1|cell-height|27409tmpt>|<cwith|2|2|1|-1|cell-height|25921tmpt>|<cwith|2|-1|1|-1|cell-background|light grey>|<cwith|2|-1|1|-1|cell-halign|c>|<table|<row|<cell|Symbol>|<cell|Shorcut>>|<row|<cell|<math|<big|int>>>|<cell|<key|I Tab>>>|<row|<cell|<math|\<infty\>>>|<cell|<key|@@>>>|<row|<cell|<math|<big|sum>>>|<cell|<key|S Tab>>>|<row|<cell|<math|<frac|1|2>>>|<cell|<key|Alt f>>>>>>|>
+
+  \;
+
+  \;
+</body>
+
+<\initial>
+  <\collection>
+    <associate|page-medium|papyrus>
+    <associate|page-screen-margin|false>
+    <associate|stem-doc-id|C170179F-678E-4130-83BA-D2E94F723270>
+  </collection>
+</initial>
+
+<\references>
+  <\collection>
+    <associate|auto-1|<tuple|A|5>>
+    <associate|auto-2|<tuple|1|5>>
+    <associate|eq1|<tuple|1|1>>
+    <associate|eq2|<tuple|2|1>>
+    <associate|eq3|<tuple|3|2>>
+    <associate|eq4|<tuple|4|3>>
+    <associate|eq5|<tuple|5|3>>
+    <associate|eq6|<tuple|6|3>>
+    <associate|eq7|<tuple|7|3>>
+    <associate|eq8|<tuple|8|3>>
+    <associate|eq9|<tuple|9|4>>
+  </collection>
+</references>
+
+<\auxiliary>
+  <\collection>
+    <\associate|table>
+      <tuple|normal|<surround|<hidden-binding|<tuple>|1>||>|<pageref|auto-2>>
+    </associate>
+    <\associate|toc>
+      <vspace*|1fn><with|font-series|<quote|bold>|math-font-series|<quote|bold>|<locus|<id|%2990CEBC378-2990C702CD0>|<link|hyperlink|<id|%2990CEBC378-2990C702CD0>|<url|#auto-1>>|Appendix A<space|2spc>Useful shortcuts>><datoms|<macro|x|<repeat|<arg|x>|<with|font-series|medium|<with|font-size|1|<space|0.05fn>.<space|0.05fn>>>>>|<htab|5mm>><no-break><pageref|auto-1><vspace|0.5fn>
+    </associate>
+  </collection>
+</auxiliary>

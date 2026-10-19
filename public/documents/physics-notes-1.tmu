@@ -1,0 +1,28 @@
+<TMU|<tuple|1.1.0|2026.3.0>>
+
+<style|<tuple|generic|chinese|table-captions-above|number-europe|preview-ref>>
+
+<\body>
+  <equation*|\<nabla\>\<times\><wide|E|\<vect\>>=-<frac|\<partial\><wide|B|\<vect\>>|\<partial\>t><space|2em>\<nabla\>\<times\><wide|B|\<vect\>>=\<mu\><rsub|0> \<varepsilon\><rsub|0><space|0.17em><frac|\<partial\><wide|E|\<vect\>>|\<partial\>t><space|2em>\<nabla\>\<cdot\><wide|E|\<vect\>>=0<space|2em>\<nabla\>\<cdot\><wide|B|\<vect\>>=0>
+
+  <\align>
+    <tformat|<cwith|1|-1|1|-1|cell-hyphen|t>|<twith|table-hyphen|y>|<table|<row|<cell|\<nabla\>\<times\><around*|(|\<nabla\>\<times\><wide|E|\<vect\>>|)>=\<nabla\><around*|(|\<nabla\>\<cdot\><wide|E|\<vect\>>|)>-\<nabla\><rsup|2><wide|E|\<vect\>>=>|<cell|-\<nabla\><rsup|2><wide|E|\<vect\>>=\<nabla\>\<times\><around*|(|-<frac|\<partial\><wide|B|\<vect\>>|\<partial\>t>|)>>>|<row|<cell|=>|<cell| -<frac|\<partial\><around*|(|\<nabla\>\<times\><wide|B|\<vect\>>|)>|\<partial\>t>=-<frac|\<partial\><around*|(|\<mu\><rsub|0> \<varepsilon\><rsub|0> <frac|\<partial\><wide|E|\<vect\>>|\<partial\>t>|)>|\<partial\>t>=-\<mu\><rsub|0>\<cal-E\><rsub|0><frac|\<partial\><rsup|2><wide|E|\<vect\>>|\<partial\>t<rsup|2>>>>>>
+  </align>
+
+  <\align>
+    <tformat|<cwith|1|-1|1|-1|cell-hyphen|t>|<twith|table-hyphen|y>|<cwith|1|-1|2|2|cell-halign|c>|<table|<row|<cell|\<nabla\><rsup|2><wide|E|\<vect\>>=\<mu\><rsub|0>*\<varepsilon\><rsub|0>*<frac|\<partial\><rsup|2><wide|E|\<vect\>>|\<partial\>*t<rsup|2>>>|<cell|<bold|<with|color|#ff0000|<text|What is this? Wave with a speed of <math|<frac|1|<sqrt|\<mu\><rsub|0>*\<varepsilon\><rsub|0>>>>! >>>>>|<row|<cell|\<nabla\><rsup|2><wide|B|\<vect\>>=\<mu\><rsub|0> \<varepsilon\><rsub|0> <frac|\<partial\><rsup|2><wide|B|\<vect\>>|\<partial\>t<rsup|2>>>|<cell|>>|<row|<cell|>|<cell|<bold|<text|<with|color|#ff0000|Wait a second, wave speed relative to what?>>>>>>>
+  </align>
+
+  <\equation*>
+    \ 
+  </equation*>
+</body>
+
+<\initial>
+  <\collection>
+    <associate|page-medium|paper>
+    <associate|page-screen-margin|false>
+    <associate|preamble|false>
+    <associate|stem-doc-id|536B291C-E42B-4E60-899E-B17AC37ABAB0>
+  </collection>
+</initial>

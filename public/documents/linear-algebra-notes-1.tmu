@@ -1,0 +1,59 @@
+<TMU|<tuple|1.1.0|2026.3.0>>
+
+<style|<tuple|generic|chinese|table-captions-above|number-europe|preview-ref>>
+
+<\body>
+  <\with|color|blue>
+    线代老师：下面给出 <math|A> 的左零空间定义：
+
+    <\equation*>
+      \<cal-N\>(A<rsup|\<top\>>)={y\<in\>\<bbb-R\><rsup|m>\<barsuchthat\>y<rsup|\<top\>>A=0}.
+    </equation*>
+  </with>
+
+  <with|color|dark green|我：哦，这个看上去应该比较简单，所以有什么用呢？>
+
+  <\with|color|blue>
+    线代老师：如果 <math|P A=L U>，令<math|r=rank<around*|(|A|)>>，那么
+
+    <\equation*>
+      span{e<rsup|\<top\>><rsub|i>L<rsup|-1>P:i=r+1,\<ldots\>,m}=\<cal-N\><around|(|A<rsup|\<top\>>|)>,
+    </equation*>
+
+    也就是说 <math|L<rsup|-1>P> 的最后 <math|m-r> 行恰好构成了 <math|A> 的左零空间的基，这个好理解吧？
+  </with>
+
+  <with|color|dark green|我：（沉默1min）嗯，好像是这样>
+
+  <\with|color|blue>
+    线代老师：快下课了，我们再介绍两个左零空间的重要结论：
+
+    <\equation>
+      \<cal-N\>(A<rsup|\<top\>>)=Col<around*|(|A|)><rsup|\<perp\>>
+    </equation>
+
+    如果 <math|T<rsub|A>:\<bbb-R\><rsup|n>\<rightarrow\>\<bbb-R\><rsup|m>>，那么
+
+    <\equation>
+      dim<around*|(|Im<around*|(|T<rsub|A>|)>|)>+dim<around*|(|ker<around*|(|T<rsub|A>|)>|)><rsub|>=dim<around*|(|\<bbb-R\><rsup|n>|)>=n
+    </equation>
+
+    第一个正交的几何意义应该很直观，第二个是在线性变换中的<em|rank-nullity theorem><text-dots>
+  </with>
+
+  <with|color|dark green|我：。。。>
+
+  \;
+
+  <\equation*>
+    Gal<around*|(|K/\<bbb-Q\>|)>\<cong\><around*|(|\<bbb-Z\>/m\<bbb-Z\>|)><rsup|\<times\>>
+  </equation*>
+</body>
+
+<\initial>
+  <\collection>
+    <associate|page-medium|paper>
+    <associate|page-screen-margin|false>
+    <associate|stem-doc-id|8C0E8FE8-C977-4F60-845A-AE9C5B00EA90>
+  </collection>
+</initial>

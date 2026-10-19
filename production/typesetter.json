@@ -1,0 +1,12 @@
+{
+  "repository": "MoganLab/research.mogan.app",
+  "revision": "943d4f225281e1e5b8436f5e3ac54daab186f41e",
+  "sourceRevision": "af724b028e555764ce7373c0792f9c71efd0e012",
+  "files": [
+    { "path": "stem.js", "size": 457419, "blob": "163095226dbe6ffb7be9a156fcbac53bb2b2fb55" },
+    { "path": "stem.wasm", "size": 23501622, "blob": "04cd2b0c45383e9f9d900450c9a4de6a4305e86a" },
+    { "path": "stem.data", "size": 39810290, "blob": "5e574486a942b636a1de15512cfda0e639cbe135" },
+    { "path": "fonts/NotoSerifCJK-Regular.otf", "source": "Serif/OTF/SimplifiedChinese/NotoSerifCJKsc-Regular.otf", "repository": "notofonts/noto-cjk", "revision": "f8d157532fbfaeda587e826d4cd5b21a49186f7c", "size": 24543080, "blob": "cba8a4783cc38574ac7cda52cae7d9b4241c07a5" },
+    { "path": "fonts/LICENSE", "source": "Serif/LICENSE", "repository": "notofonts/noto-cjk", "revision": "f8d157532fbfaeda587e826d4cd5b21a49186f7c", "size": 4301, "blob": "d952d62c065f3f35fb83a173496e90b21525aef3" }
+  ]
+}

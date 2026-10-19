@@ -5,6 +5,8 @@ interface Props { category: PostCategory; }
 const { category } = Astro.props;
 const locale = localeFromPath(Astro.url.pathname);
 const posts = await getPublishedPosts(category, locale);
+if (category === 'article') posts.sort((a, b) => Number(b.data.pinned) - Number(a.data.pinned)
+ || (a.data.pinOrder ?? Number.MAX_SAFE_INTEGER) - (b.data.pinOrder ?? Number.MAX_SAFE_INTEGER));
 ---
 {posts.length ? posts.map(post => (
 	<article class="alex-post">

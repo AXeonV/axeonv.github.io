@@ -1,0 +1,193 @@
+<TMU|<tuple|1.1.0|2026.3.0>>
+
+<style|<tuple|generic|number-europe|preview-ref|british>>
+
+<\body>
+  Given <math|y<around*|(|t|)>=x<around*|(|t|)>\<ast\>h<around*|(|t|)>>, we want <math|y<around*|(|t|)>=<below|<big|sum>|k><around*|(|\<ldots\>|)>e<rsup|j k w<rsub|0> t>>, what is <math|<around*|(|\<ldots\>|)>>?
+
+  Consider <math|x<around*|(|t|)>=<below|<above|<big|sum>|\<infty\>>|k=-\<infty\>>a<rsub|k>e<rsup|j k \ \<omega\><rsub|0> t>>, <math|a<rsub|k>> is a scaler, then
+
+  <\equation*>
+    y<around*|(|t|)>=x<around*|(|t|)>\<ast\>h<around*|(|t|)>=<around*|(|<below|<above|<big|sum>|\<infty\>>|k=-\<infty\>>a<rsub|k>e<rsup|j k \ \<omega\><rsub|0> t>|)>\<ast\>h<around*|(|t|)>=<below|<above|<big|sum>|\<infty\>>|k=-\<infty\>>a<rsub|k><around*|(|e<rsup|j k \ \<omega\><rsub|0> t>\<ast\>h<around*|(|t|)>|)>.
+  </equation*>
+
+  For single <math|e<rsup|j k \<omega\><rsub|0> t>\<ast\>h<around*|(|t|)>>, we have
+
+  <\equation*>
+    e<rsup|j k \ \<omega\><rsub|0> t>\<ast\>h<around*|(|t|)>=<big|int><rsup|\<infty\>><rsub|-\<infty\>>h<around*|(|\<tau\>|)>e<rsup|j k \ \<omega\><rsub|0><around*|(|t-\<tau\>|)>>\<mathd\>\<tau\>=e<rsup|j k \ \<omega\><rsub|0> t><big|int><rsup|\<infty\>><rsub|-\<infty\>>h<around*|(|\<tau\>|)>e<rsup|-j k \ \<omega\><rsub|0>\<tau\>>\<mathd\>\<tau\>.
+  </equation*>
+
+  Let <with|color|blue|<math|H<around*|(|j\<omega\><rsub|k>|)>=<big|int><rsup|\<infty\>><rsub|-\<infty\>>h<around*|(|\<tau\>|)>e<rsup|-j k \<omega\><rsub|0> \<tau\>>\<mathd\>\<tau\>>>, then
+
+  <\equation*>
+    y<around*|(|t|)>=<below|<above|<big|sum>|\<infty\>>|k=-\<infty\>>a<rsub|k><around*|(|e<rsup|j k \ \<omega\><rsub|0> t>\<ast\>h<around*|(|t|)>|)>=<below|<above|<big|sum>|\<infty\>>|k=-\<infty\>>a<rsub|k>H<around*|(|j \<omega\><rsub|k>|)>e<rsup|j k \ \<omega\><rsub|0> t>.
+  </equation*>
+
+  For a given <math|h<around*|(|t|)>>, <math|H<around*|(|j\<omega\><rsub|k>|)>> is easy to calculate.
+
+  So the problem becomes: <with|font-series|bold|when there is a <math|x<around*|(|t|)>>, how to find its <math|a<rsub|k>> for each <math|e<rsup|j k \ w<rsub|0> t>>?>
+
+  Consider multiplying <math|x<around*|(|t|)>> by <math|e<rsup|-j n w<rsub|0> t>>, we have
+
+  <\equation*>
+    x<around*|(|t|)>e<rsup|-j n w<rsub|0> t>=<below|<above|<big|sum>|\<infty\>>|k=-\<infty\>>a<rsub|k>e<rsup|j k w<rsub|0> t>e<rsup|-j n w<rsub|0> t>=<below|<above|<big|sum>|\<infty\>>|k=-\<infty\>>a<rsub|k>e<rsup|j <around*|(|k-n|)>w<rsub|0> t>.
+  </equation*>
+
+  Then
+
+  <\equation*>
+    <big|int><rsup|T><rsub|0>x<around*|(|t|)>e<rsup|-j n w<rsub|0> t>\<mathd\>t=<big|int><rsup|T><rsub|0><below|<above|<big|sum>|\<infty\>>|k=-\<infty\>>a<rsub|k>e<rsup|j <around*|(|k-n|)>w<rsub|0> t>\<mathd\>t=<below|<above|<big|sum>|\<infty\>>|k=-\<infty\>>a<rsub|k><around*|[|<big|int><rsup|T><rsub|0>e<rsup|j <around*|(|k-n|)>w<rsub|0> t>\<mathd\>t|]>.
+  </equation*>
+
+  For single <math|<big|int><rsup|T><rsub|0>e<rsup|j <around*|(|k-n|)>w<rsub|0> t>\<mathd\>t>, we have
+
+  <\equation*>
+    <big|int><rsup|T><rsub|0>e<rsup|j <around*|(|k-n|)>w<rsub|0> t>\<mathd\>t=<big|int><rsup|T><rsub|0>cos<around*|(|<around*|(|k-n|)>w<rsub|0> t|)>\<mathd\>t+j<big|int><rsup|T><rsub|0>sin<around*|(|<around*|(|k-n|)>w<rsub|0> t|)>\<mathd\>t=<choice|<tformat|<cwith|1|-1|1|-1|cell-hyphen|t>|<table|<row|<\cell>
+      T,
+    </cell>|<\cell>
+      k=n
+    </cell>>|<row|<\cell>
+      0,
+    </cell>|<\cell>
+      k\<neq\>n
+    </cell>>>>>.
+  </equation*>
+
+  Thus,\ 
+
+  <\equation*>
+    <big|int><rsup|T><rsub|0>x<around*|(|t|)>e<rsup|-j n w<rsub|0> t>\<mathd\>t=T a<rsub|n>\<Longrightarrow\>a<rsub|n>=<frac|1|T><big|int><rsup|T><rsub|0>x<around*|(|t|)>e<rsup|-j n w<rsub|0> t>\<mathd\>t\<Longrightarrow\><frame|<with|color|red|a<rsub|k>=<frac|1|T><big|int><rsub|T>x<around*|(|t|)>e<rsup|-j k w<rsub|0> t>\<mathd\>t>>.
+  </equation*>
+
+  Now <math|a<rsub|k>> and <math|H<around*|(|j\<omega\><rsub|k>|)>> are both computable, then we can find <math|y<around*|(|t|)>> by <math|<below|<above|<big|sum>|\<infty\>>|k=-\<infty\>>a<rsub|k>H<around*|(|j\<omega\><rsub|k>|)>e<rsup|j k \ \<omega\><rsub|0> t>.><new-page>
+
+  When <math|x<around*|(|t|)>> is real,
+
+  <\equation*>
+    <frame|a<rsub|k>=a<rsub|-k><rsup|\<ast\>>>.
+  </equation*>
+
+  <\equation*>
+    x<around*|(|t|)>=<below|<above|<big|sum>|\<infty\>>|k=-\<infty\>>a<rsub|k> e<rsup|j k w<rsub|0> t>=a<rsub|0>+<below|<above|<big|sum>|\<infty\>>|k=1>2<around*|\||a<rsub|k>|\|> cos<around*|(|k w<rsub|0> t+arg<around*|(|a<rsub|k>|)>|)>.
+  </equation*>
+
+  When <math|x<around*|(|t|)>> is odd,
+
+  <\align>
+    <tformat|<cwith|1|-1|1|-1|cell-hyphen|t>|<table|<row|<cell|a<rsub|-k>=>|<cell|<frac|1|T>*<big|int><rsub|-T/2><rsup|T/2>x<around|(|t|)>*e<rsup|j k *\<omega\><rsub|0> *t>*\<mathd\>t>>|<row|<cell|=>|<cell|<frac|1|T>*<big|int><rsub|T/2><rsup|-T/2>x<around|(|-t<rprime|'>|)>*e<rsup|-j k *\<omega\><rsub|0> *t<rprime|'>>*\<mathd\><around*|(|-t<rprime|'>|)>>>|<row|<cell|=>|<cell|<frac|-1|T><big|int><rsub|-T/2><rsup|T/2>x<around|(|t<rprime|'>|)>*e<rsup|-j k *\<omega\><rsub|0> *t<rprime|'>>*\<mathd\>t<rprime|'>>>|<row|<cell|=>|<cell|-a<rsub|k>.>>>>
+  </align>
+
+  So
+
+  <\equation*>
+    Re<around*|(|a<rsub|k>|)>=Re<around*|(|a<rsub|-k>|)>=0.
+  </equation*>
+
+  When <math|x<around*|(|t|)>> is even,
+
+  <\align>
+    <tformat|<cwith|1|-1|1|-1|cell-hyphen|t>|<table|<row|<cell|a<rsub|-k>=>|<cell|<frac|1|T>*<big|int><rsub|-T/2><rsup|T/2>x<around|(|t|)>*e<rsup|j k *\<omega\><rsub|0> *t>*\<mathd\>t>>|<row|<cell|=>|<cell|<frac|1|T>*<big|int><rsub|T/2><rsup|-T/2>x<around|(|-t<rprime|'>|)>*e<rsup|-j k *\<omega\><rsub|0> *t<rprime|'>>*\<mathd\><around*|(|-t<rprime|'>|)>>>|<row|<cell|=>|<cell|<frac|1|T><big|int><rsub|-T/2><rsup|T/2>x<around|(|t<rprime|'>|)>*e<rsup|-j k *\<omega\><rsub|0> *t<rprime|'>>*\<mathd\>t<rprime|'>>>|<row|<cell|=>|<cell|a<rsub|k>.>>>>
+  </align>
+
+  So
+
+  <\equation*>
+    Im<around*|(|a<rsub|k>|)>=Im<around*|(|a<rsub|-k>|)>=0.
+  </equation*>
+
+  \;
+
+  <\big-table>
+    <\wide-block>
+      <tformat|<cwith|1|-1|1|-1|cell-hyphen|t>|<cwith|1|-1|1|-1|cell-halign|c>|<cwith|1|-1|1|-1|cell-valign|c>|<cwith|4|6|3|3|cell-hyphen|t>|<cwith|4|6|3|3|cell-halign|c>|<cwith|4|6|3|3|cell-valign|c>|<table|<row|<\cell>
+        \;
+      </cell>|<\cell>
+        CT
+      </cell>|<\cell>
+        DT
+      </cell>>|<row|<\cell>
+        angular freq
+      </cell>|<\cell>
+        <\equation*>
+          w<rsub|0>=<frac*|2\<pi\>|T<rsub|0>>
+        </equation*>
+      </cell>|<\cell>
+        <math|\<Omega\><rsub|0>=<frac*|2\<pi\>|N<rsub|0>>>
+      </cell>>|<row|<\cell>
+        FS rep of <math|x>
+      </cell>|<\cell>
+        <\equation*>
+          x<around*|(|t|)>=<below|<above|<big|sum>|\<infty\>>|k=-\<infty\>>a<rsub|k>e<rsup|j k \ \<omega\><rsub|0> t>
+        </equation*>
+      </cell>|<\cell>
+        <\equation*>
+          x<around*|[|n|]>=<below|<above|<big|sum>|\<infty\>>|k=-\<infty\>>a<rsub|k>e<rsup|j k \ \<Omega\><rsub|0> n>
+        </equation*>
+      </cell>>|<row|<\cell>
+        FS rep of <math|y>
+      </cell>|<\cell>
+        <\equation*>
+          y<around*|(|t|)>=<below|<above|<big|sum>|\<infty\>>|k=-\<infty\>>a<rsub|k>H<around*|(|j \<omega\><rsub|k>|)>e<rsup|j k \ \<omega\><rsub|0> t>
+        </equation*>
+      </cell>|<\cell>
+        <\equation*>
+          y<around*|[|n|]>=<below|<above|<big|sum>|\<infty\>>|k=-\<infty\>>a<rsub|k>H<around*|(|j \<omega\><rsub|k>|)>e<rsup|j k \ \<Omega\><rsub|0> n>
+        </equation*>
+      </cell>>|<row|<\cell>
+        FS response
+      </cell>|<\cell>
+        <\equation*>
+          H<around*|(|j\<omega\><rsub|k>|)>=<big|int><rsup|\<infty\>><rsub|-\<infty\>>h<around*|(|\<tau\>|)>e<rsup|-j k \<omega\><rsub|0> \<tau\>>\<mathd\>\<tau\>
+        </equation*>
+      </cell>|<\cell>
+        <\equation*>
+          H<around*|(|j\<omega\><rsub|k>|)>=<below|<above|<big|sum>|\<infty\>>|n=-\<infty\>>h<around*|[|n|]>e<rsup|-j k \<Omega\><rsub|0> n>
+        </equation*>
+      </cell>>|<row|<\cell>
+        coefficients of <math|x>
+      </cell>|<\cell>
+        <\equation*>
+          a<rsub|k>=<frac|1|T><big|int><rsub|T>x<around*|(|t|)>e<rsup|-j k w<rsub|0> t>\<mathd\>t
+        </equation*>
+      </cell>|<\cell>
+        <\equation*>
+          a<rsub|k>=<frac|1|T><big|sum><rsub|T>x<around*|[|n|]>e<rsup|-j k \<Omega\><rsub|0> n>
+        </equation*>
+      </cell>>|<row|<\cell>
+        coefficients of <math|y>
+      </cell>|<\cell>
+        <\equation*>
+          b<rsub|k>=a<rsub|k>H<around*|(|j \<omega\><rsub|k>|)>
+        </equation*>
+      </cell>|<\cell>
+        <\equation*>
+          b<rsub|k>=a<rsub|k>H<around*|(|j \<omega\><rsub|k>|)>
+        </equation*>
+      </cell>>>>
+    </wide-block>
+  </big-table|Summary & Comparision>
+
+  \;
+</body>
+
+<\initial>
+  <\collection>
+    <associate|page-medium|paper>
+    <associate|page-screen-margin|false>
+    <associate|stem-doc-id|433AB1BC-E749-4D60-8E72-C457E9C8E1B0>
+  </collection>
+</initial>
+
+<\references>
+  <\collection>
+    <associate|auto-1|<tuple|1|2>>
+  </collection>
+</references>
+
+<\auxiliary>
+  <\collection>
+    <\associate|table>
+      <tuple|normal|<surround|<hidden-binding|<tuple>|1>||Summary & Comparision>|<pageref|auto-1>>
+    </associate>
+  </collection>
+</auxiliary>

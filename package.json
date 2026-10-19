@@ -12,9 +12,11 @@
     "projects:prepare": "node scripts/prepare-projects.mjs",
     "projects:check": "node scripts/check-projects.mjs",
     "projects:restore": "node scripts/restore-projects.mjs",
-    "predev": "npm run projects:prepare",
+    "typesetter:prepare": "node scripts/prepare-typesetter.mjs",
+    "typesetter:check": "node scripts/prepare-typesetter.mjs --check",
+    "predev": "npm run projects:prepare && npm run typesetter:prepare",
     "dev": "astro dev",
-    "prebuild": "npm run projects:prepare",
+    "prebuild": "npm run projects:prepare && npm run typesetter:prepare",
     "build": "astro build",
     "preview": "astro preview",
     "astro": "astro"
@@ -23,6 +25,7 @@
     "@astrojs/rss": "^4.0.19",
     "@astrojs/sitemap": "^3.7.4",
     "astro": "^7.3.8",
+    "pdfjs-dist": "6.4.299",
     "satteri": "0.10.5",
     "sharp": "^0.35.0",
     "three": "0.163.0"

@@ -1,0 +1,186 @@
+<TMU|<tuple|1.1.0|2026.3.0>>
+
+<style|<tuple|generic|table-captions-above|number-europe|preview-ref>>
+
+<\body>
+  <\hide-preamble>
+    <assign|capP|\<cap\>P>
+
+    <assign|theorem|<\macro|body>
+      <with|ornament-hpadding|4spc|ornament-vpadding|3spc|ornament-shadow-color|#5f4688|ornament-sunny-color|#5f4688|ornament-color|#eeeaf4|<\ornamented>
+        <surround|<compound|next-theorem>||<compound|render-theorem|<compound|theorem-numbered|<compound|theorem-text>|<compound|the-theorem>>|<arg|body>>>
+      </ornamented>>
+    </macro>>
+
+    <assign|definition|<\macro|body>
+      <with|ornament-hpadding|4spc|ornament-vpadding|3spc|ornament-shadow-color|#5f4688|ornament-sunny-color|#5f4688|ornament-color|#eeeaf4|<\ornamented>
+        <surround|<compound|next-definition>||<compound|render-remark|<compound|definition-numbered|<compound|definition-text>|<compound|the-definition>>|<arg|body>>>
+      </ornamented>>
+    </macro>>
+
+    <assign|proposition|<\macro|body>
+      <with|ornament-hpadding|4spc|ornament-vpadding|3spc|ornament-shadow-color|#5f4688|ornament-sunny-color|#5f4688|ornament-color|#eeeaf4|<\ornamented>
+        <\surround|<compound|next-proposition>|>
+          <compound|render-theorem|<compound|proposition-numbered|<compound|proposition-text>|<compound|the-proposition>>|<arg|body>>
+        </surround>
+      </ornamented>>
+    </macro>>
+
+    <assign|lemma|<\macro|body>
+      <with|ornament-hpadding|4spc|ornament-vpadding|3spc|ornament-shadow-color|#5f4688|ornament-sunny-color|#5f4688|ornament-color|#eeeaf4|<\ornamented>
+        <surround|<compound|next-lemma>||<compound|render-theorem|<compound|lemma-numbered|<compound|lemma-text>|<compound|the-lemma>>|<arg|body>>>
+      </ornamented>>
+    </macro>>
+
+    <assign|corollary|<\macro|body>
+      <with|ornament-hpadding|4spc|ornament-vpadding|3spc|ornament-shadow-color|#5f4688|ornament-sunny-color|#5f4688|ornament-color|#eeeaf4|<\ornamented>
+        <surround|<compound|next-corollary>||<compound|render-theorem|<compound|corollary-numbered|<compound|corollary-text>|<compound|the-corollary>>|<arg|body>>>
+      </ornamented>>
+    </macro>>
+
+    <assign|proof|<\macro|body>
+      <\inactive*>
+        <with|ornament-hpadding|4spc|ornament-vpadding|3spc|ornament-shadow-color|#5f4688|ornament-sunny-color|#5f4688|ornament-color|#eeeaf4|<\ornamented>
+          <render-proof|<proof-text>|<arg|body>>
+        </ornamented>>
+      </inactive*>
+    </macro>>
+
+    <assign|axiom|<\macro|body>
+      <with|ornament-hpadding|4spc|ornament-vpadding|3spc|ornament-shadow-color|#5f4688|ornament-sunny-color|#5f4688|ornament-color|#eeeaf4|<\ornamented>
+        <surround|<compound|next-axiom>||<compound|render-theorem|<compound|axiom-numbered|<compound|axiom-text>|<compound|the-axiom>>|<arg|body>>>
+      </ornamented>>
+    </macro>>
+
+    <assign|assumption|<\macro|body>
+      <with|ornament-hpadding|4spc|ornament-vpadding|3spc|ornament-shadow-color|#5f4688|ornament-sunny-color|#5f4688|ornament-color|#eeeaf4|<\ornamented>
+        <surround|<compound|next-assumption>||<compound|render-remark|<compound|assumption-numbered|<compound|assumption-text>|<compound|the-assumption>>|<arg|body>>>
+      </ornamented>>
+    </macro>>
+
+    <assign|notation|<\macro|body>
+      <with|ornament-hpadding|4spc|ornament-vpadding|3spc|ornament-shadow-color|#5f4688|ornament-sunny-color|#5f4688|ornament-color|#eeeaf4|<\ornamented>
+        <surround|<compound|next-notation>||<compound|render-theorem|<compound|notation-numbered|<compound|notation-text>|<compound|the-notation>>|<arg|body>>>
+      </ornamented>>
+    </macro>>
+
+    <assign|convention|<\macro|body>
+      <with|ornament-hpadding|4spc|ornament-vpadding|3spc|ornament-shadow-color|#5f4688|ornament-sunny-color|#5f4688|ornament-color|#eeeaf4|<\ornamented>
+        <surround|<compound|next-convention>||<compound|render-remark|<compound|convention-numbered|<compound|convention-text>|<compound|the-convention>>|<arg|body>>>
+      </ornamented>>
+    </macro>>
+
+    <assign|remark|<\macro|body>
+      <with|ornament-hpadding|4spc|ornament-vpadding|3spc|ornament-shadow-color|#5f4688|ornament-sunny-color|#5f4688|ornament-color|#eeeaf4|<\ornamented>
+        <surround|<compound|next-remark>||<compound|render-remark|<compound|remark-numbered|<compound|remark-text>|<compound|the-remark>>|<arg|body>>>
+      </ornamented>>
+    </macro>>
+
+    <assign|note|<\macro|body>
+      <with|ornament-hpadding|4spc|ornament-vpadding|3spc|ornament-shadow-color|#5f4688|ornament-sunny-color|#5f4688|ornament-color|#eeeaf4|<\ornamented>
+        <surround|<compound|next-note>||<compound|render-remark|<compound|note-numbered|<compound|note-text>|<compound|the-note>>|<arg|body>>>
+      </ornamented>>
+    </macro>>
+
+    <assign|example|<\macro|body>
+      <with|ornament-hpadding|4spc|ornament-vpadding|3spc|ornament-shadow-color|#5f4688|ornament-sunny-color|#5f4688|ornament-color|#eeeaf4|<\ornamented>
+        <surround|<compound|next-example>||<compound|render-remark|<compound|example-numbered|<compound|example-text>|<compound|the-example>>|<arg|body>>>
+      </ornamented>>
+    </macro>>
+
+    <assign|warning|<\macro|body>
+      <with|ornament-hpadding|4spc|ornament-vpadding|3spc|ornament-shadow-color|#5f4688|ornament-sunny-color|#5f4688|ornament-color|#eeeaf4|<\ornamented>
+        <surround|<compound|next-warning>||<compound|render-remark|<compound|warning-numbered|<compound|warning-text>|<compound|the-warning>>|<arg|body>>>
+      </ornamented>>
+    </macro>>
+
+    <assign|acknowledgments*|<\macro|body>
+      <\inactive*>
+        <with|ornament-hpadding|4spc|ornament-vpadding|3spc|ornament-shadow-color|#5f4688|ornament-sunny-color|#5f4688|ornament-color|#eeeaf4|<\ornamented>
+          <compound|render-remark|<compound|acknowledgments-unnumbered|<compound|acknowledgments-text>>|<arg|body>>
+        </ornamented>>
+      </inactive*>
+
+      \;
+    </macro>>
+
+    <assign|exercise|<\macro|body>
+      <with|ornament-hpadding|4spc|ornament-vpadding|3spc|ornament-shadow-color|#5f4688|ornament-sunny-color|#5f4688|ornament-color|#eeeaf4|<\ornamented>
+        <surround|<compound|next-exercise>||<compound|render-exercise|<compound|exercise-numbered|<compound|exercise-text>|<compound|the-exercise>>|<arg|body>>>
+      </ornamented>>
+    </macro>>
+
+    <assign|problem|<\macro|body>
+      <with|ornament-hpadding|4spc|ornament-vpadding|3spc|ornament-shadow-color|#5f4688|ornament-sunny-color|#5f4688|ornament-color|#eeeaf4|<\ornamented>
+        <surround|<compound|next-problem>||<compound|render-exercise|<compound|problem-numbered|<compound|problem-text>|<compound|the-problem>>|<arg|body>>>
+      </ornamented>>
+    </macro>>
+
+    <assign|question|<\macro|body>
+      <with|ornament-hpadding|4spc|ornament-vpadding|3spc|ornament-shadow-color|#5f4688|ornament-sunny-color|#5f4688|ornament-color|#eeeaf4|<\ornamented>
+        <surround|<compound|next-question>||<compound|render-remark|<compound|question-numbered|<compound|question-text>|<compound|the-question>>|<arg|body>>>
+      </ornamented>>
+    </macro>>
+
+    <assign|solution*|<\macro|body>
+      <\inactive*>
+        <with|ornament-hpadding|4spc|ornament-vpadding|3spc|ornament-shadow-color|#5f4688|ornament-sunny-color|#5f4688|ornament-color|#eeeaf4|<\ornamented>
+          <compound|render-exercise|<compound|solution-unnumbered|<compound|solution-text>>|<arg|body>>
+        </ornamented>>
+      </inactive*>
+    </macro>>
+
+    <assign|answer*|<\macro|body>
+      <with|ornament-hpadding|4spc|ornament-vpadding|3spc|ornament-shadow-color|#5f4688|ornament-sunny-color|#5f4688|ornament-color|#eeeaf4|<\ornamented>
+        <compound|render-remark|<compound|answer-unnumbered|<compound|answer-text>>|<arg|body>>
+      </ornamented>>
+    </macro>>
+  </hide-preamble>
+
+  <\question>
+    Let <math|\<cal-P\>=<around|{|p<rsub|1>,p<rsub|2>,p<rsub|3>,\<ldots\>|}>=<around|{|3,5,7,\<ldots\>|}>> be the set of odd prime numbers in increasing order. For fixed <math|k\<in\>\<bbb-Z\><rsub|\<geq\>2>> and <math|\<delta\>\<in\>\<bbb-Q\>>, define a sequence <math|<around*|{|X<rsub|n>|}><rsup|\<infty\>><rsub|n=1>> as:
+
+    <equation*|X<rsub|n>=<frac|1|k> <big|sum><rsub|i=0><rsup|k-1>p<rsub|n+i>+\<delta\>>
+
+    Let <math|\<cal-A\>=<around|{|X<rsub|n>\<in\>\<bbb-Z\>,n\<in\>\<bbb-Z\><rsup|+>|}>> be the set of all integer terms of the sequence.
+
+    Prove the following:
+
+    <\enumerate>
+      <item>If <math|\<delta\>=0> and <math|k = 2>, then <math|\<cal-A\>\<cap\>\<cal-P\>=\<varnothing\>>.
+
+      <item>If <math|\<delta\>=0> and <math|k> is odd, then <math|\<cal-A\>\<cap\>\<cal-P\>\<neq\>\<varnothing\>>.
+
+      <item>For any <math|\<delta\>\<in\>\<bbb-Q\>> and <math|k\<gtr\>2> such that <math|\<cal-A\>> contains infinitely many odd integers, <math|\<cal-A\>\<cap\>\<cal-P\>\<neq\>\<varnothing\>>.
+    </enumerate>
+  </question>
+</body>
+
+<\initial>
+  <\collection>
+    <associate|page-medium|paper>
+    <associate|page-screen-margin|false>
+    <associate|preamble|false>
+    <associate|stem-doc-id|10E79F94-CC6A-4370-896E-903F671F84A0>
+  </collection>
+</initial>
+
+<\references>
+  <\collection>
+    <associate|auto-1|<tuple|?|2>>
+    <associate|auto-2|<tuple|1|2>>
+  </collection>
+</references>
+
+<\auxiliary>
+  <\collection>
+    <\associate|table>
+      <tuple|normal|<\surround|<hidden-binding|<tuple>|1>|>
+        \;
+      </surround>|<pageref|auto-2>>
+    </associate>
+    <\associate|toc>
+      <with|par-left|<quote|2tab>|<locus|<id|%201A4EEF888-201ABCDD6C8--EE109E>|<link|hyperlink|<id|%201A4EEF888-201ABCDD6C8--EE109E>|<url|#auto-1>>|Example with <with|mode|<quote|math>|k=3> (odd primes: 3, 5, 7, 11, 13, ...)><datoms|<macro|x|<repeat|<arg|x>|<with|font-series|medium|<with|font-size|1|<space|0.05fn>.<space|0.05fn>>>>>|<htab|5mm>><no-break><pageref|auto-1>>
+    </associate>
+  </collection>
+</auxiliary>

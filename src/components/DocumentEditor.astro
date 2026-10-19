@@ -1,0 +1,39 @@
+---
+import type { Locale } from '../lib/i18n';
+interface Props { document: string; locale: Locale; title: string; }
+const { document, locale, title } = Astro.props;
+const source = `/tools/document-editor.html?${new URLSearchParams({ document, lang: locale })}`;
+---
+<section class="document-editor" data-document={document} aria-label={title} aria-busy="true">
+ <div class="document-actions"><button class="document-button" type="button" disabled>{locale === 'zh' ? '下载文档' : 'Download document'}</button></div>
+ <iframe title={title} src={source} referrerpolicy="same-origin"></iframe>
+</section>
+<script>
+ document.querySelectorAll<HTMLElement>('.document-editor').forEach(container => {
+  const frame = container.querySelector('iframe')!;
+  const download = container.querySelector('button')!;
+  let downloading = false;
+  const saveDownload = () => {
+   const bytes = (frame.contentWindow as Window & { readDocument: () => Uint8Array }).readDocument();
+   const url = URL.createObjectURL(new Blob([new Uint8Array(bytes)], { type: 'application/octet-stream' }));
+   const anchor = document.createElement('a'); anchor.href = url; anchor.download = container.dataset.document!.split('/').pop()!;
+   document.body.append(anchor); anchor.click(); anchor.remove();
+   setTimeout(() => URL.revokeObjectURL(url), 30_000);
+  };
+  window.addEventListener('message', event => {
+   if (event.origin !== location.origin || event.source !== frame.contentWindow) return;
+   if (event.data?.type === 'document:ready') { container.setAttribute('aria-busy', 'false'); download.disabled = false; }
+   if (event.data?.type === 'document:saved' && downloading) { downloading = false; download.disabled = false; saveDownload(); }
+   if (event.data?.type === 'document:save-error') { downloading = false; download.disabled = false; }
+  });
+  download.addEventListener('click', () => {
+   downloading = true; download.disabled = true;
+   frame.contentWindow?.postMessage({ type: 'document:save' }, location.origin);
+  });
+ });
+</script>
+<style>
+ .document-editor { margin-top: 24px; }
+ iframe { display: block; width: 100%; height: max(660px, 78svh); border: 0; background: white; }
+ .document-actions { display: flex; justify-content: flex-end; margin-bottom: 12px; font-size: 14px; }
+</style>

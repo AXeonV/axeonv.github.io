@@ -1,28 +1,33 @@
 ---
 import { Image } from 'astro:assets';
-import { POST_SECTIONS, getPostLocale, getPostTranslations, type Post } from '../lib/posts';
+import { POST_SECTIONS, getPostLocale, getPostTranslations, getPostUrl, type Post } from '../lib/posts';
 import { localePath, messages } from '../lib/i18n';
 import SiteLayout from './SiteLayout.astro';
 import FormattedDate from '../components/FormattedDate.astro';
 import PlainText from '../components/PlainText.astro';
-interface Props { post: Post; headings?: { depth: number; slug: string; text: string }[]; }
-const { post, headings = [] } = Astro.props;
-const { title, description, author, pubDate, updatedDate, heroImage, category, format } = post.data;
+import DocumentEditor from '../components/DocumentEditor.astro';
+import PdfDocument from '../components/PdfDocument.astro';
+import '../styles/document-buttons.css';
+interface Props { post: Post; headings?: { depth: number; slug: string; text: string }[]; editing?: boolean; }
+const { post, headings = [], editing = false } = Astro.props;
+const { title, description, author, pubDate, updatedDate, heroImage, category, format, document, pdf } = post.data;
 const paragraphs = format === 'text' ? (post.body ?? '').split(/\r?\n(?:[\t ]*\r?\n)+/).filter(paragraph => paragraph.trim()) : [];
 const locale = getPostLocale(post);
 const section = POST_SECTIONS[category];
-const translations = await getPostTranslations(post);
+const translations = Object.fromEntries(Object.entries(await getPostTranslations(post)).map(([lang, path]) => [lang, editing ? `${path}edit/` : path]));
 ---
 <SiteLayout title={title} description={description} translations={translations} toc={headings.filter(h => h.depth === 2).map(h => ({ id: h.slug, label: h.text }))}>
- <a href={localePath(locale, section.path)}>← {section.label}</a>
+ <a href={editing ? getPostUrl(post) : localePath(locale, section.path)}>← {editing ? (locale === 'zh' ? '返回 PDF 页面' : 'Back to PDF page') : section.label}</a>
  <article>
   <h1>{title}</h1>
   <p class="alex-muted">{author && <><span>{author}</span> · </>}<FormattedDate date={pubDate}/>{updatedDate && <> · {messages[locale].updated} <FormattedDate date={updatedDate}/></>}</p>
   {heroImage && <Image width={1100} src={heroImage} alt={title}/>}
-  {format === 'text' ? <div class="plain-text">{paragraphs.map(paragraph => <p><PlainText text={paragraph}/></p>)}</div> : <slot/>}
+  {!editing && (document || pdf) && <div class="document-actions">{document && <a class="document-button" href={`${getPostUrl(post)}edit/`}>{locale === 'zh' ? '编辑文档' : 'Edit document'}</a>}{pdf && <a class="document-button" href={pdf} download>{locale === 'zh' ? '下载文档' : 'Download document'}</a>}</div>}
+  {editing && document ? <DocumentEditor document={document} locale={locale} title={title}/> : pdf ? <PdfDocument source={pdf} title={title}/> : format === 'text' ? <div class="plain-text">{paragraphs.map(paragraph => <p><PlainText text={paragraph}/></p>)}</div> : <slot/>}
  </article>
 </SiteLayout>
 
 <style>
  .plain-text p { white-space: pre-wrap; }
+ .document-actions { display: flex; justify-content: flex-end; flex-wrap: wrap; gap: 12px; margin: 20px 0 12px; font-size: 14px; }
 </style>

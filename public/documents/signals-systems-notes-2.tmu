@@ -1,0 +1,119 @@
+<TMU|<tuple|1.1.0|2026.3.0>>
+
+<style|<tuple|generic|chinese|table-captions-above|number-europe|preview-ref>>
+
+<\body>
+  假设我们有 <math|k> 次回声：
+
+  <\equation*>
+    y<around*|[|n|]>=x<around*|[|n|]>+\<alpha\><rsub|1>x<around*|[|n-N<rsub|1>|]>+\<cdots\>+\<alpha\><rsub|k>x<around*|[|n-N<rsub|k>|]>
+  </equation*>
+
+  考虑令 <math|E<around*|[|n|]>=y<around*|[|n|]>-x<around*|[|n|]>,<space|1em>x<around*|[|n-N<rsub|k>|]>=x<rsub|k><around*|[|n|]>>，则：
+
+  <\equation*>
+    E<around*|[|n|]>=<big|sum><rsub|i=1><rsup|k>\<alpha\><rsub|i> x<rsub|i><around*|[|n|]>
+  </equation*>
+
+  由图像中的峰值很容易知道 <math|N<rsub|k>>，那么 <math|x<rsub|k><around*|[|n|]>> 是已知的，现在的问题是怎么求 <math|\<alpha\><rsub|k>>。
+
+  注意到，这实际上是一个线性方程组，即：
+
+  <\equation*>
+    <bmatrix|<tformat|<cwith|1|-1|1|-1|cell-hyphen|t>|<cwith|2|2|1|4|cell-hyphen|t>|<cwith|4|4|1|4|cell-hyphen|t>|<table|<row|<\cell>
+      x<rsub|1><around*|[|1|]>
+    </cell>|<\cell>
+      x<rsub|2><around*|[|1|]>
+    </cell>|<\cell>
+      \<ldots\>
+    </cell>|<\cell>
+      x<rsub|k><around*|[|1|]>
+    </cell>>|<row|<\cell>
+      x<rsub|1><around*|[|2|]>
+    </cell>|<\cell>
+      x<rsub|2><around*|[|2|]>
+    </cell>|<\cell>
+      \<ldots\>
+    </cell>|<\cell>
+      x<rsub|k><around*|[|2|]>
+    </cell>>|<row|<\cell>
+      \<vdots\>
+    </cell>|<\cell>
+      \<vdots\>
+    </cell>|<\cell>
+      \<ddots\>
+    </cell>|<\cell>
+      \<vdots\>
+    </cell>>|<row|<\cell>
+      x<rsub|1><around*|[|n|]>
+    </cell>|<\cell>
+      x<rsub|2><around*|[|n|]>
+    </cell>|<\cell>
+      \<ldots\>
+    </cell>|<\cell>
+      x<rsub|k><around*|[|n|]>
+    </cell>>>>><bmatrix|<tformat|<cwith|1|-1|1|-1|cell-hyphen|t>|<table|<row|<\cell>
+      \<alpha\><rsub|1>
+    </cell>>|<row|<\cell>
+      \<alpha\><rsub|2>
+    </cell>>|<row|<\cell>
+      \<vdots\>
+    </cell>>|<row|<\cell>
+      \<alpha\><rsub|k>
+    </cell>>>>>=<bmatrix|<tformat|<cwith|1|-1|1|-1|cell-hyphen|t>|<table|<row|<\cell>
+      E<around*|[|1|]>
+    </cell>>|<row|<\cell>
+      E<around*|[|2|]>
+    </cell>>|<row|<\cell>
+      \<vdots\>
+    </cell>>|<row|<\cell>
+      E<around*|[|n|]>
+    </cell>>>>>
+  </equation*>
+
+  令 <math|A=<bmatrix|<tformat|<cwith|1|-1|1|-1|cell-hyphen|t>|<cwith|2|2|1|4|cell-hyphen|t>|<cwith|4|4|1|4|cell-hyphen|t>|<table|<row|<\cell>
+    x<rsub|1><around*|[|1|]>
+  </cell>|<\cell>
+    x<rsub|2><around*|[|1|]>
+  </cell>|<\cell>
+    \<ldots\>
+  </cell>|<\cell>
+    x<rsub|k><around*|[|1|]>
+  </cell>>|<row|<\cell>
+    x<rsub|1><around*|[|2|]>
+  </cell>|<\cell>
+    x<rsub|2><around*|[|2|]>
+  </cell>|<\cell>
+    \<ldots\>
+  </cell>|<\cell>
+    x<rsub|k><around*|[|2|]>
+  </cell>>|<row|<\cell>
+    \<vdots\>
+  </cell>|<\cell>
+    \<vdots\>
+  </cell>|<\cell>
+    \<ddots\>
+  </cell>|<\cell>
+    \<vdots\>
+  </cell>>|<row|<\cell>
+    x<rsub|1><around*|[|n|]>
+  </cell>|<\cell>
+    x<rsub|2><around*|[|n|]>
+  </cell>|<\cell>
+    \<ldots\>
+  </cell>|<\cell>
+    x<rsub|k><around*|[|n|]>
+  </cell>>>>>>，则 <math|\<alpha\>=A<rsup|-1>E>，对应 Matlab 中<with|font-series|bold|求线性方程组的最小二乘解>：
+
+  <\cpp-code>
+    alpha = A \\ E;
+  </cpp-code>
+</body>
+
+<\initial>
+  <\collection>
+    <associate|page-medium|paper>
+    <associate|page-screen-margin|false>
+    <associate|stem-doc-id|0035065A-1D3D-4370-8A4A-E09DE066C080>
+  </collection>
+</initial>

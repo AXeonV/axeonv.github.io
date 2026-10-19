@@ -1,0 +1,17 @@
+/* Match the Blog unlock control, including theme colors and focus feedback. */
+.vp-doc .document-button {
+ display: inline-flex; align-items: center; justify-content: center; flex-shrink: 0;
+ padding: 6px 12px; border: 1px solid var(--vp-c-divider); border-radius: 6px;
+ background: var(--vp-c-bg-soft); color: var(--vp-c-text-2);
+ font: inherit; font-size: 14px; line-height: 22px; white-space: nowrap;
+ text-decoration: none; cursor: pointer;
+ transition: color .2s, border-color .2s, box-shadow .2s;
+}
+.vp-doc .document-button:is(:hover, :focus-visible):not(:disabled) {
+ border-color: var(--vp-c-brand-1); color: var(--vp-c-brand-1);
+ text-decoration: none;
+ box-shadow: 0 0 0 1px var(--vp-c-brand-soft), 0 0 14px var(--vp-c-brand-soft);
+}
+.vp-doc .document-button:disabled { cursor: wait; opacity: .65; }
+@media (width < 400px) { .vp-doc .document-button { padding-inline: 8px; font-size: 13px; } }
+@media (prefers-reduced-motion: reduce) { .vp-doc .document-button { transition: none; } }

@@ -1,0 +1,41 @@
+<TMU|<tuple|1.1.0|2026.3.0>>
+
+<style|<tuple|generic|table-captions-above|number-europe|preview-ref>>
+
+<\body>
+  <\question*>
+    Why <em|normal equation> <math|A<rsup|\<top\>>A<wide|x|~>=A<rsup|\<top\>>b> is always solvable?
+  </question*>
+
+  <\proof>
+    Noticed that
+
+    <\equation*>
+      rank<around*|(|A|)>=rank<around*|(|A<rsup|\<top\>>A|)>\<leqslant\>rank<around*|(|<bmatrix|<tformat|<table|<row|<cell|A<rsup|\<top\>>A>|<cell|A<rsup|\<top\>>b>>>>>|)>=rank<around*|(|A<rsup|\<top\>><bmatrix|<tformat|<table|<row|<cell|A>|<cell|b>>>>>|)>\<leqslant\>rank<around*|(|A<rsup|\<top\>>|)>=rank<around*|(|A|)>,
+    </equation*>
+
+    then every inequality signs above is equality, so
+
+    <\equation*>
+      rank<around*|(|A<rsup|\<top\>>A|)>=rank<around*|(|<bmatrix|<tformat|<table|<row|<cell|A<rsup|\<top\>>A>|<cell|A<rsup|\<top\>>b>>>>>|)>\<Longrightarrow\><with|color|red|A<rsup|\<top\>>b\<in\>\<cal-C\><around*|(|A<rsup|\<top\>>A|)>>.
+    </equation*>
+
+    Then it's clear that <math|A<rsup|\<top\>>A<wide|x|~>=A<rsup|\<top\>>b> is solvable.
+  </proof>
+
+  \;
+
+  If the columns of <math|A> are linearly independent (<math|A<rsup|\<top\>>A> is invertible), then
+
+  <\equation*>
+    <wide|x|~>=<around*|(|A<rsup|\<top\>>A|)><rsup|-1>A<rsup|\<top\>>b.
+  </equation*>
+</body>
+
+<\initial>
+  <\collection>
+    <associate|page-medium|paper>
+    <associate|page-screen-margin|false>
+    <associate|stem-doc-id|C0BF38AF-BDC2-4450-8DFA-47DEDF7D33D0>
+  </collection>
+</initial>

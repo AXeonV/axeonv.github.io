@@ -1,0 +1,454 @@
+<TMU|<tuple|1.1.0|2026.3.0>>
+
+<style|<tuple|generic|number-europe|preview-ref|smart-ref|number-long-article|chinese|table-captions-above>>
+
+<\body>
+  <\hide-preamble>
+    \;
+
+    <assign|theorem|<\macro|body>
+      <with|ornament-hpadding|4spc|ornament-vpadding|3spc|ornament-shadow-color|#5f4688|ornament-sunny-color|#5f4688|ornament-color|#eeeaf4|<\ornamented>
+        <surround|<compound|next-theorem>||<compound|render-theorem|<compound|theorem-numbered|<compound|theorem-text>|<compound|the-theorem>>|<arg|body>>>
+      </ornamented>>
+    </macro>>
+
+    <assign|definition|<\macro|body>
+      <with|ornament-hpadding|4spc|ornament-vpadding|3spc|ornament-shadow-color|#5f4688|ornament-sunny-color|#5f4688|ornament-color|#eeeaf4|<\ornamented>
+        <surround|<compound|next-definition>||<compound|render-remark|<compound|definition-numbered|<compound|definition-text>|<compound|the-definition>>|<arg|body>>>
+      </ornamented>>
+    </macro>>
+
+    <assign|proposition|<\macro|body>
+      <with|ornament-hpadding|4spc|ornament-vpadding|3spc|ornament-shadow-color|#5f4688|ornament-sunny-color|#5f4688|ornament-color|#eeeaf4|<\ornamented>
+        <\surround|<compound|next-proposition>|>
+          <compound|render-theorem|<compound|proposition-numbered|<compound|proposition-text>|<compound|the-proposition>>|<arg|body>>
+        </surround>
+      </ornamented>>
+    </macro>>
+
+    <assign|lemma|<\macro|body>
+      <with|ornament-hpadding|4spc|ornament-vpadding|3spc|ornament-shadow-color|#5f4688|ornament-sunny-color|#5f4688|ornament-color|#eeeaf4|<\ornamented>
+        <surround|<compound|next-lemma>||<compound|render-theorem|<compound|lemma-numbered|<compound|lemma-text>|<compound|the-lemma>>|<arg|body>>>
+      </ornamented>>
+    </macro>>
+
+    <assign|corollary|<\macro|body>
+      <with|ornament-hpadding|4spc|ornament-vpadding|3spc|ornament-shadow-color|#5f4688|ornament-sunny-color|#5f4688|ornament-color|#eeeaf4|<\ornamented>
+        <surround|<compound|next-corollary>||<compound|render-theorem|<compound|corollary-numbered|<compound|corollary-text>|<compound|the-corollary>>|<arg|body>>>
+      </ornamented>>
+    </macro>>
+
+    <assign|proof|<\macro|body>
+      <\inactive*>
+        <with|ornament-hpadding|4spc|ornament-vpadding|3spc|ornament-shadow-color|#5f4688|ornament-sunny-color|#5f4688|ornament-color|#eeeaf4|<\ornamented>
+          <render-proof|<proof-text>|<arg|body>>
+        </ornamented>>
+      </inactive*>
+    </macro>>
+
+    <assign|axiom|<\macro|body>
+      <with|ornament-hpadding|4spc|ornament-vpadding|3spc|ornament-shadow-color|#5f4688|ornament-sunny-color|#5f4688|ornament-color|#eeeaf4|<\ornamented>
+        <surround|<compound|next-axiom>||<compound|render-theorem|<compound|axiom-numbered|<compound|axiom-text>|<compound|the-axiom>>|<arg|body>>>
+      </ornamented>>
+    </macro>>
+
+    <assign|assumption|<\macro|body>
+      <with|ornament-hpadding|4spc|ornament-vpadding|3spc|ornament-shadow-color|#5f4688|ornament-sunny-color|#5f4688|ornament-color|#eeeaf4|<\ornamented>
+        <surround|<compound|next-assumption>||<compound|render-remark|<compound|assumption-numbered|<compound|assumption-text>|<compound|the-assumption>>|<arg|body>>>
+      </ornamented>>
+    </macro>>
+
+    <assign|notation|<\macro|body>
+      <with|ornament-hpadding|4spc|ornament-vpadding|3spc|ornament-shadow-color|#5f4688|ornament-sunny-color|#5f4688|ornament-color|#eeeaf4|<\ornamented>
+        <surround|<compound|next-notation>||<compound|render-theorem|<compound|notation-numbered|<compound|notation-text>|<compound|the-notation>>|<arg|body>>>
+      </ornamented>>
+    </macro>>
+
+    <assign|convention|<\macro|body>
+      <with|ornament-hpadding|4spc|ornament-vpadding|3spc|ornament-shadow-color|#5f4688|ornament-sunny-color|#5f4688|ornament-color|#eeeaf4|<\ornamented>
+        <surround|<compound|next-convention>||<compound|render-remark|<compound|convention-numbered|<compound|convention-text>|<compound|the-convention>>|<arg|body>>>
+      </ornamented>>
+    </macro>>
+
+    <assign|remark|<\macro|body>
+      <with|ornament-hpadding|4spc|ornament-vpadding|3spc|ornament-shadow-color|#5f4688|ornament-sunny-color|#5f4688|ornament-color|#eeeaf4|<\ornamented>
+        <surround|<compound|next-remark>||<compound|render-remark|<compound|remark-numbered|<compound|remark-text>|<compound|the-remark>>|<arg|body>>>
+      </ornamented>>
+    </macro>>
+
+    <assign|note|<\macro|body>
+      <with|ornament-hpadding|4spc|ornament-vpadding|3spc|ornament-shadow-color|#5f4688|ornament-sunny-color|#5f4688|ornament-color|#eeeaf4|<\ornamented>
+        <surround|<compound|next-note>||<compound|render-remark|<compound|note-numbered|<compound|note-text>|<compound|the-note>>|<arg|body>>>
+      </ornamented>>
+    </macro>>
+
+    <assign|example|<\macro|body>
+      <with|ornament-hpadding|4spc|ornament-vpadding|3spc|ornament-shadow-color|#5f4688|ornament-sunny-color|#5f4688|ornament-color|#eeeaf4|<\ornamented>
+        <surround|<compound|next-example>||<compound|render-remark|<compound|example-numbered|<compound|example-text>|<compound|the-example>>|<arg|body>>>
+      </ornamented>>
+    </macro>>
+
+    <assign|warning|<\macro|body>
+      <with|ornament-hpadding|4spc|ornament-vpadding|3spc|ornament-shadow-color|#5f4688|ornament-sunny-color|#5f4688|ornament-color|#eeeaf4|<\ornamented>
+        <surround|<compound|next-warning>||<compound|render-remark|<compound|warning-numbered|<compound|warning-text>|<compound|the-warning>>|<arg|body>>>
+      </ornamented>>
+    </macro>>
+
+    <assign|acknowledgments*|<\macro|body>
+      <\inactive*>
+        <with|ornament-hpadding|4spc|ornament-vpadding|3spc|ornament-shadow-color|#5f4688|ornament-sunny-color|#5f4688|ornament-color|#eeeaf4|<\ornamented>
+          <compound|render-remark|<compound|acknowledgments-unnumbered|<compound|acknowledgments-text>>|<arg|body>>
+        </ornamented>>
+      </inactive*>
+
+      \;
+    </macro>>
+
+    <assign|exercise|<\macro|body>
+      <with|ornament-hpadding|4spc|ornament-vpadding|3spc|ornament-shadow-color|#5f4688|ornament-sunny-color|#5f4688|ornament-color|#eeeaf4|<\ornamented>
+        <surround|<compound|next-exercise>||<compound|render-exercise|<compound|exercise-numbered|<compound|exercise-text>|<compound|the-exercise>>|<arg|body>>>
+      </ornamented>>
+    </macro>>
+
+    <assign|problem|<\macro|body>
+      <with|ornament-hpadding|4spc|ornament-vpadding|3spc|ornament-shadow-color|#5f4688|ornament-sunny-color|#5f4688|ornament-color|#eeeaf4|<\ornamented>
+        <surround|<compound|next-problem>||<compound|render-exercise|<compound|problem-numbered|<compound|problem-text>|<compound|the-problem>>|<arg|body>>>
+      </ornamented>>
+    </macro>>
+
+    <assign|question|<\macro|body>
+      <with|ornament-hpadding|4spc|ornament-vpadding|3spc|ornament-shadow-color|#5f4688|ornament-sunny-color|#5f4688|ornament-color|#eeeaf4|<\ornamented>
+        <surround|<compound|next-question>||<compound|render-remark|<compound|question-numbered|<compound|question-text>|<compound|the-question>>|<arg|body>>>
+      </ornamented>>
+    </macro>>
+
+    <assign|solution*|<\macro|body>
+      <\inactive*>
+        <with|ornament-hpadding|4spc|ornament-vpadding|3spc|ornament-shadow-color|#5f4688|ornament-sunny-color|#5f4688|ornament-color|#eeeaf4|<\ornamented>
+          <compound|render-exercise|<compound|solution-unnumbered|<compound|solution-text>>|<arg|body>>
+        </ornamented>>
+      </inactive*>
+    </macro>>
+
+    <assign|answer*|<\macro|body>
+      <with|ornament-hpadding|4spc|ornament-vpadding|3spc|ornament-shadow-color|#5f4688|ornament-sunny-color|#5f4688|ornament-color|#eeeaf4|<\ornamented>
+        <compound|render-remark|<compound|answer-unnumbered|<compound|answer-text>>|<arg|body>>
+      </ornamented>>
+    </macro>>
+  </hide-preamble>
+
+  <doc-data|<doc-title|碎碎念之线性变换在给定基下的矩阵表示>>
+
+  <\question>
+    在 <math|\<bbb-R\><rsup|3>> 中考虑以下两组向量：
+
+    <equation*|u<rsub|1>=(1,0,1)<rsup|\<top\>>,u<rsub|2>=(2,1,0)<rsup|\<top\>>, u<rsub|3>=(1,1,1)<rsup|\<top\>>>
+
+    和
+
+    <equation*|v<rsub|1>=(1,0,0)<rsup|\<top\>>, v<rsub|2>=(1,1,0)<rsup|\<top\>>, v<rsub|3>=(1,1,1)<rsup|\<top\>>>
+
+    可以验证这两组向量都是 <math|\<bbb-R\><rsup|3>> 的基。假定线性变换 <math|\<cal-T\>> 把基 <math|u<rsub|1>,u<rsub|2>,u<rsub|3>> 映到基 <math|v<rsub|1>,v<rsub|2>,v<rsub|3>>。
+
+    <\enumerate>
+      <item>求基 <math|u<rsub|1>>, <math|u<rsub|2>>, <math|u<rsub|3>> 到基 <math|v<rsub|1>>, <math|v<rsub|2>>, <math|v<rsub|3>> 的过渡矩阵；
+
+      <item>求 <math|\<cal-T\>> 在基 <math|u<rsub|1>,u<rsub|2>,u<rsub|3>> 下的矩阵；
+
+      <item>求 <math|\<cal-T\>> 在基 <math|v<rsub|1>,v<rsub|2>,v<rsub|3>> 下的矩阵；
+
+      <item>求 <math|\<cal-T\><rsup|2><around|(|u<rsub|1>|)>=\<cal-T\><around|(|\<cal-T\><around|(|u<rsub|1>|)>|)>>；
+
+      <item>求 <math|<around|(|1,2,3|)><rsup|\<top\>>> 在基 <math|u<rsub|1>,u<rsub|2>,u<rsub|3>> 下的坐标。
+    </enumerate>
+  </question>
+
+  在解答这道题之前，我们先回顾一下在<with|font-series|bold|给定基向量>下，一个<with|font-series|bold|线性变换>如何用<with|font-series|bold|矩阵表示>。
+
+  教材中以及老师给出的答案是：对于映射 <math|\<cal-T\>:\<bbb-V\>\<rightarrow\>\<bbb-W\>>，
+
+  <\equation>
+    \<cal-T\><around*|(|x<rsub|j>|)>=A x<rsub|j>=<below|<above|<big|sum>|m>|i=1>a<rsub|i j> y<rsub|i><label|eq0>
+  </equation>
+
+  其中 <math|x<rsub|i>> 是 <math|\<bbb-V\>> 空间的一组基，<math|y<rsub|i>> 是 <math|\<bbb-W\>> 空间的一组基。
+
+  这个定义看起来是不是像<with|color|blue|天书>？完全<with|color|blue|不知所云>，看完也不知道 <math|A> 是干嘛的，以及怎么找。
+
+  那么我接下来给出一个较为直观的理解方式。
+
+  <\proposition>
+    我们约定 <math|V=<around*|[|v<rsub|1>\|\<ldots\>\|v<rsub|n>|]>>，其中 <math|<around*|(|v<rsub|1>,\<ldots\>,v<rsub|n>|)>> 是在自然基意义下的坐标。则：
+
+    <\equation>
+      \<cal-T\><around*|(|V|)>=V\<cdot\>A<rsub|V><label|eq1>
+    </equation>
+
+    其中 <math|A<rsub|V>> 即为映射 <math|\<cal-T\>> 在给定基 <math|V> 下的矩阵表示。
+  </proposition>
+
+  看着也很抽象，那我来解释一下。可能大家最习惯的是看
+
+  <\equation*>
+    \<cal-T\><around*|(|x|)>=A x
+  </equation*>
+
+  左乘一个矩阵非常直观对吧？<math|A> 很容易理解成对一个输入向量进行一个作用，输出的就是变换的结果向量。
+
+  那么<smart-ref|eq1>这里右乘一个矩阵 <math|A<rsub|V>> 要怎么理解呢？右乘的本质是对 <math|V> 的列做线性组合，<math|A<rsub|V>> 记录了 <math|V> 的基底（即列向量）的组装过程，而这个组装过程恰恰就是一个结果向量在这个基下的分解。
+
+  为什么要对 <math|\<cal-T\><around*|(|V|)>> 做分解呢？我们由定义知 <math|\<cal-T\><around*|(|V|)>=W>，我们想研究在这组给定基 <math|V> 下该映射 <math|\<cal-T\>> 的矩阵表示，其实只需要知道 <math|V> 中的每个基在变换后得到的实体向量 <math|W> 在该 <math|V> 基下的坐标是多少就可以了。这个实体向量就是 <math|\<cal-T\><around*|(|V|)>>，而且是在自然基<\footnote>
+    自然基即一组标准正交基，这里在<math|\<bbb-R\><rsup|3>>中的自然基是<math|<around*|(|1,0,0|)>,<around*|(|0,1,0|)>,<around*|(|0,0,1|)>>
+  </footnote>意义下的。<math|A<rsub|V>> 的每个列向量就是 <math|\<cal-T\><around*|(|V|)>> 最终在 <math|V> 基下的坐标。换句话说整个参考系换到 <math|V> 后，它的标准基在变换 <math|\<cal-T\>> 作用后的结果就是 <math|A<rsub|V>> 的每个列向量。
+
+  承认了<smart-ref|eq1>的合理性后，我们开始来解答这个题。
+
+  <\answer*>
+    我们先不考虑过渡矩阵的事，它会在后面自然而然地呈现出来。
+
+    <\enumerate>
+      <item>考虑 <math|\<cal-T\>> 在自然基下的<with|font-series|bold|标准矩阵表示>。由定义知：
+
+      <\equation>
+        \<cal-T\><around*|(|U|)>=V<label|eq2>
+      </equation>
+
+      我们记 <math|\<cal-T\>> 在自然基下的标准矩阵为 <math|A>，有 <math|A U=V>，故
+
+      <\equation>
+        <with|color|magenta|A=V U<rsup|-1>><label|eq3>
+      </equation>
+
+      <item>考虑 <math|\<cal-T\>> 在 <with|font-series|bold|<math|U> 的基底下矩阵表示>。由<smart-ref|eq1>知
+
+      <\equation*>
+        \<cal-T\><around*|(|U|)>=U\<cdot\>A<rsub|U>
+      </equation*>
+
+      而同时有<smart-ref|eq2>，故
+
+      <\equation*>
+        <with|color|red|A<rsub|U>=U<rsup|-1>V>
+      </equation*>
+
+      <item>考虑 <math|\<cal-T\>> 在 <with|font-series|bold|<math|V> 的基底下矩阵表示>。由<smart-ref|eq1>知
+
+      <\equation>
+        \<cal-T\><around*|(|V|)>=V\<cdot\>A<rsub|V><label|eq4>
+      </equation>
+
+      而同时有<smart-ref|eq3>，故
+
+      <\equation*>
+        \<cal-T\><around*|(|V|)>=A\<cdot\>V=<around*|(|V U<rsup|-1>|)>V=V<around*|(|U<rsup|-1>V|)>
+      </equation*>
+
+      对比<smart-ref|eq4>，我们得到
+
+      <\equation*>
+        <with|color|red|A<rsub|V>=U<rsup|-1>V>
+      </equation*>
+    </enumerate>
+
+    我们会惊讶地发现，<math|A<rsub|U>> 和 <math|A<rsub|V>> 居然奇迹般相等了，这是个很好的结论，但也仅限于在 <math|U> 或 <math|V> 这两个基底下的矩阵表示。
+  </answer*>
+
+  既然有这么好的一致性，那我们就自然定义过渡矩阵：
+
+  <\definition>
+    在 <math|n >维空间 <math|\<bbb-V\>> 中存在两组基 <math|X=<around*|[|x<rsub|1>\|\<ldots\>\|x<rsub|n>|]>,Y=<around*|[|y<rsub|1>\|\<ldots\>\|y<rsub|n>|]>>，若满足：
+
+    <\equation*>
+      Y=X P
+    </equation*>
+
+    则称 <math|P> 为基变换 <math|X> 到 <math|Y> 的过渡矩阵。
+  </definition>
+
+  我们先不急着解题目中的最后两问。上述推导 <math|A<rsub|U>> 和 <math|A<rsub|V>> 还是需要一定的洞察力，但其实还有<with|color|blue|更简单>的方法。
+
+  这里需要引入一个强大的工具：线性变换的换基公式！
+
+  <\theorem>
+    对于映射 <math|\<cal-T\>:\<bbb-V\>\<rightarrow\>\<bbb-W\>>，其在基 <math|V> 到基 <math|W> 意义下的矩阵表示为 <math|A>（意味着 <math|A> 的输入是一个 <math|V> 基底的坐标，输出是映射后的 <math|W> 基底的坐标）。现对于新基 <math|V<rprime|'>=V P>，新基 <math|W<rprime|'>=W Q>，则在基 <math|V<rprime|'>> 和 <math|W<rprime|'>> 意义下的矩阵表示 <math|B> 为：
+
+    <\equation>
+      B=Q<rsup|-1>A P<label|eq5>
+    </equation>
+  </theorem>
+
+  利用换基公式<smart-ref|eq5>，我们直接对<smart-ref|eq3>中得到的 <math|A> 作变换。
+
+  <\answer*>
+    注意 <math|A> 是自然基到自然基意义下变换 <math|\<cal-T\>> 的矩阵表示。
+
+    <\enumerate>
+      <item>考虑 <math|A<rsub|U>>，即基 <math|U> 到基 <math|U> 意义下变换 <math|\<cal-T\>> 的矩阵表示。换基的两个过渡矩阵都是 <math|U>，则：
+
+      <\equation*>
+        A<rsub|U>=U<rsup|-1>A U
+      </equation*>
+
+      将<smart-ref|eq3>带入，得到
+
+      <\align>
+        <tformat|<table|<row|<cell|A<rsub|U>=>|<cell|U<rsup|-1>V U<rsup|-1>U>>|<row|<cell|=>|<cell|<with|color|red|U<rsup|-1>V>>>>>
+      </align>
+
+      结果一致。
+
+      <item>考虑 <math|A<rsub|V>>，即基 <math|V> 到基 <math|V> 意义下变换 <math|\<cal-T\>> 的矩阵表示。换基的两个过渡矩阵都是 <math|V>，则：
+
+      <\equation*>
+        A<rsub|V>=V<rsup|-1>A V
+      </equation*>
+
+      将<smart-ref|eq3>带入，得到
+
+      <\align>
+        <tformat|<table|<row|<cell|A<rsub|V>=>|<cell|V<rsup|-1>V U<rsup|-1>V>>|<row|<cell|=>|<cell|<with|color|red|U<rsup|-1>V>>>>>
+      </align>
+
+      结果一致。
+
+      <item>另外考虑 <math|A<rsub|U\<rightarrow\>V>>，即基 <math|U> 到基 <math|V> 意义下变换 <math|\<cal-T\>> 的矩阵表示。换基的两个过渡矩阵分别是 <math|U> 和 <math|V>。这个变换很有意思，由于 <math|\<cal-T\>> 本身就把基 <math|U> 映到基 <math|V>，考虑 <math|U> 意义下的一个单位向量变换后是 <math|V> 意义下的单位向量，其坐标不会发生改变，因此 <math|A<rsub|U\<rightarrow\>V>=I>，我们验证一下：
+
+      <\align>
+        <tformat|<table|<row|<cell|A<rsub|U\<rightarrow\>V>=>|<cell|V<rsup|-1>V U<rsup|-1>U>>|<row|<cell|=>|<cell|<with|color|red|I>>>>>
+      </align>
+
+      结果一致。
+    </enumerate>
+  </answer*>
+
+  上述推导更为简洁直观。下面我们带入数据完整地解答这道题。
+
+  <\answer*>
+    \;
+
+    <\enumerate>
+      <item>求过渡矩阵 <math|P>：
+
+      <\equation*>
+        P=U<rsup|-1>V=<frac|1|2><bmatrix|<tformat|<table|<row|<cell|1>|<cell|-2>|<cell|1>>|<row|<cell|1>|<cell|0>|<cell|-1>>|<row|<cell|-1>|<cell|2>|<cell|1>>>>><bmatrix|<tformat|<table|<row|<cell|1>|<cell|1>|<cell|1>>|<row|<cell|0>|<cell|1>|<cell|1>>|<row|<cell|0>|<cell|0>|<cell|1>>>>>=<with|color|red|<bmatrix|<tformat|<table|<row|<cell|<frac*|1|2>>|<cell|-<frac*|1|2>>|<cell|0>>|<row|<cell|<frac*|1|2>>|<cell|<frac*|1|2>>|<cell|0>>|<row|<cell|-<frac*|1|2>>|<cell|<frac*|1|2>>|<cell|1>>>>>>
+      </equation*>
+
+      <item>求 <math|A<rsub|U>>：
+
+      <\equation*>
+        A<rsub|U>=U<rsup|-1>V=<with|color|red|<bmatrix|<tformat|<table|<row|<cell|<frac*|1|2>>|<cell|-<frac*|1|2>>|<cell|0>>|<row|<cell|<frac*|1|2>>|<cell|<frac*|1|2>>|<cell|0>>|<row|<cell|-<frac*|1|2>>|<cell|<frac*|1|2>>|<cell|1>>>>>>
+      </equation*>
+
+      <item>求 <math|A<rsub|V>>：
+
+      <\equation*>
+        A<rsub|V>=U<rsup|-1>V=<with|color|red|<bmatrix|<tformat|<table|<row|<cell|<frac*|1|2>>|<cell|-<frac*|1|2>>|<cell|0>>|<row|<cell|<frac*|1|2>>|<cell|<frac*|1|2>>|<cell|0>>|<row|<cell|-<frac*|1|2>>|<cell|<frac*|1|2>>|<cell|1>>>>>>
+      </equation*>
+
+      <item>求 <math|\<cal-T\><rsup|2><around|(|u<rsub|1>|)>=\<cal-T\><around|(|\<cal-T\><around|(|u<rsub|1>|)>|)>>：
+
+      由题意知 <math|\<cal-T\><around|(|u<rsub|1>|)>=v<rsub|1>>，故 <math|\<cal-T\><rsup|2><around|(|u<rsub|1>|)>=\<cal-T\><around*|(|v<rsub|1>|)>>
+
+      由<smart-ref|eq1>知
+
+      <\equation*>
+        \<cal-T\><around*|(|v<rsub|1>|)>=A v<rsub|1>=<frac|1|2><bmatrix|<tformat|<table|<row|<cell|1>|<cell|1>|<cell|1>>|<row|<cell|0>|<cell|1>|<cell|1>>|<row|<cell|0>|<cell|0>|<cell|1>>>>><bmatrix|<tformat|<table|<row|<cell|1>|<cell|-2>|<cell|1>>|<row|<cell|1>|<cell|0>|<cell|-1>>|<row|<cell|-1>|<cell|2>|<cell|1>>>>><bmatrix|<tformat|<table|<row|<cell|1>>|<row|<cell|0>>|<row|<cell|0>>>>>=<bmatrix|<tformat|<table|<row|<cell|<frac*|1|2>>>|<row|<cell|0>>|<row|<cell|-<frac*|1|2>>>>>>
+      </equation*>
+
+      故
+
+      <\equation*>
+        \<cal-T\><rsup|2><around*|(|u<rsub|1>|)>=<with|color|red|<bmatrix|<tformat|<table|<row|<cell|<frac*|1|2>>>|<row|<cell|0>>|<row|<cell|-<frac*|1|2>>>>>>>
+      </equation*>
+
+      <item>求新坐标 <math|<around*|[|x|]><rsub|U>>：
+
+      类似于<smart-ref|eq1>，我们有
+
+      <\equation*>
+        x=U\<cdot\><around*|[|x|]><rsub|U>
+      </equation*>
+
+      注意 <math|x> 是自然基意义下的坐标向量，故
+
+      <\equation*>
+        <around*|[|x|]><rsub|U>=U<rsup|-1>x=<frac|1|2><bmatrix|<tformat|<table|<row|<cell|1>|<cell|-2>|<cell|1>>|<row|<cell|1>|<cell|0>|<cell|-1>>|<row|<cell|-1>|<cell|2>|<cell|1>>>>><bmatrix|<tformat|<table|<row|<cell|1>>|<row|<cell|2>>|<row|<cell|3>>>>>=<with|color|red|<bmatrix|<tformat|<table|<row|<cell|0>>|<row|<cell|-1>>|<row|<cell|3>>>>>>
+      </equation*>
+    </enumerate>
+  </answer*>
+
+  <\note>
+    <with|font-shape|italic|2025.4.16 补充>：
+
+    根据很多学长的反馈，事实上<smart-ref|eq1>的写法也非常的<with|color|blue|反人类>。这里作出三点补充：
+
+    <\enumerate>
+      <item><smart-ref|eq1>的推法不应该先从<with|font-series|bold|矩阵>开始，最直接的是从<with|font-series|bold|向量>角度考虑：
+
+      对于一个实体向量 <math|v>，其在给定基底 <math|V> 下的坐标 <math|x> 满足
+
+      <\equation*>
+        v=V\<cdot\>x
+      </equation*>
+
+      之后考虑映射 <math|\<cal-T\>> 在给定基底 <math|V> 下的矩阵表示，即只需求基向量经过映射后在 <math|V> 下的坐标。
+
+      <\equation*>
+        \<cal-T\><around*|(|v<rsub|j>|)>=V\<cdot\>A<rsub|j>
+      </equation*>
+
+      其中 <math|v<rsub|j>> 为第 <math|j> 个基向量，<math|A<rsub|j>> 为矩阵 <math|A> 的第 <math|j> 列。
+
+      这些坐标按列拼成的矩阵 <math|A> 即为映射 <math|\<cal-T\>> 在给定基地 <math|V> 下的矩阵表示。
+
+      <\equation*>
+        \<cal-T\><around*|(|V|)>=V\<cdot\>A
+      </equation*>
+
+      故有<smart-ref|eq1>。
+
+      <item>更一般地，不局限于 <math|V> 基映到 <math|V> 基，对于任意基底 <math|P> 下表示的向量，如果知道映射规则（也即知道 <math|\<cal-T\><around*|(|P|)>>，这是一个实体向量），那么其在另一个基底 <math|Q> 下输出的矩阵表示 <math|A<rprime|'>>（<underline|输入的是 <math|P> 基下的坐标，输出的是映射 <math|\<cal-T\>> 后在 <math|Q> 基下的坐标>）即为
+
+      <\equation*>
+        \<cal-T\><around*|(|P|)>=Q\<cdot\>A
+      </equation*>
+
+      其中 <math|A> 的第 <math|j> 列是基底 <math|P> 下的第 <math|j> 个基向量经映射 <math|\<cal-T\>> 后在基底 <math|Q> 下<with|font-series|bold|坐标>。
+
+      <item>对于<smart-ref|eq0>，实际上也是可以理解的：
+
+      <\equation*>
+        A x<rsub|j>=<below|<above|<big|sum>|m>|i=1>a<rsub|i j> y<rsub|i>
+      </equation*>
+
+      其中 <math|x<rsub|j>> 为输入基 <math|X> 意义下的坐标，<math|y<rsub|i>> 为输出基 <math|Y> 下的第 <math|i> 个基向量。
+
+      <math|a<rsub|i j>> 即为基 <math|Y> 下的每个坐标分量，一列拼起来得到的一个列向量 <math|A<rsub|j>> 是 <math|x<rsub|j>> 在基 <math|Y> 下的坐标，也即矩阵 <math|A> 的第 <math|j> 列。
+
+      <underline|从考试的角度来说，求一个线性映射 <math|\<cal-T\>> 在某一个基底 <math|V> 下的矩阵表示 <math|A>，其实就是把基向量按照规则 <math|\<cal-T\>> 映射后得到的向量，求这个向量在基 <math|V> 下的<with|font-series|bold|坐标>。把这些坐标按列拼成的矩阵即为所求。>
+    </enumerate>
+  </note>
+</body>
+
+<\initial>
+  <\collection>
+    <associate|page-medium|papyrus>
+    <associate|page-screen-margin|false>
+    <associate|par-columns|1>
+    <associate|preamble|false>
+    <associate|stem-doc-id|FE97FF14-FAE6-4200-87DF-5C9BA7165D70>
+  </collection>
+</initial>
+
+<\references>
+  <\collection>
+    <associate|eq0|<tuple|0.1|?>>
+    <associate|eq1|<tuple|0.2|1>>
+    <associate|eq2|<tuple|0.3|2>>
+    <associate|eq3|<tuple|0.4|2>>
+    <associate|eq4|<tuple|0.5|2>>
+    <associate|eq5|<tuple|0.6|3>>
+    <associate|footnote-0.1|<tuple|0.1|?>>
+    <associate|footnr-0.1|<tuple|0.1|?>>
+  </collection>
+</references>

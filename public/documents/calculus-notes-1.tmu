@@ -1,0 +1,25 @@
+<TMU|<tuple|1.1.0|2026.3.0>>
+
+<style|<tuple|generic|chinese|table-captions-above|number-europe|preview-ref>>
+
+<\body>
+  <\equation*>
+    <frac|\<mathd\>|\<mathd\>x>sin<rsup|-1>x=<frac|1|<sqrt|1-x<rsup|2>>>=<below|<above|<big|sum>|\<infty\>>|n=0>C<rsub|n><around*|(|-x<rsup|2>|)><rsup|n>=<below|<above|<big|sum>|\<infty\>>|n=0>C<rsub|n><around*|(|-1|)><rsup|n>x<rsup|2n>
+  </equation*>
+
+  <\equation*>
+    C<rsub|n>=<choose|<frac*|-1|2>|n>=<around*|(|-1|)><rsup|n>\<cdot\><frac|<choose|2n|n>|4<rsup|n>>=<around*|(|-1|)><rsup|n>\<cdot\><frac|<around*|(|2n|)>!|4<rsup|n><around*|(|n!|)><rsup|2>>=<around*|(|-1|)><rsup|n>\<cdot\><frac|<around*|(|2n-1|)>!!|<around*|(|2n|)>!!>
+  </equation*>
+
+  <\equation*>
+    n\<rightarrow\>\<infty\>\<Longrightarrow\><frac|<around*|(|2n-1|)>!!|<around*|(|2n|)>!!>\<rightarrow\><frac|1|<sqrt|\<pi\>n>><application-space|1em><text|(by <with|font-series|bold|Stirling>'s<nbsp>approximation)>
+  </equation*>
+</body>
+
+<\initial>
+  <\collection>
+    <associate|page-medium|paper>
+    <associate|page-screen-margin|false>
+    <associate|stem-doc-id|61F5BA22-9DDF-4370-8CA7-315C06B04E80>
+  </collection>
+</initial>
