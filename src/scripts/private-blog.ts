@@ -22,6 +22,7 @@ function initPrivateBlog(root: HTMLElement) {
  const submit = form.querySelector<HTMLButtonElement>('button')!;
  const status = root.querySelector<HTMLElement>('[data-private-status]')!;
  const content = root.querySelector<HTMLElement>('[data-private-content]')!;
+ const cardTemplate = root.querySelector<HTMLTemplateElement>('[data-private-card]');
  let unlocked = false;
  let catalog: PrivateCatalog | undefined;
  let operation = 0;
@@ -84,17 +85,12 @@ function initPrivateBlog(root: HTMLElement) {
   } else {
    const fragment = document.createDocumentFragment();
    for (const post of entries) {
-    const article = document.createElement('article');
-    article.className = 'alex-post';
-    const heading = document.createElement('h2');
-    const link = document.createElement('a');
+    const card = cardTemplate!.content.cloneNode(true) as DocumentFragment;
+    const link = card.querySelector<HTMLAnchorElement>('a')!;
     link.href = `/${locale}/blog/${post.id}/`;
-    link.textContent = post.title;
-    heading.append(link);
-    const description = document.createElement('p');
-    description.textContent = post.description;
-    article.append(heading, description);
-    fragment.append(article);
+    card.querySelector('h2')!.textContent = post.title;
+    card.querySelector('p')!.textContent = post.description;
+    fragment.append(card);
    }
    if (token !== operation) return;
    content.replaceChildren(fragment);

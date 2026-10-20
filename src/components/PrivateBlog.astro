@@ -1,6 +1,7 @@
 ---
 import { localeFromPath } from '../lib/i18n';
 import { privateBlogText } from '../lib/private-blog-text';
+import PostCard from './PostCard.astro';
 interface Props { postId?: string; }
 const { postId = '' } = Astro.props;
 const locale = localeFromPath(Astro.url.pathname);
@@ -21,7 +22,10 @@ const panelId = postId ? `private-${postId}` : 'private-blog-list';
  </div>
  <div id={panelId}>
   <p class="private-status" role="status" aria-live="polite" data-private-status hidden></p>
-  {postId ? <article data-private-content hidden><h1 data-private-title></h1><p class="alex-muted" data-private-meta></p><div data-private-body></div></article> : <div data-private-content hidden></div>}
+  {postId ? <article data-private-content hidden><h1 data-private-title></h1><p class="alex-muted" data-private-meta></p><div data-private-body></div></article> : <>
+   <div class="post-grid" data-private-content hidden></div>
+   <template data-private-card><PostCard title="" description="" href="#"/></template>
+  </>}
  </div>
  <noscript><p class="alex-muted">{text.noScript}</p></noscript>
 </section>
@@ -33,6 +37,7 @@ const panelId = postId ? `private-${postId}` : 'private-blog-list';
  .private-blog { margin-top: 24px; }
  .private-blog[hidden], .private-blog [hidden] { display: none !important; }
  .private-row { display: flex; align-items: center; gap: 12px; min-height: 36px; }
+ .post-grid { margin-top: 20px; }
  .private-button { flex-shrink: 0; padding: 6px 12px; border: 1px solid var(--vp-c-divider); border-radius: 6px; background: var(--vp-c-bg-soft); color: var(--vp-c-text-2); font: inherit; font-size: 14px; line-height: 22px; white-space: nowrap; transition: color .2s, border-color .2s, box-shadow .2s; }
  .private-button:is(:hover, :focus-visible):not(:disabled) { border-color: var(--vp-c-brand-1); color: var(--vp-c-brand-1); box-shadow: 0 0 0 1px var(--vp-c-brand-soft), 0 0 14px var(--vp-c-brand-soft); }
  .private-toggle { display: inline-flex; align-items: center; gap: 8px; }

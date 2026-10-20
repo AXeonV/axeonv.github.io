@@ -67,9 +67,11 @@ const articleFor = ({ title, author, date, markdown }) => ({
 async function readSources() {
  const { posts } = JSON.parse(await readFile(configPath, 'utf8'));
  return Promise.all(posts.map(async source => {
+  const id = source.id ?? idFor(source.title);
+  if (!/^[a-f0-9]{64}$/.test(id)) throw new Error('Article IDs must be SHA-256 hashes.');
   const [markdown, file] = await Promise.all([readFile(source.source, 'utf8'), stat(source.source)]);
   return {
-   id: idFor(source.title), title: source.title, description: source.description,
+   id, title: source.title, description: source.description,
    author: source.author, date: sourceDate(file.mtime), markdown,
   };
  }));
@@ -100,7 +102,7 @@ async function check(sources, password) {
 const password = await readPassword();
 if (!password) throw new Error('Password cannot be empty.');
 const sources = await readSources();
-if (new Set(sources.map(post => post.id)).size !== sources.length) throw new Error('Duplicate article titles.');
+if (new Set(sources.map(post => post.id)).size !== sources.length) throw new Error('Duplicate article IDs.');
 if (process.argv.includes('--check')) {
  await check(sources, password);
 } else {

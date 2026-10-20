@@ -1,0 +1,11 @@
+---
+import '../styles/post-cards.css';
+interface Props { title: string; description: string; href: string; featured?: boolean; }
+const { title, description, href, featured = false } = Astro.props;
+---
+<article class:list={['post-card', { 'post-card-featured': featured }]}>
+ <a class="post-card-link" href={href}>
+  <h2>{title}</h2>
+  <p>{description}</p>
+ </a>
+</article>

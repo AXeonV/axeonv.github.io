@@ -8,6 +8,8 @@ export default defineConfig({
 	site: 'https://axeonv.github.io',
 	devToolbar: { enabled: false },
 	vite: {
+		// The content-config runner is a separate Vite environment from page SSR.
+		environments: { astro: { resolve: { external: ['astro/content/config', 'astro/loaders', 'astro/zod'] } } },
 		optimizeDeps: {
 			// Include the lazy black-hole scene before the first Gallery request.
 			include: [

@@ -41,8 +41,6 @@ body { min-width: 0; }
 .gallery-page { -webkit-user-select: none; user-select: none; }
 .gallery-page :is(input, textarea, [contenteditable="true"]) { -webkit-user-select: text; user-select: text; }
 @media (width < 640px) { .gallery-main { height: calc(100svh - 110px); } }
-.alex-post { padding: 24px 0; }
-.vp-doc .alex-post h2 { margin-top: 0; border: 0; }
 .alex-section-header { display: flex; align-items: baseline; flex-wrap: wrap; gap: 8px 24px; margin-bottom: 24px; }
 .vp-doc .alex-section-header h1 { margin: 0; }
 .vp-doc .alex-section-header p { margin: 0; color: var(--vp-c-text-3); }
