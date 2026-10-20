@@ -8,9 +8,74 @@ const posts = await getPublishedPosts(category, locale);
 if (category === 'article') posts.sort((a, b) => Number(b.data.pinned) - Number(a.data.pinned)
  || (a.data.pinOrder ?? Number.MAX_SAFE_INTEGER) - (b.data.pinOrder ?? Number.MAX_SAFE_INTEGER));
 ---
-{posts.length ? posts.map(post => (
+{posts.length ? category === 'article' ? (
+	<div class="article-grid">
+		{posts.map((post, index) => (
+			<article class:list={['article-card', { 'article-card-featured': index === 0 }]}>
+				<a class="article-card-link" href={getPostUrl(post)}>
+					<h2>{post.data.title}</h2>
+					<p>{post.data.description}</p>
+				</a>
+			</article>
+		))}
+	</div>
+) : posts.map(post => (
 	<article class="alex-post">
 		<h2><a href={getPostUrl(post)}>{post.data.title}</a></h2>
 		<p>{post.data.description}</p>
 	</article>
 )) : <p class="alex-muted">{category === 'article' ? messages[locale].emptyArticles : messages[locale].emptyBlog}</p>}
+
+<style>
+	.article-grid {
+		display: grid;
+		grid-template-columns: repeat(3, minmax(0, 1fr));
+		gap: 20px;
+	}
+	.article-card {
+		min-width: 0;
+		border: 2px solid var(--vp-c-divider);
+		border-radius: 12px;
+		background: var(--vp-c-bg-elv);
+		transition: transform .2s ease, border-color .2s ease, box-shadow .2s ease;
+	}
+	.article-card-featured { grid-column: 1 / -1; }
+	:global(.vp-doc) .article-card-link {
+		display: block;
+		height: 100%;
+		padding: 24px;
+		border-radius: inherit;
+		color: inherit;
+		text-decoration: none;
+		overflow-wrap: anywhere;
+	}
+	:global(.vp-doc) .article-card h2 {
+		margin: 0;
+		font-size: 1.25rem;
+		line-height: 1.45;
+		color: var(--vp-c-brand-1);
+	}
+	:global(.vp-doc) .article-card-featured h2 { font-size: 1.625rem; }
+	:global(.vp-doc) .article-card p {
+		margin: 12px 0 0;
+		font-size: .9375rem;
+		color: var(--vp-c-text-2);
+	}
+	.article-card:is(:hover, :focus-within) {
+		transform: translateY(-4px);
+		border-color: var(--vp-c-brand-1);
+		box-shadow: 0 14px 36px 3px rgba(30, 64, 175, .24), 0 0 0 2px var(--vp-c-brand-soft);
+	}
+	@media (width < 900px) {
+		.article-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+	}
+	@media (width < 600px) {
+		.article-grid { grid-template-columns: minmax(0, 1fr); gap: 16px; }
+		:global(.vp-doc) .article-card-link { padding: 20px; }
+		:global(.vp-doc) .article-card-featured h2 { font-size: 1.375rem; }
+	}
+	@media (prefers-reduced-motion: reduce) {
+		.article-card { transition: none; }
+		.article-card:is(:hover, :focus-within) { transform: none; }
+	}
+</style>
