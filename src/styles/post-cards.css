@@ -20,6 +20,10 @@
  text-decoration: none;
  overflow-wrap: anywhere;
 }
+.vp-doc .post-card-link:is(:hover, :focus-visible) {
+ color: inherit;
+ text-decoration: none;
+}
 .vp-doc .post-card h2 {
  margin: 0;
  font-size: 1.25rem;
