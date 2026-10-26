@@ -14,6 +14,8 @@ const tmu: Publication = {
 
 export const conferencePublications: Publication[] = [{
  ...tmu,
+ date: '2026-10',
+ url: 'https://aclanthology.org/2026.emnlp-industry.8/',
  venue: 'The 2026 Conference on Empirical Methods in Natural Language Processing (EMNLP 2026), Industry Track',
  venueItalic: '2026 Conference on Empirical Methods in Natural Language Processing',
 }];
