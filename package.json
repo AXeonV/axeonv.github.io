@@ -22,11 +22,14 @@
     "astro": "astro"
   },
   "dependencies": {
+    "@astrojs/markdown-satteri": "0.4.3",
     "@astrojs/rss": "^4.0.19",
     "@astrojs/sitemap": "^3.7.4",
     "astro": "^7.3.8",
+    "katex": "0.19.1",
     "pdfjs-dist": "6.4.299",
     "satteri": "0.10.5",
+    "satteri-katex": "0.2.0",
     "sharp": "^0.35.0",
     "three": "0.163.0"
   },

@@ -8,6 +8,7 @@ import PlainText from '../components/PlainText.astro';
 import DocumentEditor from '../components/DocumentEditor.astro';
 import PdfDocument from '../components/PdfDocument.astro';
 import '../styles/document-buttons.css';
+import '../styles/math.css';
 interface Props { post: Post; headings?: { depth: number; slug: string; text: string }[]; editing?: boolean; }
 const { post, headings = [], editing = false } = Astro.props;
 const { title, description, author, pubDate, updatedDate, heroImage, category, format, document, pdf } = post.data;

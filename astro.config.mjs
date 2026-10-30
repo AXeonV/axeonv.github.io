@@ -2,11 +2,14 @@
 
 import sitemap from '@astrojs/sitemap';
 import { defineConfig } from 'astro/config';
+import { satteri } from '@astrojs/markdown-satteri';
+import { satteriKatex } from 'satteri-katex';
 
 // https://astro.build/config
 export default defineConfig({
 	site: 'https://axeonv.github.io',
 	devToolbar: { enabled: false },
+	markdown: { processor: satteri({ features: { math: true }, mdastPlugins: [satteriKatex()] }) },
 	vite: {
 		// The content-config runner is a separate Vite environment from page SSR.
 		environments: { astro: { resolve: { external: ['astro/content/config', 'astro/loaders', 'astro/zod'] } } },

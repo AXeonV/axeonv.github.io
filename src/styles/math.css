@@ -1,0 +1,6 @@
+@import 'katex/dist/katex.min.css';
+
+.vp-doc .katex-display {
+ overflow-x: auto;
+ overflow-y: hidden;
+}

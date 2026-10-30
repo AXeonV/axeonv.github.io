@@ -5,6 +5,7 @@ import { fileURLToPath } from 'node:url';
 import { Writable } from 'node:stream';
 import { createInterface } from 'node:readline/promises';
 import { markdownToHtml } from 'satteri';
+import { satteriKatex } from 'satteri-katex';
 
 const root = fileURLToPath(new URL('../', import.meta.url));
 const configPath = resolve(root, '.private-blog/sources.json');
@@ -54,8 +55,11 @@ function sourceDate(modified) {
 function renderMarkdown(markdown) {
  // Keep Markdown formatting, but never turn source HTML into executable markup.
  return markdownToHtml(markdown, {
-  features: { smartPunctuation: false, frontmatter: false },
-  mdastPlugins: [{ name: 'literal-html', html(node, ctx) { ctx.replaceNode(node, { type: 'text', value: node.value }); } }],
+  features: { math: true, smartPunctuation: false, frontmatter: false },
+  mdastPlugins: [
+   { name: 'literal-html', html(node, ctx) { ctx.replaceNode(node, { type: 'text', value: node.value }); } },
+   satteriKatex(),
+  ],
  }).html;
 }
 
