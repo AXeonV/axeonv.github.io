@@ -8,5 +8,5 @@ pubDate: '2026-10-12'
 category: 'article'
 translationKey: 'signals-systems-notes-1'
 pinned: true
-pinOrder: 7
+pinOrder: 8
 ---
