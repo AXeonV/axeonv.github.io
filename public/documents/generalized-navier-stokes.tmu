@@ -1,0 +1,551 @@
+<TMU|<tuple|1.1.0|2026.3.0>>
+
+<style|<tuple|generic|number-europe|preview-ref|chinese|table-captions-above|smart-ref>>
+
+<\body>
+  <\hide-preamble>
+    \;
+
+    <assign|theorem|<\macro|body>
+      <with|ornament-hpadding|4spc|ornament-vpadding|3spc|ornament-shadow-color|#5f4688|ornament-sunny-color|#5f4688|ornament-color|#eeeaf4|<\ornamented>
+        <surround|<compound|next-theorem>||<compound|render-theorem|<compound|theorem-numbered|<compound|theorem-text>|<compound|the-theorem>>|<arg|body>>>
+      </ornamented>>
+    </macro>>
+
+    <assign|definition|<\macro|body>
+      <with|ornament-hpadding|4spc|ornament-vpadding|3spc|ornament-shadow-color|#5f4688|ornament-sunny-color|#5f4688|ornament-color|#eeeaf4|<\ornamented>
+        <surround|<compound|next-definition>||<compound|render-remark|<compound|definition-numbered|<compound|definition-text>|<compound|the-definition>>|<arg|body>>>
+      </ornamented>>
+    </macro>>
+
+    <assign|proposition|<\macro|body>
+      <with|ornament-hpadding|4spc|ornament-vpadding|3spc|ornament-shadow-color|#5f4688|ornament-sunny-color|#5f4688|ornament-color|#eeeaf4|<\ornamented>
+        <\surround|<compound|next-proposition>|>
+          <compound|render-theorem|<compound|proposition-numbered|<compound|proposition-text>|<compound|the-proposition>>|<arg|body>>
+        </surround>
+      </ornamented>>
+    </macro>>
+
+    <assign|lemma|<\macro|body>
+      <with|ornament-hpadding|4spc|ornament-vpadding|3spc|ornament-shadow-color|#5f4688|ornament-sunny-color|#5f4688|ornament-color|#eeeaf4|<\ornamented>
+        <surround|<compound|next-lemma>||<compound|render-theorem|<compound|lemma-numbered|<compound|lemma-text>|<compound|the-lemma>>|<arg|body>>>
+      </ornamented>>
+    </macro>>
+
+    <assign|corollary|<\macro|body>
+      <with|ornament-hpadding|4spc|ornament-vpadding|3spc|ornament-shadow-color|#5f4688|ornament-sunny-color|#5f4688|ornament-color|#eeeaf4|<\ornamented>
+        <surround|<compound|next-corollary>||<compound|render-theorem|<compound|corollary-numbered|<compound|corollary-text>|<compound|the-corollary>>|<arg|body>>>
+      </ornamented>>
+    </macro>>
+
+    <assign|proof|<\macro|body>
+      <\inactive*>
+        <with|ornament-hpadding|4spc|ornament-vpadding|3spc|ornament-shadow-color|#5f4688|ornament-sunny-color|#5f4688|ornament-color|#eeeaf4|<\ornamented>
+          <render-proof|<proof-text>|<arg|body>>
+        </ornamented>>
+      </inactive*>
+    </macro>>
+
+    <assign|axiom|<\macro|body>
+      <with|ornament-hpadding|4spc|ornament-vpadding|3spc|ornament-shadow-color|#5f4688|ornament-sunny-color|#5f4688|ornament-color|#eeeaf4|<\ornamented>
+        <surround|<compound|next-axiom>||<compound|render-theorem|<compound|axiom-numbered|<compound|axiom-text>|<compound|the-axiom>>|<arg|body>>>
+      </ornamented>>
+    </macro>>
+
+    <assign|assumption|<\macro|body>
+      <with|ornament-hpadding|4spc|ornament-vpadding|3spc|ornament-shadow-color|#5f4688|ornament-sunny-color|#5f4688|ornament-color|#eeeaf4|<\ornamented>
+        <surround|<compound|next-assumption>||<compound|render-remark|<compound|assumption-numbered|<compound|assumption-text>|<compound|the-assumption>>|<arg|body>>>
+      </ornamented>>
+    </macro>>
+
+    <assign|notation|<\macro|body>
+      <with|ornament-hpadding|4spc|ornament-vpadding|3spc|ornament-shadow-color|#5f4688|ornament-sunny-color|#5f4688|ornament-color|#eeeaf4|<\ornamented>
+        <surround|<compound|next-notation>||<compound|render-theorem|<compound|notation-numbered|<compound|notation-text>|<compound|the-notation>>|<arg|body>>>
+      </ornamented>>
+    </macro>>
+
+    <assign|convention|<\macro|body>
+      <with|ornament-hpadding|4spc|ornament-vpadding|3spc|ornament-shadow-color|#5f4688|ornament-sunny-color|#5f4688|ornament-color|#eeeaf4|<\ornamented>
+        <surround|<compound|next-convention>||<compound|render-remark|<compound|convention-numbered|<compound|convention-text>|<compound|the-convention>>|<arg|body>>>
+      </ornamented>>
+    </macro>>
+
+    <assign|remark|<\macro|body>
+      <with|ornament-hpadding|4spc|ornament-vpadding|3spc|ornament-shadow-color|#5f4688|ornament-sunny-color|#5f4688|ornament-color|#eeeaf4|<\ornamented>
+        <surround|<compound|next-remark>||<compound|render-remark|<compound|remark-numbered|<compound|remark-text>|<compound|the-remark>>|<arg|body>>>
+      </ornamented>>
+    </macro>>
+
+    <assign|note|<\macro|body>
+      <with|ornament-hpadding|4spc|ornament-vpadding|3spc|ornament-shadow-color|#5f4688|ornament-sunny-color|#5f4688|ornament-color|#eeeaf4|<\ornamented>
+        <surround|<compound|next-note>||<compound|render-remark|<compound|note-numbered|<compound|note-text>|<compound|the-note>>|<arg|body>>>
+      </ornamented>>
+    </macro>>
+
+    <assign|example|<\macro|body>
+      <with|ornament-hpadding|4spc|ornament-vpadding|3spc|ornament-shadow-color|#5f4688|ornament-sunny-color|#5f4688|ornament-color|#eeeaf4|<\ornamented>
+        <surround|<compound|next-example>||<compound|render-remark|<compound|example-numbered|<compound|example-text>|<compound|the-example>>|<arg|body>>>
+      </ornamented>>
+    </macro>>
+
+    <assign|warning|<\macro|body>
+      <with|ornament-hpadding|4spc|ornament-vpadding|3spc|ornament-shadow-color|#5f4688|ornament-sunny-color|#5f4688|ornament-color|#eeeaf4|<\ornamented>
+        <surround|<compound|next-warning>||<compound|render-remark|<compound|warning-numbered|<compound|warning-text>|<compound|the-warning>>|<arg|body>>>
+      </ornamented>>
+    </macro>>
+
+    <assign|acknowledgments*|<\macro|body>
+      <\inactive*>
+        <with|ornament-hpadding|4spc|ornament-vpadding|3spc|ornament-shadow-color|#5f4688|ornament-sunny-color|#5f4688|ornament-color|#eeeaf4|<\ornamented>
+          <compound|render-remark|<compound|acknowledgments-unnumbered|<compound|acknowledgments-text>>|<arg|body>>
+        </ornamented>>
+      </inactive*>
+
+      \;
+    </macro>>
+
+    <assign|exercise|<\macro|body>
+      <with|ornament-hpadding|4spc|ornament-vpadding|3spc|ornament-shadow-color|#5f4688|ornament-sunny-color|#5f4688|ornament-color|#eeeaf4|<\ornamented>
+        <surround|<compound|next-exercise>||<compound|render-exercise|<compound|exercise-numbered|<compound|exercise-text>|<compound|the-exercise>>|<arg|body>>>
+      </ornamented>>
+    </macro>>
+
+    <assign|problem|<\macro|body>
+      <with|ornament-hpadding|4spc|ornament-vpadding|3spc|ornament-shadow-color|#5f4688|ornament-sunny-color|#5f4688|ornament-color|#eeeaf4|<\ornamented>
+        <surround|<compound|next-problem>||<compound|render-exercise|<compound|problem-numbered|<compound|problem-text>|<compound|the-problem>>|<arg|body>>>
+      </ornamented>>
+    </macro>>
+
+    <assign|question|<\macro|body>
+      <with|ornament-hpadding|4spc|ornament-vpadding|3spc|ornament-shadow-color|#5f4688|ornament-sunny-color|#5f4688|ornament-color|#eeeaf4|<\ornamented>
+        <surround|<compound|next-question>||<compound|render-remark|<compound|question-numbered|<compound|question-text>|<compound|the-question>>|<arg|body>>>
+      </ornamented>>
+    </macro>>
+
+    <assign|solution*|<\macro|body>
+      <\inactive*>
+        <with|ornament-hpadding|4spc|ornament-vpadding|3spc|ornament-shadow-color|#5f4688|ornament-sunny-color|#5f4688|ornament-color|#eeeaf4|<\ornamented>
+          <compound|render-exercise|<compound|solution-unnumbered|<compound|solution-text>>|<arg|body>>
+        </ornamented>>
+      </inactive*>
+    </macro>>
+
+    <assign|answer*|<\macro|body>
+      <with|ornament-hpadding|4spc|ornament-vpadding|3spc|ornament-shadow-color|#5f4688|ornament-sunny-color|#5f4688|ornament-color|#eeeaf4|<\ornamented>
+        <compound|render-remark|<compound|answer-unnumbered|<compound|answer-text>>|<arg|body>>
+      </ornamented>>
+    </macro>>
+  </hide-preamble>
+
+  <\theorem>
+    <with|color|blue|雷诺输运定理>：
+
+    <\align>
+      <tformat|<cwith|1|-1|1|-1|cell-hyphen|t>|<table|<row|<cell|<frac|\<mathd\>|\<mathd\>t><big|int><rsub|V<around*|(|t|)>>f \<mathd\>V=>|<cell|<big|int><rsub|V<around*|(|t|)>><around*|[|<frac|\<partial\>|\<partial\>t>f+\<nabla\>\<cdot\><around*|(|f<with|font-series|bold|u>|)>|]>\<mathd\>V<eq-number>>>|<row|<cell|=>|<cell|<big|int><rsub|V<around*|(|t|)>><around*|[|\<partial\><rsub|t>f+\<partial\><rsub|i><around*|(|f u<rsup|i>|)>|]>\<mathd\>V<label|eq:R><eq-number>>>>>
+    </align>
+
+    其中<smart-ref|eq:R>采用爱因斯坦求和约定的索引法，对标量和矢量的标记更加直观。
+
+    此定理的证明方式在最后。
+  </theorem>
+
+  使用雷诺输运定理作用于<with|font-series|bold|质量>、<with|font-series|bold|动量>、<with|font-series|bold|能量>，可以得到常见的广义 NS 方程的三个式子。
+
+  <section|质量>
+
+  由于质量守恒，令 <math|f=\<rho\>>，可以得到：
+
+  <\equation*>
+    <frac|\<mathd\>|\<mathd\>t><big|int><rsub|V<around*|(|t|)>>\<rho\> \<mathd\>V=<big|int><rsub|V<around*|(|t|)>><around*|(|<frac|\<partial\>|\<partial\>t>\<rho\>+\<nabla\>\<cdot\><around*|(|\<rho\><with|font-series|bold|u>|)>|)>\<mathd\>V=0
+  </equation*>
+
+  于是
+
+  <\equation>
+    <with|color|red|<frac|\<partial\>\<rho\>|\<partial\>t>+\<nabla\>\<cdot\><around*|(|\<rho\><with|font-series|bold|u>|)>=0><label|eq:m1>
+  </equation>
+
+  对于<underline|不可压缩流体>，密度是常数，则<smart-ref|eq:m1>变成：
+
+  <\equation>
+    <with|color|dark magenta|\<nabla\>\<cdot\><with|font-series|bold|u>=0><label|eq:b1>
+  </equation>
+
+  <section|动量>
+
+  根据牛顿第二定律有：
+
+  <\equation*>
+    <with|font-series|bold|F>=m<with|font-series|bold|a>=<frac|\<mathd\>|\<mathd\>t><around*|(|m<with|font-series|bold|v>|)>
+  </equation*>
+
+  令 <math|f=\<rho\><with|font-series|bold|u>>，可以得到：
+
+  <\equation*>
+    <frac|\<mathd\>|\<mathd\>t><big|int><rsub|V<around*|(|t|)>>\<rho\><with|font-series|bold|u> \<mathd\>V=<big|int><rsub|V<around*|(|t|)>><around*|(|<frac|\<partial\>|\<partial\>t>\<rho\><with|font-series|bold|u>+\<nabla\>\<cdot\><around*|(|\<rho\><with|font-series|bold|u>\<otimes\><with|font-series|bold|u>|)>|)>\<mathd\>V=<with|font-series|bold|F>
+  </equation*>
+
+  于是
+
+  <\equation>
+    <frac|\<partial\>|\<partial\>t>\<rho\><with|font-series|bold|u>+\<nabla\>\<cdot\><around*|(|\<rho\><with|font-series|bold|u>\<otimes\><with|font-series|bold|u>|)>=<frac|\<mathd\>|\<mathd\>V><with|font-series|bold|F><label|eq:m2f>
+  </equation>
+
+  <\notation>
+    写成爱因斯坦求和约定的索引形式：
+
+    <math|<with|font-series|bold|u>\<otimes\><with|font-series|bold|u>=u<rsup|i>u<rsup|j>=<matrix|<tformat|<cwith|1|-1|1|-1|cell-hyphen|t>|<cwith|2|3|2|2|cell-hyphen|t>|<cwith|2|3|3|3|cell-hyphen|t>|<table|<row|<\cell>
+      u<rsup|1>u<rsup|1>
+    </cell>|<\cell>
+      u<rsup|1>u<rsup|2>
+    </cell>|<\cell>
+      u<rsup|1>u<rsup|3>
+    </cell>>|<row|<\cell>
+      u<rsup|2>u<rsup|1>
+    </cell>|<\cell>
+      u<rsup|2>u<rsup|2>
+    </cell>|<\cell>
+      u<rsup|2>u<rsup|3>
+    </cell>>|<row|<\cell>
+      u<rsup|3>u<rsup|1>
+    </cell>|<\cell>
+      u<rsup|3>u<rsup|2>
+    </cell>|<\cell>
+      u<rsup|3>u<rsup|3>
+    </cell>>>>>\<in\>\<bbb-R\><rsup|3\<times\>3>>，<math|<with|font-series|bold|u>\<cdot\><with|font-series|bold|u>=u<rsup|i>u<rsub|i>\<in\>\<bbb-R\>>。
+
+    <math|\<nabla\>\<cdot\><around*|(|\<rho\><with|font-series|bold|u>\<otimes\><with|font-series|bold|u>|)>> 可以写成 <math|\<partial\><rsub|i><around*|(|\<rho\>u<rsup|i>u<rsup|j>|)>>：对 <math|i> 求和后仍然保留 <math|j> 的三个分量，因此这一项 <math|\<in\>\<bbb-R\><rsup|3>>。
+  </notation>
+
+  考虑 <math|<with|font-series|bold|F>> 的构成有两种：体积力、表面应力（压力与剪切力）。
+
+  <subsection|体积力>
+
+  由于存在体积而被环境作用的力，比如重力、浮力等。
+
+  考虑重力
+
+  <\equation*>
+    <with|font-series|bold|F>=m<with|font-series|bold|g>=\<rho\>V<with|font-series|bold|g>
+  </equation*>
+
+  <\equation*>
+    <frac|\<mathd\>|\<mathd\>V><with|font-series|bold|F>=\<rho\><with|font-series|bold|g>
+  </equation*>
+
+  浮力实际上是对重力做一个修正。考虑介质密度是 <math|\<rho\><rsub|m>>，总体积力是
+
+  <\equation*>
+    <with|font-series|bold|F>=\<rho\>V<with|font-series|bold|g>-\<rho\><rsub|m>V<with|font-series|bold|g>
+  </equation*>
+
+  若令 <math|<with|font-series|bold|b>=<frac|\<rho\>-\<rho\><rsub|m>|\<rho\>><with|font-series|bold|g>\<in\>\<bbb-R\><rsup|3>>，则有
+
+  <\equation>
+    <frac|\<mathd\>|\<mathd\>V><with|font-series|bold|F>=\<rho\><with|font-series|bold|b><label|eq:m2a>
+  </equation>
+
+  <subsection|表面应力>
+
+  <\align>
+    <tformat|<cwith|1|-1|1|-1|cell-hyphen|t>|<table|<row|<cell|<with|font-series|bold|t><around*|(|<with|font-series|bold|n>|)>=<with|font-series|bold|\<sigma\>>\<cdot\><with|font-series|bold|n>=>|<cell|-p<with|font-series|bold|\<Iota\>><with|font-series|bold|n>+<with|font-series|bold|\<tau\>>\<cdot\><with|font-series|bold|n>>>|<row|<cell|<with|font-series|bold|\<sigma\>>=>|<cell|-p<with|font-series|bold|\<Iota\>>+<with|font-series|bold|\<tau\>>>>>>
+  </align>
+
+  其中 <math|p> 是一个标量函数，<math|<with|font-series|bold|\<tau\>>\<in\>\<bbb-R\><rsup|3\<times\>3>> 是一个二阶张量，<math|\<tau\><rsub|i j>> 表示朝 <math|i> 方向的剪切应力作用于法向为 <math|j> 的面上，<math|\<tau\><rsub|i i>> 是法向为 <math|i> 的面上受到法向额外应力（而非剪切力）。
+
+  <\note>
+    举个<with|font-shape|italic|立方体橡皮泥>的例子理解这些应力。
+
+    <\enumerate>
+      <item>手去推这个橡皮泥会导致它两面受到不同的压强而形变，这是 <math|-p<with|font-series|bold|\<Iota\>>>；
+
+      <item>双手挡在橡皮泥两面上，沿平行于面的方向搓<with|font-shape|italic|（外界合压力为0）>，橡皮泥会形变（侧面形成平行四边形）。手感受到这两面给的摩擦力就是剪切力 <math|\<tau\><rsub|i j>>；
+
+      <item>双手挡在橡皮泥两面上，沿垂直于面的方向做“拉面”动作<with|font-shape|italic|（外界合压力为0）>，如果橡皮泥足够黏，手会感受到这两面向内的弹力，这是法向额外应力 <math|\<tau\><rsub|i i>>；
+    </enumerate>
+  </note>
+
+  容易验证，<math|\<tau\><rsub|i j>=\<tau\><rsub|j i>>，因此 <math|\<sigma\><rsub|i j>=\<sigma\><rsub|j i>>，<math|<with|font-series|bold|\<sigma\>>> 是对称矩阵。
+
+  <\corollary>
+    对于牛顿流体还满足如下关系：
+
+    <\equation*>
+      <with|font-series|bold|\<sigma\>>=-p<with|font-series|bold|\<Iota\>>+2\<mu\><with|font-series|bold|\<mathD\>>
+    </equation*>
+
+    其中 <math|<with|font-series|bold|\<mathD\>>=<frac|1|2><around*|[|\<nabla\><with|font-series|bold|u>+<around*|(|\<nabla\><with|font-series|bold|u>|)><rsup|\<top\>>|]>> 为形变张量，<math|\<mu\>> 为动力粘度系数，这里不做展开。
+  </corollary>
+
+  考虑力的关系，由著名的高斯散度定理可得：
+
+  <\equation*>
+    <with|font-series|bold|F>=<big|int><rsub|S<around*|(|t|)>><with|font-series|bold|\<sigma\>>\<cdot\><with|font-series|bold|n>\<mathd\>S=<big|int><rsub|V<around*|(|t|)>>\<nabla\>\<cdot\><with|font-series|bold|\<sigma\>>\<mathd\>V
+  </equation*>
+
+  故
+
+  <\equation>
+    <frac|\<mathd\>|\<mathd\>V><with|font-series|bold|F>=\<nabla\>\<cdot\><with|font-series|bold|\<sigma\>>=-\<nabla\>p+\<nabla\>\<cdot\><with|font-series|bold|\<tau\>><label|eq:m2b>
+  </equation>
+
+  将<smart-ref|eq:m2a>和<smart-ref|eq:m2b>一起带入<smart-ref|eq:m2f>，可得：
+
+  <\equation>
+    <with|color|red|<frac|\<partial\>|\<partial\>t>\<rho\><with|font-series|bold|u>+\<nabla\>\<cdot\><around*|(|\<rho\><with|font-series|bold|u>\<otimes\><with|font-series|bold|u>|)>=-\<nabla\>p+\<nabla\>\<cdot\><with|font-series|bold|\<tau\>>+\<rho\><with|font-series|bold|b>><label|eq:m2>
+  </equation>
+
+  对于<underline|不可压缩流体>，左边的对流项带入<smart-ref|eq:b1>的条件可化简：
+
+  <\equation*>
+    \<nabla\>\<cdot\><around*|(|\<rho\><with|font-series|bold|u>\<otimes\><with|font-series|bold|u>|)>=\<rho\><around*|(|<with|font-series|bold|u>\<cdot\>\<nabla\>|)><with|font-series|bold|u>+\<rho\><with|font-series|bold|u><around*|(|\<nabla\>\<cdot\><with|font-series|bold|u>|)>=\<rho\><around*|(|<with|font-series|bold|u>\<cdot\>\<nabla\>|)><with|font-series|bold|u>
+  </equation*>
+
+  于是<smart-ref|eq:m2>变为：
+
+  <\equation*>
+    <with|color|dark magenta|\<rho\><around*|[|<frac|\<partial\><with|font-series|bold|u>|\<partial\>t>+<around*|(|<with|font-series|bold|u>\<cdot\>\<nabla\>|)><with|font-series|bold|u>|]>=-\<nabla\>p+\<nabla\>\<cdot\><with|font-series|bold|\<tau\>>+\<rho\><with|font-series|bold|b>>
+  </equation*>
+
+  <\corollary>
+    在惯性力相对于压力和黏性力可以忽略的流动中，可忽略<smart-ref|eq:m2>左边的局部加速度项和对流加速度项，得到 Stokes 近似（广义 Stokes 方程）：
+
+    <\equation*>
+      <with|color|dark magenta|-\<nabla\>p+\<nabla\>\<cdot\><with|font-series|bold|\<tau\>>+\<rho\><with|font-series|bold|b>=0>
+    </equation*>
+  </corollary>
+
+  \;
+
+  <section|能量>
+
+  根据热力学第一定律：
+
+  <\equation*>
+    <text|总能量变化率>=<text|外力做功功率>+<text|热输入功率>
+  </equation*>
+
+  令 <math|f=\<rho\>E>（这里的 <math|E> 是单位质量上的能量），可以得到：
+
+  <\equation*>
+    <frac|\<mathd\>|\<mathd\>t><big|int><rsub|V<around*|(|t|)>>\<rho\>E \<mathd\>V=<big|int><rsub|V<around*|(|t|)>><around*|(|<frac|\<partial\>|\<partial\>t>\<rho\>E+\<nabla\>\<cdot\><around*|(|\<rho\>E<with|font-series|bold|u>|)>|)>\<mathd\>V=P<rsub|m>+<wide|Q|\<dot\>>
+  </equation*>
+
+  于是
+
+  <\equation>
+    <frac|\<partial\>|\<partial\>t>\<rho\>E+\<nabla\>\<cdot\><around*|(|\<rho\>E<with|font-series|bold|u>|)>=<frac|\<mathd\>|\<mathd\>V><around*|(|P<rsub|m>+<wide|Q|\<dot\>>|)><label|eq:m3f>
+  </equation>
+
+  考虑 <math|P<rsub|m>> 的构成有两种：体积力功率、表面应力功率。而 <math|<wide|Q|\<dot\>>> 的构成也有两种：热源功率、热交换功率。
+
+  <\note>
+    单独考虑<with|font-shape|italic|热源>和<with|font-shape|italic|热交换>是由于热力学中通常要界定“<with|font-shape|italic|源项>”和“<with|font-shape|italic|通量项>”两个机制。
+
+    <\enumerate>
+      <item>热源：顾名思义，一个概念神；
+
+      <item>热交换：控制体表面的能量交换行为，通常由温度梯度形成热传导（<math|<with|font-series|bold|q>=-k\<nabla\>T>）；
+    </enumerate>
+  </note>
+
+  对上述几个部分分别计算。
+
+  体积力功率：
+
+  <\equation*>
+    P<rsub|m>=<big|int><rsub|V<around*|(|t|)>>\<rho\><with|font-series|bold|b>\<cdot\><with|font-series|bold|u>\<mathd\>V
+  </equation*>
+
+  <\equation>
+    <frac|\<mathd\>|\<mathd\>V>P<rsub|m>=\<rho\><with|font-series|bold|b>\<cdot\><with|font-series|bold|u><label|eq:m3a>
+  </equation>
+
+  表面应力功率：
+
+  <\equation*>
+    P<rsub|m>=<big|int><rsub|S<around*|(|t|)>><around*|(|<with|font-series|bold|\<sigma\>>\<cdot\><with|font-series|bold|n>|)>\<cdot\><with|font-series|bold|u>\<mathd\>S=<big|int><rsub|V<around*|(|t|)>>\<nabla\>\<cdot\><around*|(|<with|font-series|bold|\<sigma\>>\<cdot\><with|font-series|bold|u>|)>\<mathd\>V=<big|int><rsub|V<around*|(|t|)>><around*|[|-\<nabla\>\<cdot\><around*|(|p<with|font-series|bold|u>|)>+\<nabla\>\<cdot\><around*|(|<with|font-series|bold|\<tau\>>\<cdot\><with|font-series|bold|u>|)>|]>\<mathd\>V
+  </equation*>
+
+  <\equation>
+    <frac|\<mathd\>|\<mathd\>V>P<rsub|m>=-\<nabla\>\<cdot\><around*|(|p<with|font-series|bold|u>|)>+\<nabla\>\<cdot\><around*|(|<with|font-series|bold|\<tau\>>\<cdot\><with|font-series|bold|u>|)><label|eq:m3b>
+  </equation>
+
+  \;
+
+  热源功率：
+
+  <\equation*>
+    <wide|Q|\<dot\>>=<big|int><rsub|V<around*|(|t|)>>\<rho\>r\<mathd\>V
+  </equation*>
+
+  <\equation>
+    <frac|\<mathd\>|\<mathd\>V><wide|Q|\<dot\>>=\<rho\>r<label|eq:m3c>
+  </equation>
+
+  热交换功率：
+
+  <\equation*>
+    <wide|Q|\<dot\>>=-<big|int><rsub|S<around*|(|t|)>><around*|(|<with|font-series|bold|q>\<cdot\><with|font-series|bold|n>|)>\<mathd\>S=-<big|int><rsub|V<around*|(|t|)>>\<nabla\>\<cdot\><with|font-series|bold|q>\<mathd\>V
+  </equation*>
+
+  <\equation>
+    <frac|\<mathd\>|\<mathd\>V><wide|Q|\<dot\>>=-\<nabla\>\<cdot\><with|font-series|bold|q><label|eq:m3d>
+  </equation>
+
+  将<smart-ref|eq:m3a>、<smart-ref|eq:m3b>、<smart-ref|eq:m3c>和<smart-ref|eq:m3d>一起带入<smart-ref|eq:m3f>，可得：
+
+  <\equation*>
+    <frac|\<partial\>|\<partial\>t>\<rho\>E+\<nabla\>\<cdot\><around*|(|\<rho\>E<with|font-series|bold|u>|)>=\<rho\><with|font-series|bold|b>\<cdot\><with|font-series|bold|u>-\<nabla\>\<cdot\><around*|(|p<with|font-series|bold|u>|)>+\<nabla\>\<cdot\><around*|(|<with|font-series|bold|\<tau\>>\<cdot\><with|font-series|bold|u>|)>+\<rho\>r-\<nabla\>\<cdot\><with|font-series|bold|q>
+  </equation*>
+
+  移项可得：
+
+  <\equation>
+    <with|color|red|<frac|\<partial\>|\<partial\>t>\<rho\>E+\<nabla\>\<cdot\><around*|[|<around*|(|\<rho\>E+p|)><with|font-series|bold|u>|]>=\<rho\><with|font-series|bold|b>\<cdot\><with|font-series|bold|u>+\<nabla\>\<cdot\><around*|(|<with|font-series|bold|\<tau\>>\<cdot\><with|font-series|bold|u>|)>+\<rho\>r-\<nabla\>\<cdot\><with|font-series|bold|q>><label|eq:m3>
+  </equation>
+
+  对于<underline|不可压缩流体>，左边的对流项带入<smart-ref|eq:b1>的条件可化简：
+
+  <\equation*>
+    \<nabla\>\<cdot\><around*|(|p<with|font-series|bold|u>|)>=<with|font-series|bold|u>\<cdot\>\<nabla\>p+p\<nabla\>\<cdot\><with|font-series|bold|u>=<with|font-series|bold|u>\<cdot\>\<nabla\>p
+  </equation*>
+
+  于是<smart-ref|eq:m3>变为：
+
+  <\equation*>
+    <with|color|dark magenta|\<rho\><around*|[|<frac|\<partial\>E|\<partial\>t>+<with|font-series|bold|u>\<cdot\>\<nabla\>E|]>+<with|font-series|bold|u>\<cdot\>\<nabla\>p=\<rho\><with|font-series|bold|b>\<cdot\><with|font-series|bold|u>+\<nabla\>\<cdot\><around*|(|<with|font-series|bold|\<tau\>>\<cdot\><with|font-series|bold|u>|)>+\<rho\>r-\<nabla\>\<cdot\><with|font-series|bold|q>>
+  </equation*>
+
+  综上，<smart-ref|eq:m1>、<smart-ref|eq:m2>、<smart-ref|eq:m3>即为广义 NS 方程：
+
+  <\equation*>
+    <frame|<frac|\<partial\>\<rho\>|\<partial\>t>+\<nabla\>\<cdot\><around*|(|\<rho\><with|font-series|bold|u>|)>=0>
+  </equation*>
+
+  <\equation*>
+    <frame|<frac|\<partial\>|\<partial\>t>\<rho\><with|font-series|bold|u>+\<nabla\>\<cdot\><around*|(|\<rho\><with|font-series|bold|u>\<otimes\><with|font-series|bold|u>|)>=-\<nabla\>p+\<nabla\>\<cdot\><with|font-series|bold|\<tau\>>+\<rho\><with|font-series|bold|b>>
+  </equation*>
+
+  <\equation*>
+    <frame|<frac|\<partial\>|\<partial\>t>\<rho\>E+\<nabla\>\<cdot\><around*|[|<around*|(|\<rho\>E+p|)><with|font-series|bold|u>|]>=\<rho\><with|font-series|bold|b>\<cdot\><with|font-series|bold|u>+\<nabla\>\<cdot\><around*|(|<with|font-series|bold|\<tau\>>\<cdot\><with|font-series|bold|u>|)>+\<rho\>r-\<nabla\>\<cdot\><with|font-series|bold|q>>
+  </equation*>
+
+  \;
+
+  值得一提的是，笔者在初学时搞混了物质导数和输运方程，两者是不同概念，但有联系。
+
+  <\theorem>
+    <with|color|blue|物质导数（或随体导数、全导数）>：
+
+    <\equation>
+      <frac|\<mathD\>|\<mathD\>t>f=<frac|\<partial\>|\<partial\>t>f+<with|font-series|bold|u>\<cdot\>\<nabla\>f<label|eq:s1>
+    </equation>
+  </theorem>
+
+  物质导数与输运方程的右边积分里的：
+
+  <\equation*>
+    <frac|\<partial\>|\<partial\>t>f+\<nabla\>\<cdot\><around*|(|f<with|font-series|bold|u>|)>
+  </equation*>
+
+  很像，但展开最后一项会发现：
+
+  <\equation*>
+    \<nabla\>\<cdot\><around*|(|f<with|font-series|bold|u>|)>=<with|font-series|bold|u>\<cdot\>\<nabla\>f+<with|color|orange|f\<nabla\>\<cdot\><with|font-series|bold|u>>
+  </equation*>
+
+  多了一项这个。可以理解：物质导数是站在流体团本身视角来看的，雷诺输运方程是站在宏观系统去看一个流体团，而流体团本身变化带来的贡献是 <math|f\<nabla\>\<cdot\><with|font-series|bold|u>>，这一项站在流体团的参考系下是看不见的。
+
+  注意到，对于不可压缩流体，根据<smart-ref|eq:b1>可知这一项为 <math|0>，因此它的物质导数和雷诺输运方程是等价的，但它们的意义是不一样的。
+
+  <appendix|雷诺输运定理的证明>
+
+  <\proof>
+    考虑一个微小体积元 <math|\<mathd\>V=\<mathd\>x\<mathd\>y\<mathd\>z>，里面的标量场为 <math|f>。
+
+    考虑 <math|\<mathd\>V> 的物质导数，计算其变化量：
+
+    <\equation*>
+      \<mathd\>V<rprime|'>=\<mathd\>V<around*|[|1+<around*|(|<frac|\<partial\>u<rsub|x>|\<partial\>x>+<frac|\<partial\>u<rsub|y>|\<partial\>y>+<frac|\<partial\>u<rsub|z>|\<partial\>z>|)>\<Delta\>t|]>
+    </equation*>
+
+    <\equation*>
+      <frac|\<mathD\>|\<mathD\>t><around*|(|\<mathd\>V|)>=<below|lim|\<Delta\>t\<rightarrow\>0><frac|\<mathd\>V<rprime|'>-\<mathd\>V|\<Delta\>t>=<around*|(|\<partial\><rsub|x>u<rsup|x>+\<partial\><rsub|y>u<rsup|y>+\<partial\><rsub|z>u<rsup|z>|)>\<mathd\>V=<around*|(|\<nabla\>\<cdot\><with|font-series|bold|u>|)>\<mathd\>V
+    </equation*>
+
+    计算 <math|f\<mathd\>V> 的物质导数<smart-ref|eq:s1>：
+
+    <\align>
+      <tformat|<cwith|1|-1|1|-1|cell-hyphen|t>|<table|<row|<cell|<frac|\<mathD\>|\<mathD\>t><around*|(|f\<mathd\>V|)>=>|<cell|<frac|\<mathD\>f|\<mathD\>t>\<mathd\>V+f<frac|\<mathD\>|\<mathD\>t><around*|(|\<mathd\>V|)>>>|<row|<cell|=>|<cell|<around*|[|<frac|\<mathD\>f|\<mathD\>t>+f<around*|(|\<nabla\>\<cdot\><with|font-series|bold|u>|)>|]>\<mathd\>V>>|<row|<cell|=>|<cell|<around*|[|<frac|\<partial\>f|\<partial\>t>+<with|font-series|bold|u>\<cdot\>\<nabla\>f+f<around*|(|\<nabla\>\<cdot\><with|font-series|bold|u>|)>|]>\<mathd\>V>>|<row|<cell|=>|<cell|<around*|[|<frac|\<partial\>f|\<partial\>t>+\<nabla\>\<cdot\><around*|(|f<with|font-series|bold|u>|)>|]>\<mathd\>V>>>>
+    </align>
+
+    两边对整个物质体积积分：
+
+    <\equation*>
+      <big|int><rsub|V<around*|(|t|)>><frac|\<mathD\>|\<mathD\>t><around*|(|f\<mathd\>V|)>=<big|int><rsub|V<around*|(|t|)>><around*|[|<frac|\<partial\>f|\<partial\>t>+\<nabla\>\<cdot\><around*|(|f<with|font-series|bold|u>|)>|]>\<mathd\>V
+    </equation*>
+
+    等式左边描述的是：站在每一个体微元的角度分别考虑得失并求和。它等价于整体角度计算总得失，计算对象是同一个。因此 <math|<frac|\<mathD\>|\<mathD\>t>> 算子可以提到积分号之前并变成 <math|<frac|\<mathd\>|\<mathd\>t>>，于是：
+
+    <\equation*>
+      <frac|\<mathd\>|\<mathd\>t><big|int><rsub|V<around*|(|t|)>>f \<mathd\>V=<big|int><rsub|V<around*|(|t|)>><around*|[|<frac|\<partial\>f|\<partial\>t>+\<nabla\>\<cdot\><around*|(|f<with|font-series|bold|u>|)>|]>\<mathd\>V
+    </equation*>
+
+    也就是雷诺输运定理的内容。
+  </proof>
+
+  \;
+</body>
+
+<\initial>
+  <\collection>
+    <associate|page-medium|paper>
+    <associate|page-screen-margin|false>
+    <associate|preamble|false>
+    <associate|stem-doc-id|1122689D-5317-4140-80C3-4BC2ECC30970>
+  </collection>
+</initial>
+
+<\references>
+  <\collection>
+    <associate|auto-1|<tuple|1|1>>
+    <associate|auto-2|<tuple|2|1>>
+    <associate|auto-3|<tuple|2.1|2>>
+    <associate|auto-4|<tuple|2.2|2>>
+    <associate|auto-5|<tuple|3|3>>
+    <associate|auto-6|<tuple|A|5>>
+    <associate|eq:R|<tuple|2|1>>
+    <associate|eq:b1|<tuple|4|1>>
+    <associate|eq:m1|<tuple|3|1>>
+    <associate|eq:m2|<tuple|8|3>>
+    <associate|eq:m2a|<tuple|6|2>>
+    <associate|eq:m2b|<tuple|7|2>>
+    <associate|eq:m2f|<tuple|5|1>>
+    <associate|eq:m3|<tuple|14|4>>
+    <associate|eq:m3a|<tuple|10|3>>
+    <associate|eq:m3b|<tuple|11|4>>
+    <associate|eq:m3c|<tuple|12|4>>
+    <associate|eq:m3d|<tuple|13|4>>
+    <associate|eq:m3f|<tuple|9|3>>
+    <associate|eq:s1|<tuple|15|4>>
+  </collection>
+</references>
+
+<\auxiliary>
+  <\collection>
+    <\associate|toc>
+      <vspace*|1fn><with|font-series|<quote|bold>|math-font-series|<quote|bold>|<locus|<id|%2F1B38A9818-2F200BAF028-4946893B>|<link|hyperlink|<id|%2F1B38A9818-2F200BAF028-4946893B>|<url|#auto-1>>|1<space|2spc>质量>><datoms|<macro|x|<repeat|<arg|x>|<with|font-series|medium|<with|font-size|1|<space|0.05fn>.<space|0.05fn>>>>>|<htab|5mm>><no-break><pageref|auto-1><vspace|0.5fn>
+
+      <vspace*|1fn><with|font-series|<quote|bold>|math-font-series|<quote|bold>|<locus|<id|%2F1B38A9818-2F200BB6900-4946893B>|<link|hyperlink|<id|%2F1B38A9818-2F200BB6900-4946893B>|<url|#auto-2>>|2<space|2spc>动量>><datoms|<macro|x|<repeat|<arg|x>|<with|font-series|medium|<with|font-size|1|<space|0.05fn>.<space|0.05fn>>>>>|<htab|5mm>><no-break><pageref|auto-2><vspace|0.5fn>
+
+      <with|par-left|<quote|1tab>|<locus|<id|%2F1B38A9818-2F1BA798F40--790CE45>|<link|hyperlink|<id|%2F1B38A9818-2F1BA798F40--790CE45>|<url|#auto-3>>|2.1<space|2spc>体积力><datoms|<macro|x|<repeat|<arg|x>|<with|font-series|medium|<with|font-size|1|<space|0.05fn>.<space|0.05fn>>>>>|<htab|5mm>><no-break><pageref|auto-3>>
+
+      <with|par-left|<quote|1tab>|<locus|<id|%2F1B38A9818-2F200BAEEA8--790CE45>|<link|hyperlink|<id|%2F1B38A9818-2F200BAEEA8--790CE45>|<url|#auto-4>>|2.2<space|2spc>表面应力><datoms|<macro|x|<repeat|<arg|x>|<with|font-series|medium|<with|font-size|1|<space|0.05fn>.<space|0.05fn>>>>>|<htab|5mm>><no-break><pageref|auto-4>>
+
+      <vspace*|1fn><with|font-series|<quote|bold>|math-font-series|<quote|bold>|<locus|<id|%2F1B38A9818-2F200C55E00-4946893B>|<link|hyperlink|<id|%2F1B38A9818-2F200C55E00-4946893B>|<url|#auto-5>>|3<space|2spc>能量>><datoms|<macro|x|<repeat|<arg|x>|<with|font-series|medium|<with|font-size|1|<space|0.05fn>.<space|0.05fn>>>>>|<htab|5mm>><no-break><pageref|auto-5><vspace|0.5fn>
+
+      <vspace*|1fn><with|font-series|<quote|bold>|math-font-series|<quote|bold>|<locus|<id|%2F1B38A9818-2F1F7477F40>|<link|hyperlink|<id|%2F1B38A9818-2F1F7477F40>|<url|#auto-6>>|附录 A<space|2spc>雷诺输运定理的证明>><datoms|<macro|x|<repeat|<arg|x>|<with|font-series|medium|<with|font-size|1|<space|0.05fn>.<space|0.05fn>>>>>|<htab|5mm>><no-break><pageref|auto-6><vspace|0.5fn>
+    </associate>
+  </collection>
+</auxiliary>

@@ -1,0 +1,454 @@
+<TMU|<tuple|1.1.0|2026.3.0>>
+
+<style|<tuple|generic|chinese|table-captions-above|number-europe|preview-ref|smart-ref>>
+
+<\body>
+  <\hide-preamble>
+    \;
+
+    <assign|theorem|<\macro|body>
+      <with|ornament-hpadding|4spc|ornament-vpadding|3spc|ornament-shadow-color|#5f4688|ornament-sunny-color|#5f4688|ornament-color|#eeeaf4|<\ornamented>
+        <surround|<compound|next-theorem>||<compound|render-theorem|<compound|theorem-numbered|<compound|theorem-text>|<compound|the-theorem>>|<arg|body>>>
+      </ornamented>>
+    </macro>>
+
+    <assign|definition|<\macro|body>
+      <with|ornament-hpadding|4spc|ornament-vpadding|3spc|ornament-shadow-color|#5f4688|ornament-sunny-color|#5f4688|ornament-color|#eeeaf4|<\ornamented>
+        <surround|<compound|next-definition>||<compound|render-remark|<compound|definition-numbered|<compound|definition-text>|<compound|the-definition>>|<arg|body>>>
+      </ornamented>>
+    </macro>>
+
+    <assign|proposition|<\macro|body>
+      <with|ornament-hpadding|4spc|ornament-vpadding|3spc|ornament-shadow-color|#5f4688|ornament-sunny-color|#5f4688|ornament-color|#eeeaf4|<\ornamented>
+        <\surround|<compound|next-proposition>|>
+          <compound|render-theorem|<compound|proposition-numbered|<compound|proposition-text>|<compound|the-proposition>>|<arg|body>>
+        </surround>
+      </ornamented>>
+    </macro>>
+
+    <assign|lemma|<\macro|body>
+      <with|ornament-hpadding|4spc|ornament-vpadding|3spc|ornament-shadow-color|#5f4688|ornament-sunny-color|#5f4688|ornament-color|#eeeaf4|<\ornamented>
+        <surround|<compound|next-lemma>||<compound|render-theorem|<compound|lemma-numbered|<compound|lemma-text>|<compound|the-lemma>>|<arg|body>>>
+      </ornamented>>
+    </macro>>
+
+    <assign|corollary|<\macro|body>
+      <with|ornament-hpadding|4spc|ornament-vpadding|3spc|ornament-shadow-color|#5f4688|ornament-sunny-color|#5f4688|ornament-color|#eeeaf4|<\ornamented>
+        <surround|<compound|next-corollary>||<compound|render-theorem|<compound|corollary-numbered|<compound|corollary-text>|<compound|the-corollary>>|<arg|body>>>
+      </ornamented>>
+    </macro>>
+
+    <assign|proof|<\macro|body>
+      <\inactive*>
+        <with|ornament-hpadding|4spc|ornament-vpadding|3spc|ornament-shadow-color|#5f4688|ornament-sunny-color|#5f4688|ornament-color|#eeeaf4|<\ornamented>
+          <render-proof|<proof-text>|<arg|body>>
+        </ornamented>>
+      </inactive*>
+    </macro>>
+
+    <assign|axiom|<\macro|body>
+      <with|ornament-hpadding|4spc|ornament-vpadding|3spc|ornament-shadow-color|#5f4688|ornament-sunny-color|#5f4688|ornament-color|#eeeaf4|<\ornamented>
+        <surround|<compound|next-axiom>||<compound|render-theorem|<compound|axiom-numbered|<compound|axiom-text>|<compound|the-axiom>>|<arg|body>>>
+      </ornamented>>
+    </macro>>
+
+    <assign|assumption|<\macro|body>
+      <with|ornament-hpadding|4spc|ornament-vpadding|3spc|ornament-shadow-color|#5f4688|ornament-sunny-color|#5f4688|ornament-color|#eeeaf4|<\ornamented>
+        <surround|<compound|next-assumption>||<compound|render-remark|<compound|assumption-numbered|<compound|assumption-text>|<compound|the-assumption>>|<arg|body>>>
+      </ornamented>>
+    </macro>>
+
+    <assign|notation|<\macro|body>
+      <with|ornament-hpadding|4spc|ornament-vpadding|3spc|ornament-shadow-color|#5f4688|ornament-sunny-color|#5f4688|ornament-color|#eeeaf4|<\ornamented>
+        <surround|<compound|next-notation>||<compound|render-theorem|<compound|notation-numbered|<compound|notation-text>|<compound|the-notation>>|<arg|body>>>
+      </ornamented>>
+    </macro>>
+
+    <assign|convention|<\macro|body>
+      <with|ornament-hpadding|4spc|ornament-vpadding|3spc|ornament-shadow-color|#5f4688|ornament-sunny-color|#5f4688|ornament-color|#eeeaf4|<\ornamented>
+        <surround|<compound|next-convention>||<compound|render-remark|<compound|convention-numbered|<compound|convention-text>|<compound|the-convention>>|<arg|body>>>
+      </ornamented>>
+    </macro>>
+
+    <assign|remark|<\macro|body>
+      <with|ornament-hpadding|4spc|ornament-vpadding|3spc|ornament-shadow-color|#5f4688|ornament-sunny-color|#5f4688|ornament-color|#eeeaf4|<\ornamented>
+        <surround|<compound|next-remark>||<compound|render-remark|<compound|remark-numbered|<compound|remark-text>|<compound|the-remark>>|<arg|body>>>
+      </ornamented>>
+    </macro>>
+
+    <assign|note|<\macro|body>
+      <with|ornament-hpadding|4spc|ornament-vpadding|3spc|ornament-shadow-color|#5f4688|ornament-sunny-color|#5f4688|ornament-color|#eeeaf4|<\ornamented>
+        <surround|<compound|next-note>||<compound|render-remark|<compound|note-numbered|<compound|note-text>|<compound|the-note>>|<arg|body>>>
+      </ornamented>>
+    </macro>>
+
+    <assign|example|<\macro|body>
+      <with|ornament-hpadding|4spc|ornament-vpadding|3spc|ornament-shadow-color|#5f4688|ornament-sunny-color|#5f4688|ornament-color|#eeeaf4|<\ornamented>
+        <surround|<compound|next-example>||<compound|render-remark|<compound|example-numbered|<compound|example-text>|<compound|the-example>>|<arg|body>>>
+      </ornamented>>
+    </macro>>
+
+    <assign|warning|<\macro|body>
+      <with|ornament-hpadding|4spc|ornament-vpadding|3spc|ornament-shadow-color|#5f4688|ornament-sunny-color|#5f4688|ornament-color|#eeeaf4|<\ornamented>
+        <surround|<compound|next-warning>||<compound|render-remark|<compound|warning-numbered|<compound|warning-text>|<compound|the-warning>>|<arg|body>>>
+      </ornamented>>
+    </macro>>
+
+    <assign|acknowledgments*|<\macro|body>
+      <\inactive*>
+        <with|ornament-hpadding|4spc|ornament-vpadding|3spc|ornament-shadow-color|#5f4688|ornament-sunny-color|#5f4688|ornament-color|#eeeaf4|<\ornamented>
+          <compound|render-remark|<compound|acknowledgments-unnumbered|<compound|acknowledgments-text>>|<arg|body>>
+        </ornamented>>
+      </inactive*>
+
+      \;
+    </macro>>
+
+    <assign|exercise|<\macro|body>
+      <with|ornament-hpadding|4spc|ornament-vpadding|3spc|ornament-shadow-color|#5f4688|ornament-sunny-color|#5f4688|ornament-color|#eeeaf4|<\ornamented>
+        <surround|<compound|next-exercise>||<compound|render-exercise|<compound|exercise-numbered|<compound|exercise-text>|<compound|the-exercise>>|<arg|body>>>
+      </ornamented>>
+    </macro>>
+
+    <assign|problem|<\macro|body>
+      <with|ornament-hpadding|4spc|ornament-vpadding|3spc|ornament-shadow-color|#5f4688|ornament-sunny-color|#5f4688|ornament-color|#eeeaf4|<\ornamented>
+        <surround|<compound|next-problem>||<compound|render-exercise|<compound|problem-numbered|<compound|problem-text>|<compound|the-problem>>|<arg|body>>>
+      </ornamented>>
+    </macro>>
+
+    <assign|question|<\macro|body>
+      <with|ornament-hpadding|4spc|ornament-vpadding|3spc|ornament-shadow-color|#5f4688|ornament-sunny-color|#5f4688|ornament-color|#eeeaf4|<\ornamented>
+        <surround|<compound|next-question>||<compound|render-remark|<compound|question-numbered|<compound|question-text>|<compound|the-question>>|<arg|body>>>
+      </ornamented>>
+    </macro>>
+
+    <assign|solution*|<\macro|body>
+      <\inactive*>
+        <with|ornament-hpadding|4spc|ornament-vpadding|3spc|ornament-shadow-color|#5f4688|ornament-sunny-color|#5f4688|ornament-color|#eeeaf4|<\ornamented>
+          <compound|render-exercise|<compound|solution-unnumbered|<compound|solution-text>>|<arg|body>>
+        </ornamented>>
+      </inactive*>
+    </macro>>
+
+    <assign|answer*|<\macro|body>
+      <with|ornament-hpadding|4spc|ornament-vpadding|3spc|ornament-shadow-color|#5f4688|ornament-sunny-color|#5f4688|ornament-color|#eeeaf4|<\ornamented>
+        <compound|render-remark|<compound|answer-unnumbered|<compound|answer-text>>|<arg|body>>
+      </ornamented>>
+    </macro>>
+  </hide-preamble>
+
+  我们希望将速度 <math|<with|font-series|bold|u>> 场分解成<with|font-series|bold|平移>、<with|font-series|bold|变形>、<with|font-series|bold|涡旋>的三个场。变形场<with|font-shape|italic|无旋度>、涡旋场<with|font-shape|italic|无散度>。
+
+  <section|数学前置>
+
+  以下索引记法均采用爱因斯坦求和约定。
+
+  <\definition>
+    Kronecker delta
+
+    <\equation*>
+      \<delta\><rsup|i><rsub|j>=<choice|<tformat|<cwith|1|-1|1|-1|cell-hyphen|t>|<table|<row|<\cell>
+        1,
+      </cell>|<\cell>
+        i=j
+      </cell>>|<row|<\cell>
+        0,
+      </cell>|<\cell>
+        i\<neq\>j
+      </cell>>>>>
+    </equation*>
+  </definition>
+
+  <\definition>
+    Levi-Civita symbol
+
+    <\equation*>
+      \<epsilon\><rsub|i j k>=<choice|<tformat|<cwith|1|-1|1|-1|cell-hyphen|t>|<table|<row|<\cell>
+        1,
+      </cell>|<\cell>
+        <text|if even permutation>
+      </cell>>|<row|<\cell>
+        -1,
+      </cell>|<\cell>
+        <text|if odd permutation>
+      </cell>>|<row|<\cell>
+        0,
+      </cell>|<\cell>
+        <text|if <math|i=j > or <math|i=k > or <math|j=k>>
+      </cell>>>>>
+    </equation*>
+  </definition>
+
+  <\lemma>
+    Levi-Civita symbol 的乘积：
+
+    <\equation>
+      \<epsilon\><rsub|i j k>\<epsilon\><rsup|m n k>=<around*|(|\<delta\><rsup|m><rsub|i>\<delta\><rsup|n><rsub|j>-\<delta\><rsup|n><rsub|i>\<delta\><rsup|m><rsub|j>|)><label|thm:01>
+    </equation>
+  </lemma>
+
+  <\lemma>
+    对于 <math|<with|font-series|bold|u>,<with|font-series|bold|v>\<in\>\<bbb-R\><rsup|3>>，有：
+
+    <\equation>
+      <around*|(|<with|font-series|bold|u>\<times\><with|font-series|bold|v>|)><rsup|i>=\<epsilon\><rsup|i><rsub|j k>u<rsup|j>v<rsup|k><label|thm:02>
+    </equation>
+
+    这是向量叉乘用 Levi-Civita symbol 展开，可用于很多计算。
+  </lemma>
+
+  <section|拆分速度场>
+
+  考虑对 <math|<with|font-series|bold|u>> 一阶麦克劳林展开：
+
+  <\equation*>
+    u<rsup|i>\<approx\>u<rsup|i><around*|(|0|)>+<below|<above|<big|sum>|3>|j=1><frac|\<partial\>u<rsup|i>|\<partial\>x<rsup|j>>\<delta\>x<rsup|j>
+  </equation*>
+
+  这里的 <math|\<delta\>x<rsup|j>> 是微小位移矢量的第 <math|j> 个分量。
+
+  不失一般性，考虑 <math|u<rsup|i><around*|(|0|)>=0> 时，
+
+  <\equation*>
+    u<rsup|i>=<frac|\<partial\>u<rsup|i>|\<partial\>x<rsup|j>>\<delta\>x<rsup|j>=<around*|(|\<partial\><rsub|j>u<rsup|i>|)>\<delta\>x<rsup|j>
+  </equation*>
+
+  不难发现，<math|\<partial\><rsub|j>u<rsup|i>> 可以写成一个矩阵：
+
+  <\equation*>
+    \<Tau\><rsub|i j>=\<Tau\><rsup|i><rsub|j>\<triangleq\>\<partial\><rsub|j>u<rsup|i>\<Longrightarrow\><with|color|dark magenta|\<Tau\>=\<nabla\><with|font-series|bold|u>>
+  </equation*>
+
+  <\equation*>
+    \<Tau\>\<delta\>x=<matrix|<tformat|<cwith|1|-1|1|-1|cell-hyphen|t>|<cwith|3|3|1|2|cell-hyphen|t>|<cwith|1|3|3|3|cell-hyphen|t>|<cwith|3|3|3|3|cell-hyphen|t>|<table|<row|<\cell>
+      \<partial\><rsub|1>u<rsup|1>
+    </cell>|<\cell>
+      \<partial\><rsub|2>u<rsup|1>
+    </cell>|<\cell>
+      \<partial\><rsub|3>u<rsup|1>
+    </cell>>|<row|<\cell>
+      \<partial\><rsub|1>u<rsup|2>
+    </cell>|<\cell>
+      \<partial\><rsub|2>u<rsup|2>
+    </cell>|<\cell>
+      \<partial\><rsub|3>u<rsup|2>
+    </cell>>|<row|<\cell>
+      \<partial\><rsub|1>u<rsup|3>
+    </cell>|<\cell>
+      \<partial\><rsub|2>u<rsup|3>
+    </cell>|<\cell>
+      \<partial\><rsub|3>u<rsup|3>
+    </cell>>>>><matrix|<tformat|<cwith|1|-1|1|-1|cell-hyphen|t>|<table|<row|<\cell>
+      \<delta\>x<rsup|1>
+    </cell>>|<row|<\cell>
+      \<delta\>x<rsup|2>
+    </cell>>|<row|<\cell>
+      \<delta\>x<rsup|3>
+    </cell>>>>>=<matrix|<tformat|<cwith|1|-1|1|-1|cell-hyphen|t>|<table|<row|<\cell>
+      <frac|\<partial\>u<rsup|1>|\<partial\>x<rsup|1>>\<delta\>x<rsup|1>+<frac|\<partial\>u<rsup|1>|\<partial\>x<rsup|2>>\<delta\>x<rsup|2>
+    </cell>>|<row|<\cell>
+      <frac|\<partial\>u<rsup|2>|\<partial\>x<rsup|1>>\<delta\>x<rsup|1>+<frac|\<partial\>u<rsup|2>|\<partial\>x<rsup|2>>\<delta\>x<rsup|2>
+    </cell>>|<row|<\cell>
+      <frac|\<partial\>u<rsup|3>|\<partial\>x<rsup|1>>\<delta\>x<rsup|1>+<frac|\<partial\>u<rsup|3>|\<partial\>x<rsup|2>>\<delta\>x<rsup|2>
+    </cell>>>>>=<with|font-series|bold|u>
+  </equation*>
+
+  也即，
+
+  <\equation*>
+    u<rsup|i>=\<Tau\><rsub|i j>\<delta\>x<rsup|j>
+  </equation*>
+
+  对 <math|\<Tau\>> 做自对称和反对称的拆分：
+
+  <\align>
+    <tformat|<cwith|1|-1|1|-1|cell-hyphen|t>|<table|<row|<cell|<with|font-series|bold|\<mathD\>>=>|<cell|<frac|1|2><around*|[|\<Tau\>+\<Tau\><rsup|\<top\>>|]>\<Longrightarrow\><with|font-series|bold|\<mathD\>>=<with|font-series|bold|\<mathD\>><rsup|\<top\>>>>|<row|<cell|<with|font-series|bold|\<b-up-W\>>=>|<cell|<frac|1|2><around*|[|\<Tau\>-\<Tau\><rsup|\<top\>>|]>\<Longrightarrow\><with|font-series|bold|\<b-up-W\>>=-<with|font-series|bold|\<b-up-W\>><rsup|\<top\>>>>>>
+  </align>
+
+  再考虑初始速度 <math|<with|font-series|bold|u<rsub|0>>=<with|font-series|bold|u><around*|(|0|)>>，得到：
+
+  <\equation>
+    <with|color|blue|<with|font-series|bold|u>=<with|font-series|bold|u<rsub|0>>+<with|font-series|bold|\<mathD\>>\<delta\>x+<with|font-series|bold|\<b-up-W\>>\<delta\>x><label|eq:u>
+  </equation>
+
+  这里 <math|<with|font-series|bold|\<mathD\>>> 称为应变率张量，<math|<with|font-series|bold|\<b-up-W\>>> 称为旋转张量。
+
+  <subsection|应变率张量>
+
+  <\theorem>
+    对于二次型
+
+    <\equation*>
+      f<around*|(|x|)>=x<rsup|\<top\>>\<Alpha\>x
+    </equation*>
+
+    我们有
+
+    <\equation*>
+      \<nabla\>f=<around*|(|\<Alpha\>+\<Alpha\><rsup|\<top\>>|)>x
+    </equation*>
+  </theorem>
+
+  <\proof>
+    将二次型展开
+
+    <\equation*>
+      f<around*|(|x|)>=<below|<above|<big|sum>|n>|i=1><below|<above|<big|sum>|n>|j=1>a<rsub|i j>x<rsup|i>x<rsup|j>
+    </equation*>
+
+    <\equation*>
+      <frac|\<partial\>f|\<partial\>x<rsup|k>>=<below|<above|<big|sum>|n>|j=1>a<rsub|k j>x<rsup|j>+<below|<above|<big|sum>|n>|i=1>a<rsub|i k>x<rsup|i>
+    </equation*>
+
+    将 <math|<below|<above|<big|sum>|n>|i=1>a<rsub|i k>x<rsup|i>> 写成 <math|<below|<above|<big|sum>|n>|j=1>a<rsub|j k>x<rsup|j>>，则
+
+    <\equation*>
+      <frac|\<partial\>f|\<partial\>x<rsup|k>>=<below|<above|<big|sum>|n>|j=1><around*|(|a<rsub|k j>+a<rsub|j k>|)>x<rsup|j>\<Longrightarrow\>\<partial\><rsub|k>f=<around*|(|a<rsub|k j>+a<rsub|j k>|)>x<rsup|j>
+    </equation*>
+
+    <math|k> 从 <math|1> 到 <math|n> 索引，故
+
+    <\equation*>
+      \<nabla\>f=<around*|(|\<Alpha\>+\<Alpha\><rsup|\<top\>>|)>x
+    </equation*>
+  </proof>
+
+  令 <math|f=2\<phi\>,\<Alpha\>=<with|font-series|bold|\<mathD\>>>，由于其自对称，故应变的贡献：
+
+  <\equation>
+    <with|color|red|<with|font-series|bold|\<mathD\>>\<delta\>x=\<nabla\>\<phi\>><label|eq:d><space|3em>\<phi\>=<frac|1|2>\<delta\>x<rsup|\<top\>><with|font-series|bold|\<mathD\>>\<delta\>x
+  </equation>
+
+  由向量场的恒等式知：
+
+  <\equation*>
+    \<nabla\>\<times\><around*|(|\<nabla\>\<phi\>|)>=0
+  </equation*>
+
+  故 <math|<with|font-series|bold|\<mathD\>>> 是<with|font-shape|italic|无旋场>。
+
+  <subsection|旋转张量>
+
+  <\definition>
+    <\equation*>
+      w<rsup|j>=-<frac|1|2>\<epsilon\><rsup|j m n>\<b-up-W\><rsub|m n>
+    </equation*>
+  </definition>
+
+  <\proposition>
+    <\equation>
+      <with|font-series|bold|\<b-up-W\>>\<delta\>x=<with|font-series|bold|w>*\<times\>\<delta\>x<label|eq:w1>
+    </equation>
+
+    按<smart-ref|thm:02>展开：
+
+    <\equation*>
+      \<b-up-W\><rsub|i j>\<delta\>x<rsup|j>=\<epsilon\><rsub|i j k>w<rsup|j>\<delta\>x<rsup|k>
+    </equation*>
+  </proposition>
+
+  <\proof>
+    根据 <math|\<epsilon\><rsub|i j k>> 的性质、<math|<with|font-series|bold|\<b-up-W\>>>的反对称性和<smart-ref|thm:01>：
+
+    <\align>
+      <tformat|<cwith|1|-1|1|-1|cell-hyphen|t>|<table|<row|<cell|\<epsilon\><rsub|i j k>w<rsup|j>\<delta\>x<rsup|k>=>|<cell|-<frac|1|2>\<epsilon\><rsub|i j k>\<epsilon\><rsup|j m n >\<b-up-W\><rsub|m n>\<delta\>x<rsup|k>>>|<row|<cell|=>|<cell|<frac|1|2>\<epsilon\><rsub|i \ k j>\<epsilon\><rsup| m n j >\<b-up-W\><rsub|m n>\<delta\>x<rsup|k>>>|<row|<cell|=>|<cell|<frac|1|2><around*|(|\<delta\><rsup|m><rsub|i>\<delta\><rsup|n><rsub|k>-\<delta\><rsup|n><rsub|i>\<delta\><rsup|m><rsub|k>|)>\<b-up-W\><rsub|m n>\<delta\>x<rsup|k>>>|<row|<cell|=>|<cell|<frac|1|2><around*|(|\<b-up-W\><rsub|i k>-\<b-up-W\><rsub|k i>|)>\<delta\>x<rsup|k>>>|<row|<cell|=>|<cell|\<b-up-W\><rsub|i k>\<delta\>x<rsup|k>=\<b-up-W\><rsub|i j>\<delta\>x<rsup|j>>>>>
+    </align>
+
+    也即，
+
+    <\equation*>
+      <with|font-series|bold|\<b-up-W\>>\<delta\>x=<with|font-series|bold|w>*\<times\>\<delta\>x
+    </equation*>
+  </proof>
+
+  <\proposition>
+    <\equation>
+      <with|font-series|bold|w>=<frac|1|2>\<nabla\>\<times\><with|font-series|bold|u><label|eq:w2>
+    </equation>
+
+    按<smart-ref|thm:02>展开：
+
+    <\equation*>
+      w<rsup|i>=<frac|1|2>\<epsilon\><rsup|i><rsub|j k>\<partial\><rsub|j>u<rsup|k>
+    </equation*>
+  </proposition>
+
+  <\proof>
+    根据 <math|\<epsilon\><rsub|i j k>> 的性质和 <math|<with|font-series|bold|\<b-up-W\>>> 的定义展开：
+
+    <\align>
+      <tformat|<cwith|1|-1|1|-1|cell-hyphen|t>|<table|<row|<cell|w<rsup|i>=>|<cell|-<frac|1|2>\<epsilon\><rsup|i m n>\<b-up-W\><rsub|m n>>>|<row|<cell|=>|<cell|-<frac|1|2>\<epsilon\><rsup|i m n><frac|1|2><around*|(|\<Tau\><rsub|m n>-\<Tau\><rsub|n m>|)>>>|<row|<cell|=>|<cell|-<frac|1|4>\<epsilon\><rsup|i m n><around*|(|\<partial\><rsub|n>u<rsup|m>-\<partial\><rsub|m>u<rsup|n>|)>>>|<row|<cell|=>|<cell|-<frac|1|4>\<epsilon\><rsup|i m n>\<partial\><rsub|n>u<rsup|m>+<frac|1|4>\<epsilon\><rsup|i m n>\<partial\><rsub|m>u<rsup|n>>>|<row|<cell|=>|<cell|<frac|1|4>\<epsilon\><rsup|i m n>\<partial\><rsub|m>u<rsup|n>+<frac|1|4>\<epsilon\><rsup|i m n>\<partial\><rsub|m>u<rsup|n>>>|<row|<cell|=>|<cell|<frac|1|2>\<epsilon\><rsup|i m n>\<partial\><rsub|m>u<rsup|n>>>>>
+    </align>
+
+    也即，
+
+    <\equation*>
+      <with|font-series|bold|w>=<frac|1|2>\<nabla\>\<times\><with|font-series|bold|u>
+    </equation*>
+  </proof>
+
+  合并<smart-ref|eq:w1>和<smart-ref|eq:w2>，旋转的贡献：
+
+  <\equation*>
+    \;
+  </equation*>
+
+  <\equation>
+    <with|color|red|<with|font-series|bold|\<b-up-W\>>\<delta\>x=<frac|1|2><around*|(|\<nabla\>\<times\><with|font-series|bold|u>|)>\<times\>\<delta\>x><label|eq:w>
+  </equation>
+
+  由向量场的恒等式知：
+
+  <\equation*>
+    \<nabla\>\<cdot\><around*|(|\<nabla\>\<times\><with|font-series|bold|u>|)>=0
+  </equation*>
+
+  故 <math|<with|font-series|bold|\<b-up-W\>>> 是<with|font-shape|italic|无散场>。
+
+  最后，合并<smart-ref|eq:d>和<smart-ref|eq:w>到<smart-ref|eq:u>，得到亥姆霍兹分解的完整形式：
+
+  <\equation*>
+    <frame|<with|font-series|bold|u>=<with|font-series|bold|u<rsub|0>>+\<nabla\>\<phi\>+<frac|1|2><around*|(|\<nabla\>\<times\><with|font-series|bold|u>|)>\<times\>\<delta\>x>
+  </equation*>
+
+  其中，<math|\<phi\>=<frac|1|2>\<delta\>x<rsup|\<top\>><with|font-series|bold|\<mathD\>>\<delta\>x>。
+</body>
+
+<\initial>
+  <\collection>
+    <associate|page-medium|paper>
+    <associate|page-screen-margin|false>
+    <associate|preamble|false>
+    <associate|stem-doc-id|16FF8534-2AD0-4910-85EA-7F5916BE8B80>
+  </collection>
+</initial>
+
+<\references>
+  <\collection>
+    <associate|auto-1|<tuple|1|1>>
+    <associate|auto-2|<tuple|2|1>>
+    <associate|auto-3|<tuple|2.1|2>>
+    <associate|auto-4|<tuple|2.2|3>>
+    <associate|eq:d|<tuple|4|2>>
+    <associate|eq:u|<tuple|3|2>>
+    <associate|eq:w|<tuple|7|4>>
+    <associate|eq:w1|<tuple|5|3>>
+    <associate|eq:w2|<tuple|6|3>>
+    <associate|thm:01|<tuple|1|1>>
+    <associate|thm:02|<tuple|2|1>>
+  </collection>
+</references>
+
+<\auxiliary>
+  <\collection>
+    <\associate|toc>
+      <vspace*|1fn><with|font-series|<quote|bold>|math-font-series|<quote|bold>|<locus|<id|%2F1F7384B78-2F1A52ABC90-4946893B>|<link|hyperlink|<id|%2F1F7384B78-2F1A52ABC90-4946893B>|<url|#auto-1>>|1<space|2spc>数学前置>><datoms|<macro|x|<repeat|<arg|x>|<with|font-series|medium|<with|font-size|1|<space|0.05fn>.<space|0.05fn>>>>>|<htab|5mm>><no-break><pageref|auto-1><vspace|0.5fn>
+
+      <vspace*|1fn><with|font-series|<quote|bold>|math-font-series|<quote|bold>|<locus|<id|%2F1F7384B78-2F2105B3C88-4946893B>|<link|hyperlink|<id|%2F1F7384B78-2F2105B3C88-4946893B>|<url|#auto-2>>|2<space|2spc>拆分速度场>><datoms|<macro|x|<repeat|<arg|x>|<with|font-series|medium|<with|font-size|1|<space|0.05fn>.<space|0.05fn>>>>>|<htab|5mm>><no-break><pageref|auto-2><vspace|0.5fn>
+
+      <with|par-left|<quote|1tab>|<locus|<id|%2F1F7384B78-2F2105CA3A8--790CE45>|<link|hyperlink|<id|%2F1F7384B78-2F2105CA3A8--790CE45>|<url|#auto-3>>|2.1<space|2spc>应变率张量><datoms|<macro|x|<repeat|<arg|x>|<with|font-series|medium|<with|font-size|1|<space|0.05fn>.<space|0.05fn>>>>>|<htab|5mm>><no-break><pageref|auto-3>>
+
+      <with|par-left|<quote|1tab>|<locus|<id|%2F1F7384B78-2F2105D6478--790CE45>|<link|hyperlink|<id|%2F1F7384B78-2F2105D6478--790CE45>|<url|#auto-4>>|2.2<space|2spc>旋转张量><datoms|<macro|x|<repeat|<arg|x>|<with|font-series|medium|<with|font-size|1|<space|0.05fn>.<space|0.05fn>>>>>|<htab|5mm>><no-break><pageref|auto-4>>
+    </associate>
+  </collection>
+</auxiliary>

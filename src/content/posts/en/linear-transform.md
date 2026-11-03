@@ -7,6 +7,6 @@ document: '/documents/linear-transform.tmu'
 pubDate: '2026-04-07'
 category: 'article'
 pinned: true
-pinOrder: 2
+pinOrder: 4
 translationKey: 'linear-transform'
 ---
