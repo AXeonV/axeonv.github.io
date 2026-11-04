@@ -1,6 +1,6 @@
 ---
 title: '新世界'
-description: '一篇关于人工智能、人类情感与文明未来的科幻小说。'
+description: '一篇关于 AI、爱与未来的科幻小说。'
 author: '刘天佑'
 format: 'text'
 pubDate: '2026-09-14'
