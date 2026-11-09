@@ -121,7 +121,7 @@
         </equation*>
       </cell>|<\cell>
         <\equation*>
-          x<around*|[|n|]>=<below|<above|<big|sum>|\<infty\>>|k=-\<infty\>>a<rsub|k>e<rsup|j k \ \<Omega\><rsub|0> n>
+          x<around*|[|n|]>=<below|<big|sum>|k=<around*|\<langle\>|N<rsub|0>|\<rangle\>>>a<rsub|k>e<rsup|j k \ \<Omega\><rsub|0> n>
         </equation*>
       </cell>>|<row|<\cell>
         FS rep of <math|y>
@@ -147,11 +147,11 @@
         coefficients of <math|x>
       </cell>|<\cell>
         <\equation*>
-          a<rsub|k>=<frac|1|T><big|int><rsub|T>x<around*|(|t|)>e<rsup|-j k w<rsub|0> t>\<mathd\>t
+          a<rsub|k>=<frac|1|T<rsub|0>><big|int><rsub|T<rsub|0>>x<around*|(|t|)>e<rsup|-j k w<rsub|0> t>\<mathd\>t
         </equation*>
       </cell>|<\cell>
         <\equation*>
-          a<rsub|k>=<frac|1|T><big|sum><rsub|T>x<around*|[|n|]>e<rsup|-j k \<Omega\><rsub|0> n>
+          a<rsub|k>=<frac|1|N<rsub|0>><big|sum><rsub|n=<around*|\<langle\>|N<rsub|0>|\<rangle\>>>x<around*|[|n|]>e<rsup|-j k \<Omega\><rsub|0> n>
         </equation*>
       </cell>>|<row|<\cell>
         coefficients of <math|y>

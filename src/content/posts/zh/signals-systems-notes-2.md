@@ -7,4 +7,6 @@ document: '/documents/signals-systems-notes-2.tmu'
 pubDate: '2026-10-18'
 category: 'article'
 translationKey: 'signals-systems-notes-2'
+pinned: true
+pinOrder: 9
 ---

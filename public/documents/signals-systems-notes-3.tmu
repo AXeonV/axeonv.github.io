@@ -1,0 +1,133 @@
+<TMU|<tuple|1.1.0|2026.3.0>>
+
+<style|<tuple|generic|chinese|table-captions-above|number-europe|preview-ref|framed-session>>
+
+<\body>
+  <\wide-block>
+    <tformat|<cwith|1|-1|1|-1|cell-hyphen|t>|<cwith|1|-1|1|-1|cell-halign|c>|<table|<row|<\cell>
+      \;
+    </cell>|<\cell>
+      Analysis equation
+    </cell>|<\cell>
+      Synthesis equation
+    </cell>|<\cell>
+      Periodic?
+    </cell>>|<row|<\cell>
+      CTFS
+    </cell>|<\cell>
+      <\equation*>
+        a<rsub|k>=<frac|1|T<rsub|0>><big|int><rsub|T<rsub|0>>x<around*|(|t|)>e<rsup|-j k w<rsub|0> t>\<mathd\>t
+      </equation*>
+    </cell>|<\cell>
+      <\equation*>
+        x<around*|(|t|)>=<below|<above|<big|sum>|\<infty\>>|k=-\<infty\>>a<rsub|k>e<rsup|j k \ \<omega\><rsub|0> t>
+      </equation*>
+    </cell>|<\cell>
+      Not necessarily
+    </cell>>|<row|<\cell>
+      DTFS
+    </cell>|<\cell>
+      <\equation*>
+        a<rsub|k>=<frac|1|N<rsub|0>><big|sum><rsub|n=<around*|\<langle\>|N<rsub|0>|\<rangle\>>>x<around*|[|n|]>e<rsup|-j k \<Omega\><rsub|0> n>
+      </equation*>
+    </cell>|<\cell>
+      <\equation*>
+        x<around*|[|n|]>=<below|<big|sum>|k=<around*|\<langle\>|N<rsub|0>|\<rangle\>>>a<rsub|k>e<rsup|j k \ \<Omega\><rsub|0> n>
+      </equation*>
+    </cell>|<\cell>
+      <\equation*>
+        a<rsub|k>=a<rsub|k+N<rsub|0>>
+      </equation*>
+    </cell>>|<row|<\cell>
+      CTFT
+    </cell>|<\cell>
+      <\equation*>
+        X<around*|(|j\<omega\>|)>=<big|int><rsup|\<infty\>><rsub|-\<infty\>>x<around*|(|t|)>e<rsup|-j\<omega\> t>\<mathd\>t
+      </equation*>
+    </cell>|<\cell>
+      <\equation*>
+        x<around*|(|t|)>=<frac|1|2\<pi\>><big|int><rsup|\<infty\>><rsub|-\<infty\>>X<around*|(|j\<omega\>|)>e<rsup|j\<omega\> t>\<mathd\>w
+      </equation*>
+    </cell>|<\cell>
+      Not necessarily
+    </cell>>|<row|<\cell>
+      DTFT
+    </cell>|<\cell>
+      <\equation*>
+        X<around*|(|e<rsup|j\<Omega\>>|)>=<below|<above|<big|sum>|\<infty\>>|n=-\<infty\>>x<around*|[|n|]>e<rsup|-j\<Omega\> n>
+      </equation*>
+    </cell>|<\cell>
+      <\equation*>
+        x<around*|[|n|]>=<frac|1|2\<pi\>><big|int><rsub|2\<pi\>>X<around*|(|j\<Omega\>|)>e<rsup|j\<Omega\> n>\<mathd\>\<Omega\>
+      </equation*>
+    </cell>|<\cell>
+      <\equation*>
+        X<around*|(|e<rsup|j\<Omega\>>|)>=X<around*|(|e<rsup|j<around*|(|\<Omega\>+2\<pi\>|)>>|)>
+      </equation*>
+    </cell>>>>
+  </wide-block>
+
+  \;
+
+  Relationship between FS & FT analysis:
+
+  <\equation*>
+    X<around*|(|j\<omega\>|)>=<below|<above|<big|sum>|\<infty\>>|k=-\<infty\>>2\<pi\>a<rsub|k> \<delta\><around*|(|w-k\<omega\><rsub|0>|)>.
+  </equation*>
+
+  If there is an aperiodic signal <math|g<around*|(|t|)>>, how to compute its FS?
+
+  Replicate <math|g<around*|(|t|)>> in a period of <math|T<rsub|0>> (<math|T<rsub|0>> is not the length of <math|g<around*|(|t|)>>), then
+
+  <\equation*>
+    a<rsub|k>=<frac|1|T<rsub|0>><big|int><rsub|T<rsub|0>>g<around*|(|t|)>e<rsup|-j k w<rsub|0> t>\<mathd\>t.
+  </equation*>
+
+  Consider its FT:
+
+  <\equation*>
+    G<around*|(|j\<omega\>|)>=<big|int><rsup|\<infty\>><rsub|-\<infty\>>g<around*|(|t|)>e<rsup|-j\<omega\> t>\<mathd\>t.
+  </equation*>
+
+  So
+
+  <\equation*>
+    <frame|a<rsub|k>=<frac|G<around*|(|j k\<omega\><rsub|0>|)>|T<rsub|0>>>.
+  </equation*>
+
+  which means <math|a<rsub|k>> is sampling on <math|G<around*|(|j\<omega\>|)>> with <math|k> then divided by <math|T<rsub|0>>.
+
+  When the sampling is denser, the <math|a<rsub|k>> approximates <math|G<around*|(|j\<omega\>|)>> more, then <math|T<rsub|0>\<rightarrow\>\<infty\>> more.
+
+  \;
+
+  If <math|x<around*|(|t|)>> is real (i.e. <math|x<around*|(|t|)>=x<rprime|\<asterisk\>><around*|(|t|)>>), then
+
+  <\equation*>
+    X<around*|(|j\<omega\>|)>=X<rprime|\<asterisk\>><around*|(|-j\<omega\>|)>.
+  </equation*>
+
+  <\equation*>
+    <frame|\<cal-E\>v<around*|{|x<around*|(|t|)>|}><above|\<longleftrightarrow\>|\<cal*-F\>>\<cal-R\>e<around*|{|X<around*|(|j\<omega\>|)>|}>>.
+  </equation*>
+
+  <\equation*>
+    <frame|\<cal-O\>d<around*|{|x<around*|(|t|)>|}><above|\<longleftrightarrow\>|\<cal*-F\>>j\<cal-I\>m<around*|{|X<around*|(|j\<omega\>|)>|}>>.
+  </equation*>
+
+  \;
+</body>
+
+<\initial>
+  <\collection>
+    <associate|page-medium|paper>
+    <associate|page-screen-margin|false>
+    <associate|stem-doc-id|5C73B212-123E-4770-810E-D1E1C9905E90>
+  </collection>
+</initial>
+
+<\references>
+  <\collection>
+    <associate|auto-1|<tuple|1|?|..\\..\\..\\Documents\\LiiiSTEM\\no_name\\draft_20261109_190158.tmu>>
+  </collection>
+</references>
