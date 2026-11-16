@@ -16,6 +16,7 @@ for (const project of projects) {
   const url = new URL(project.repo);
   assert.equal(url.hostname, 'github.com');
   assert.equal(url.pathname.split('/')[1].toLowerCase(), 'axeonv');
+  if (project.webView === false) assert.equal(project.entry, null, `${project.name}: Web View is disabled`);
   if (project.directory) {
     const directory = join(root, project.directory);
     assert.equal(git(directory, 'rev-parse', 'HEAD'), project.commit, `${project.name}: replica version`);

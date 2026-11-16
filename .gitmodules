@@ -122,3 +122,12 @@
 [submodule "xiangqi"]
 	path = production/repos/xiangqi
 	url = https://github.com/AXeonV/XiangQi.git
+[submodule "cae-bench"]
+	path = production/repos/cae-bench
+	url = https://github.com/AXeonV/CAE-Bench.git
+[submodule "cl-etching"]
+	path = production/repos/cl-etching
+	url = https://github.com/AXeonV/Cl-Etching.git
+[submodule "tau-vf-nn"]
+	path = production/repos/tau-vf-nn
+	url = https://github.com/AXeonV/tau-VF-NN.git

@@ -55,6 +55,7 @@ for (const repo of publicRepos) {
       console.log(`Clone ${repo.name}${source ? ' from Workspace' : ' from GitHub'}`);
       git(root, 'clone', '--no-hardlinks', '--no-checkout', '--', origin, destination);
       git(destination, 'remote', 'set-url', 'origin', `${repo.url}.git`);
+      if (process.platform === 'win32') git(destination, 'config', 'core.longpaths', 'true');
     }
     const paths = execFileSync('git', ['-C', destination, 'ls-tree', '-r', '--name-only', '-z', 'HEAD'], { encoding: 'utf8' }).split('\0').filter(Boolean);
     windowsMetadataOnly = paths.some((path) => path.split('/').some((part) => /[<>:"|?*\u0000-\u001f]|[. ]$/.test(part) || /^(con|prn|aux|nul|com[1-9]|lpt[1-9])(?:\.|$)/i.test(part)));
@@ -88,13 +89,14 @@ for (const repo of publicRepos) {
     git(root, 'add', '--', '.gitmodules');
     // The parent's gitlink records the exact version used for the next deployment.
     git(root, 'update-index', '--add', '--cacheinfo', `160000,${commit},${relative}`);
-    entry = metadataOnly ? null : selectProjectEntry(destination, repo.name, old?.entry);
+    entry = metadataOnly || old?.webView === false ? null : selectProjectEntry(destination, repo.name, old?.entry);
   }
   projects.push({
     slug, name: repo.name, repo: repo.url, description: repo.description || '',
     language: repo.primaryLanguage?.name || (entry ? 'HTML' : 'Project'),
     localDirectory: source && !homepage ? basename(source) : null,
     directory: homepage ? null : relative, commit, entry, windowsMetadataOnly,
+    ...(old?.webView === false ? { webView: false } : {}),
   });
 }
 // A source commit may exist locally before it is pushed. Retain such revisions as

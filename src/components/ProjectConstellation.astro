@@ -6,8 +6,8 @@ import { projectColor } from '../lib/gallery/project-colors.js';
 const zh = localeFromPath(Astro.url.pathname) === 'zh';
 // Local builds can be tried in Gallery before their source repository is committed.
 const projects = catalog.projects.map((project) => {
- const preview = import.meta.env.DEV && existsSync(new URL(`../../public/previews/${project.slug}/index.html`, import.meta.url));
- const view = preview ? `/previews/${project.slug}/index.html`
+ const preview = project.webView !== false && import.meta.env.DEV && existsSync(new URL(`../../public/previews/${project.slug}/index.html`, import.meta.url));
+ const view = project.webView === false ? null : preview ? `/previews/${project.slug}/index.html`
   : project.entry ? `/projects/${project.slug}/${project.entry.split('/').map(encodeURIComponent).join('/')}` : null;
  return { ...project, view };
 });

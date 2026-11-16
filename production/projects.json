@@ -105,6 +105,20 @@
       "bundle": null
     },
     {
+      "slug": "cae-bench",
+      "name": "CAE-Bench",
+      "repo": "https://github.com/AXeonV/CAE-Bench",
+      "description": "用于评测 Agent 实现的 CAE solver 的 OJ",
+      "language": "Python",
+      "localDirectory": "CAE-Bench",
+      "directory": "production/repos/cae-bench",
+      "commit": "c92736b72adc55c5260b8806a686aee9016260b5",
+      "entry": null,
+      "windowsMetadataOnly": false,
+      "webView": false,
+      "bundle": null
+    },
+    {
       "slug": "christmas2025",
       "name": "christmas2025",
       "repo": "https://github.com/AXeonV/christmas2025",
@@ -115,6 +129,20 @@
       "commit": "9a04b3298da3e2b8c3e125f0bd0dd5e826edcc30",
       "entry": "index.html",
       "windowsMetadataOnly": false,
+      "bundle": null
+    },
+    {
+      "slug": "cl-etching",
+      "name": "Cl-Etching",
+      "repo": "https://github.com/AXeonV/Cl-Etching",
+      "description": "Simulation of Etching Morphology using Cl ions",
+      "language": "C++",
+      "localDirectory": "Cl-Etching",
+      "directory": "production/repos/cl-etching",
+      "commit": "c67b30e3e6f9478fb2b707ece57df64ca771f2fb",
+      "entry": null,
+      "windowsMetadataOnly": false,
+      "webView": false,
       "bundle": null
     },
     {
@@ -492,6 +520,20 @@
       "commit": "5619133c39abd6f1328c99424d602134b59204df",
       "entry": "index.html",
       "windowsMetadataOnly": false,
+      "bundle": null
+    },
+    {
+      "slug": "tau-vf-nn",
+      "name": "tau-VF-NN",
+      "repo": "https://github.com/AXeonV/tau-VF-NN",
+      "description": "NN-based interface prediction for STICK-IN problem",
+      "language": "Python",
+      "localDirectory": "tau-VF-NN",
+      "directory": "production/repos/tau-vf-nn",
+      "commit": "860ea56a3f288182f6e6d15a23ed1ea7a0aecbb3",
+      "entry": null,
+      "windowsMetadataOnly": false,
+      "webView": false,
       "bundle": null
     },
     {
