@@ -20,4 +20,11 @@ export const conferencePublications: Publication[] = [{
  venueItalic: '2026 Conference on Empirical Methods in Natural Language Processing',
 }];
 
-export const preprints: Publication[] = [tmu];
+export const preprints: Publication[] = [
+ {
+  date: '2026-11',
+  title: 'CAE-Bench: Benchmarking AI Agents for Reusable CAE Solver Development',
+  url: 'https://arxiv.org/abs/2611.21273',
+ },
+ tmu,
+];
